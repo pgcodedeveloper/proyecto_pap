@@ -70,17 +70,16 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Principal");
         setName("frmPrincipal"); // NOI18N
-        setType(java.awt.Window.Type.POPUP);
 
         javax.swing.GroupLayout panelInicioLayout = new javax.swing.GroupLayout(panelInicio);
         panelInicio.setLayout(panelInicioLayout);
         panelInicioLayout.setHorizontalGroup(
             panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1032, Short.MAX_VALUE)
+            .addGap(0, 1170, Short.MAX_VALUE)
         );
         panelInicioLayout.setVerticalGroup(
             panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
+            .addGap(0, 680, Short.MAX_VALUE)
         );
 
         menu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -99,7 +98,6 @@ public class Principal extends javax.swing.JFrame {
 
         mnItemCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
         mnItemCliente.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        mnItemCliente.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\java\\presentacion\\icons\\icons8-registro-25.png")); // NOI18N
         mnItemCliente.setText("Registrar Cliente");
         mnItemCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +108,6 @@ public class Principal extends javax.swing.JFrame {
 
         mnItemProf.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
         mnItemProf.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        mnItemProf.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\java\\presentacion\\icons\\icons8-registro-25.png")); // NOI18N
         mnItemProf.setText("Registrar Profesor");
         mnItemProf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
