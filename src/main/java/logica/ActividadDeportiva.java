@@ -3,11 +3,83 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package logica;
-
+import java.util.List;
+import datatypes.DtFecha;
 /**
  *
  * @author PC
  */
+import java.util.List;
+
 public class ActividadDeportiva {
-    
+    private String nombre;
+    private String descripcion;
+    private Integer duracion;
+    private float costo;
+    private DtFecha fechaReg;
+    private List<Clase> clases;
+
+    // Constructor
+    public ActividadDeportiva(String nombre, String descripcion, Integer duracion, float costo, DtFecha fechaReg, List<Clase> clases) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.costo = costo;
+        this.fechaReg = fechaReg;
+        this.clases = clases;
+    }
+
+    // Getter y Setter para 'nombre'
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    // Getter y Setter para 'descripcion'
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    // Getter y Setter para 'duracion'
+    public Integer getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(Integer duracion) {
+        this.duracion = duracion;
+    }
+
+    // Getter y Setter para 'costo'
+    public float getCosto() {
+        return costo;
+    }
+
+    public void setCosto(float costo) {
+        this.costo = costo;
+    }
+
+    // Getter y Setter para 'fechaReg'
+    public DtFecha getFechaReg() {
+        return fechaReg;
+    }
+
+    public void setFechaReg(DtFecha fechaReg) {
+        this.fechaReg = fechaReg;
+    }
+
+    // Getter y Setter para 'clases'
+    public List<Clase> getClases() {
+        return clases;
+    }
+
+    public void setClases(List<Clase> clases) {
+        this.clases = clases;
+    }
 }

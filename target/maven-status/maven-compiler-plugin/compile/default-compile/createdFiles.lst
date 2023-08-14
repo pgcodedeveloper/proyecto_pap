@@ -1,11 +1,17 @@
 logica\Usuario.class
+presentacion\RegistroClientes$2.class
+presentacion\RegistroClientes$1.class
+presentacion\RegistroClientes.class
 logica\ActividadDeportiva.class
 logica\Clase.class
+presentacion\RegistroClientes$3.class
 datatypes\DtFecha.class
 logica\Profesor.class
 logica\Socio.class
 presentacion\Principal$1.class
+presentacion\Principal$3.class
 logica\InstitucionDeportiva.class
+presentacion\RegistroClientes$4.class
 datatypes\DtHora.class
 presentacion\Principal$2.class
 presentacion\Principal.class
