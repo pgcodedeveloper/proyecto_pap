@@ -7,15 +7,13 @@ logica\ActividadDeportiva.class
 presentacion\Main$5.class
 presentacion\RegistroProfesores$7.class
 logica\Socio.class
-presentacion\Principal$1.class
-presentacion\Principal$3.class
 presentacion\RegistroProfesores$2.class
 presentacion\RegistroClientes$4.class
 datatypes\DtHora.class
-presentacion\Principal.class
 presentacion\Main.class
 presentacion\Main$7.class
 presentacion\Main$2.class
+presentacion\RegistroClientes$7.class
 presentacion\RegistroProfesores$3.class
 presentacion\RegistroProfesores$5.class
 presentacion\RegistroClientes$2.class
@@ -29,7 +27,6 @@ presentacion\Main$4.class
 presentacion\RegistroProfesores$1.class
 logica\InstitucionDeportiva.class
 presentacion\Main$6.class
-presentacion\Principal$2.class
 presentacion\RegistroProfesores$6.class
 logica\Registro.class
 presentacion\RegistroProfesores.class

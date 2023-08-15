@@ -7,6 +7,7 @@ package presentacion;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 import org.w3c.dom.css.RGBColor;
 
 /**
@@ -48,10 +49,10 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         panelInicio = new javax.swing.JPanel();
+        panelHeader = new javax.swing.JPanel();
         panelBotones = new javax.swing.JPanel();
         btnMinimizar = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JLabel();
-        panelHeader = new javax.swing.JPanel();
         panelHeading = new javax.swing.JPanel();
         lblIcono = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
@@ -74,9 +75,24 @@ public class Main extends javax.swing.JFrame {
         setUndecorated(true);
         setSize(new java.awt.Dimension(0, 0));
 
+        panelInicio.setBackground(new java.awt.Color(153, 153, 153));
         panelInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelHeader.setBackground(new java.awt.Color(46, 124, 209));
+        panelHeader.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                panelHeaderMouseDragged(evt);
+            }
+        });
+        panelHeader.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panelHeaderMousePressed(evt);
+            }
+        });
+        panelHeader.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         panelBotones.setBackground(new java.awt.Color(46, 124, 209));
+        panelBotones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnMinimizar.setBackground(new java.awt.Color(46, 124, 209));
         btnMinimizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -88,6 +104,7 @@ public class Main extends javax.swing.JFrame {
                 btnMinimizarMouseClicked(evt);
             }
         });
+        panelBotones.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 40, 30));
 
         btnCerrar.setBackground(new java.awt.Color(46, 124, 209));
         btnCerrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -106,41 +123,9 @@ public class Main extends javax.swing.JFrame {
                 btnCerrarMouseExited(evt);
             }
         });
+        panelBotones.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 40, 30));
 
-        javax.swing.GroupLayout panelBotonesLayout = new javax.swing.GroupLayout(panelBotones);
-        panelBotones.setLayout(panelBotonesLayout);
-        panelBotonesLayout.setHorizontalGroup(
-            panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBotonesLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(btnMinimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        panelBotonesLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCerrar, btnMinimizar});
-
-        panelBotonesLayout.setVerticalGroup(
-            panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnMinimizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        panelInicio.add(panelBotones, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 0, 120, 30));
-
-        panelHeader.setBackground(new java.awt.Color(46, 124, 209));
-        panelHeader.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                panelHeaderMouseDragged(evt);
-            }
-        });
-        panelHeader.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                panelHeaderMousePressed(evt);
-            }
-        });
-        panelHeader.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelHeader.add(panelBotones, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 0, 120, 30));
 
         panelHeading.setOpaque(false);
 
@@ -169,11 +154,13 @@ public class Main extends javax.swing.JFrame {
 
         panelHeader.add(panelHeading, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 30));
 
-        panelInicio.add(panelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 30));
+        panelInicio.add(panelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 30));
 
-        panelPrincipal.setLayout(new javax.swing.BoxLayout(panelPrincipal, javax.swing.BoxLayout.LINE_AXIS));
+        panelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelAcciones.setBackground(new java.awt.Color(25, 104, 157));
+        panelAcciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelAcciones.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 153, 176, 10));
 
         jPanel1.setOpaque(false);
 
@@ -188,13 +175,17 @@ public class Main extends javax.swing.JFrame {
             .addGap(0, 146, Short.MAX_VALUE)
         );
 
+        panelAcciones.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 176, -1));
+
         lblRegistros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblRegistros.setForeground(new java.awt.Color(255, 255, 255));
         lblRegistros.setText("REGISTROS");
+        panelAcciones.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 216, 160, 36));
 
         lblConsultas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblConsultas.setForeground(new java.awt.Color(255, 255, 255));
         lblConsultas.setText("CONSULTAS");
+        panelAcciones.add(lblConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 386, 160, 36));
 
         btnCliente.setBackground(new java.awt.Color(25, 104, 157));
         btnCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -203,7 +194,7 @@ public class Main extends javax.swing.JFrame {
         btnCliente.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\java\\presentacion\\iconos\\icons8-registro-25.png")); // NOI18N
         btnCliente.setText("Registrar Cliente");
         btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCliente.setIconTextGap(50);
+        btnCliente.setIconTextGap(45);
         btnCliente.setOpaque(true);
         btnCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -216,6 +207,7 @@ public class Main extends javax.swing.JFrame {
                 btnClienteMouseExited(evt);
             }
         });
+        panelAcciones.add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 177, 40));
 
         btnProfesor.setBackground(new java.awt.Color(25, 104, 157));
         btnProfesor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -224,7 +216,7 @@ public class Main extends javax.swing.JFrame {
         btnProfesor.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\java\\presentacion\\iconos\\icons8-registro-25.png")); // NOI18N
         btnProfesor.setText("Registrar Profesor");
         btnProfesor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnProfesor.setIconTextGap(50);
+        btnProfesor.setIconTextGap(45);
         btnProfesor.setOpaque(true);
         btnProfesor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -237,60 +229,22 @@ public class Main extends javax.swing.JFrame {
                 btnProfesorMouseExited(evt);
             }
         });
+        panelAcciones.add(btnProfesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 328, 177, 40));
 
-        javax.swing.GroupLayout panelAccionesLayout = new javax.swing.GroupLayout(panelAcciones);
-        panelAcciones.setLayout(panelAccionesLayout);
-        panelAccionesLayout.setHorizontalGroup(
-            panelAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(panelAccionesLayout.createSequentialGroup()
-                .addGroup(panelAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSeparator1)
-                    .addGroup(panelAccionesLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panelAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblConsultas)))
-                    .addComponent(btnProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        panelAccionesLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblConsultas, lblRegistros});
-
-        panelAccionesLayout.setVerticalGroup(
-            panelAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAccionesLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(lblRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblConsultas)
-                .addGap(419, 419, 419))
-        );
-
-        panelAccionesLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblConsultas, lblRegistros});
-
-        panelPrincipal.add(panelAcciones);
+        panelPrincipal.add(panelAcciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 830));
 
         javax.swing.GroupLayout panelContenidoLayout = new javax.swing.GroupLayout(panelContenido);
         panelContenido.setLayout(panelContenidoLayout);
         panelContenidoLayout.setHorizontalGroup(
             panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1094, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelContenidoLayout.setVerticalGroup(
             panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        panelPrincipal.add(panelContenido);
+        panelPrincipal.add(panelContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 1120, 830));
 
         panelInicio.add(panelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1300, 830));
 
@@ -310,6 +264,7 @@ public class Main extends javax.swing.JFrame {
 
     private void panelHeaderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelHeaderMousePressed
         // TODO add your handling code here:
+        this.setExtendedState(NORMAL);
         xMouse = evt.getX();
         yMouse = evt.getY();
     }//GEN-LAST:event_panelHeaderMousePressed
