@@ -18,6 +18,7 @@ public class Main extends javax.swing.JFrame {
     int xMouse, yMouse;
     private RegistroClientes clientes;
     private RegistroProfesores profesores;
+    private RegistroActividadDeportiva actDeportiva;  
     /**
      * Creates new form Main
      */
@@ -32,13 +33,21 @@ public class Main extends javax.swing.JFrame {
         panelContenido.add(clientes);
         clientes.setVisible(false);
         
+        
         profesores = new RegistroProfesores();
         jInternalFrameSize = profesores.getSize();
         profesores.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
         panelContenido.add(profesores);
         profesores.setVisible(false);
+        
+        actDeportiva  = new RegistroActividadDeportiva();
+        jInternalFrameSize = actDeportiva.getSize();
+        actDeportiva.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
+        panelContenido.add(actDeportiva);
+        actDeportiva.setVisible(false);
     }
 
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,6 +71,7 @@ public class Main extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblRegistros = new javax.swing.JLabel();
         lblConsultas = new javax.swing.JLabel();
+        btnRegActDeportiva = new javax.swing.JLabel();
         btnCliente = new javax.swing.JLabel();
         btnProfesor = new javax.swing.JLabel();
         panelContenido = new javax.swing.JPanel();
@@ -96,8 +106,7 @@ public class Main extends javax.swing.JFrame {
 
         btnMinimizar.setBackground(new java.awt.Color(46, 124, 209));
         btnMinimizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnMinimizar.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\java\\presentacion\\iconos\\icons8-arrows-16.png")); // NOI18N
-        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnMinimizar.setMaximumSize(new java.awt.Dimension(16, 5));
         btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -109,8 +118,7 @@ public class Main extends javax.swing.JFrame {
         btnCerrar.setBackground(new java.awt.Color(46, 124, 209));
         btnCerrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnCerrar.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\java\\presentacion\\iconos\\icons8-eliminar-16.png")); // NOI18N
-        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrar.setOpaque(true);
         btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -130,7 +138,6 @@ public class Main extends javax.swing.JFrame {
         panelHeading.setOpaque(false);
 
         lblIcono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIcono.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\java\\presentacion\\iconos\\icons8-gym-26.png")); // NOI18N
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -187,13 +194,33 @@ public class Main extends javax.swing.JFrame {
         lblConsultas.setText("CONSULTAS");
         panelAcciones.add(lblConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 386, 160, 36));
 
+        btnRegActDeportiva.setBackground(new java.awt.Color(25, 104, 157));
+        btnRegActDeportiva.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRegActDeportiva.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegActDeportiva.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRegActDeportiva.setText("Registrar Actividad Deportiva");
+        btnRegActDeportiva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegActDeportiva.setIconTextGap(45);
+        btnRegActDeportiva.setOpaque(true);
+        btnRegActDeportiva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegActDeportivaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegActDeportivaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegActDeportivaMouseExited(evt);
+            }
+        });
+        panelAcciones.add(btnRegActDeportiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 177, 40));
+
         btnCliente.setBackground(new java.awt.Color(25, 104, 157));
         btnCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCliente.setForeground(new java.awt.Color(255, 255, 255));
         btnCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnCliente.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\java\\presentacion\\iconos\\icons8-registro-25.png")); // NOI18N
         btnCliente.setText("Registrar Cliente");
-        btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCliente.setIconTextGap(45);
         btnCliente.setOpaque(true);
         btnCliente.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -207,15 +234,14 @@ public class Main extends javax.swing.JFrame {
                 btnClienteMouseExited(evt);
             }
         });
-        panelAcciones.add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 177, 40));
+        panelAcciones.add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 177, 40));
 
         btnProfesor.setBackground(new java.awt.Color(25, 104, 157));
         btnProfesor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnProfesor.setForeground(new java.awt.Color(255, 255, 255));
         btnProfesor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnProfesor.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\java\\presentacion\\iconos\\icons8-registro-25.png")); // NOI18N
         btnProfesor.setText("Registrar Profesor");
-        btnProfesor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProfesor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnProfesor.setIconTextGap(45);
         btnProfesor.setOpaque(true);
         btnProfesor.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -229,7 +255,7 @@ public class Main extends javax.swing.JFrame {
                 btnProfesorMouseExited(evt);
             }
         });
-        panelAcciones.add(btnProfesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 328, 177, 40));
+        panelAcciones.add(btnProfesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 177, 40));
 
         panelPrincipal.add(panelAcciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 830));
 
@@ -237,11 +263,11 @@ public class Main extends javax.swing.JFrame {
         panelContenido.setLayout(panelContenidoLayout);
         panelContenidoLayout.setHorizontalGroup(
             panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1120, Short.MAX_VALUE)
         );
         panelContenidoLayout.setVerticalGroup(
             panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 830, Short.MAX_VALUE)
         );
 
         panelPrincipal.add(panelContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 1120, 830));
@@ -331,6 +357,23 @@ public class Main extends javax.swing.JFrame {
         btnProfesor.setBackground(c);
     }//GEN-LAST:event_btnProfesorMouseExited
 
+    private void btnRegActDeportivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseClicked
+        // TODO add your handling code here:
+        actDeportiva.setVisible(true);
+    }//GEN-LAST:event_btnRegActDeportivaMouseClicked
+
+    private void btnRegActDeportivaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseEntered
+        // TODO add your handling code here:
+                Color c = new Color (16,69,104);
+        btnRegActDeportiva.setBackground(c);
+    }//GEN-LAST:event_btnRegActDeportivaMouseEntered
+
+    private void btnRegActDeportivaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseExited
+        // TODO add your handling code here:
+        Color c = new Color(25,104,157);
+        btnRegActDeportiva. setBackground(c);
+    }//GEN-LAST:event_btnRegActDeportivaMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -371,6 +414,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel btnCliente;
     private javax.swing.JLabel btnMinimizar;
     private javax.swing.JLabel btnProfesor;
+    private javax.swing.JLabel btnRegActDeportiva;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblConsultas;
