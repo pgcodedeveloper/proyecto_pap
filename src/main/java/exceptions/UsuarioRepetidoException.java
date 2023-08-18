@@ -2,17 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package interfaces;
-
-import datatypes.DtUsuario;
-import exceptions.UsuarioRepetidoException;
+package exceptions;
 
 /**
  *
  * @author PC
  */
-public interface IControlador {
+public class UsuarioRepetidoException extends Exception {
+    private static final long serialVersionUID = 1L;
+
+    public UsuarioRepetidoException(String message) {
+        super(message);
+    }
     
-    //Crear un nuevo usuario
-    public void altaUsuario(DtUsuario usr) throws UsuarioRepetidoException;
 }

@@ -4,9 +4,12 @@
  */
 package presentacion;
 
+import interfaces.Fabrica;
+import interfaces.IControlador;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import org.w3c.dom.css.RGBColor;
 
@@ -24,8 +27,9 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-        
-        clientes = new RegistroClientes();
+        Fabrica fab = Fabrica.getInstancia();
+        IControlador con = fab.getIControlador();
+        clientes = new RegistroClientes(con);
         Dimension desktopSize = panelContenido.getSize();
         Dimension jInternalFrameSize;
         jInternalFrameSize = clientes.getSize();
@@ -46,8 +50,7 @@ public class Main extends javax.swing.JFrame {
         panelContenido.add(actDeportiva);
         actDeportiva.setVisible(false);
     }
-
-        
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,12 +71,17 @@ public class Main extends javax.swing.JFrame {
         panelPrincipal = new javax.swing.JPanel();
         panelAcciones = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
-        jPanel1 = new javax.swing.JPanel();
+        panelLogo = new javax.swing.JPanel();
+        lblAdmin = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
         lblRegistros = new javax.swing.JLabel();
         lblConsultas = new javax.swing.JLabel();
-        btnRegActDeportiva = new javax.swing.JLabel();
+        btnRegClase = new javax.swing.JLabel();
         btnCliente = new javax.swing.JLabel();
         btnProfesor = new javax.swing.JLabel();
+        btnRegActDeportiva = new javax.swing.JLabel();
+        btnRegDictadoClase = new javax.swing.JLabel();
+        btnRegInstitucion = new javax.swing.JLabel();
         panelContenido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,6 +91,7 @@ public class Main extends javax.swing.JFrame {
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setName("frmMain"); // NOI18N
         setUndecorated(true);
+        setResizable(false);
         setSize(new java.awt.Dimension(0, 0));
 
         panelInicio.setBackground(new java.awt.Color(153, 153, 153));
@@ -106,11 +115,19 @@ public class Main extends javax.swing.JFrame {
 
         btnMinimizar.setBackground(new java.awt.Color(46, 124, 209));
         btnMinimizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnMinimizar.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\resources\\icons8-arrows-16.png")); // NOI18N
         btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnMinimizar.setMaximumSize(new java.awt.Dimension(16, 5));
+        btnMinimizar.setOpaque(true);
         btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMinimizarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMinimizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMinimizarMouseExited(evt);
             }
         });
         panelBotones.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 40, 30));
@@ -118,6 +135,7 @@ public class Main extends javax.swing.JFrame {
         btnCerrar.setBackground(new java.awt.Color(46, 124, 209));
         btnCerrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCerrar.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\resources\\icons8-eliminar-16.png")); // NOI18N
         btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrar.setOpaque(true);
         btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -138,6 +156,7 @@ public class Main extends javax.swing.JFrame {
         panelHeading.setOpaque(false);
 
         lblIcono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIcono.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\resources\\icons8-gym-26.png")); // NOI18N
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -167,61 +186,74 @@ public class Main extends javax.swing.JFrame {
 
         panelAcciones.setBackground(new java.awt.Color(25, 104, 157));
         panelAcciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelAcciones.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 153, 176, 10));
+        panelAcciones.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 153, 180, 10));
 
-        jPanel1.setOpaque(false);
+        panelLogo.setOpaque(false);
+        panelLogo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 146, Short.MAX_VALUE)
-        );
+        lblAdmin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        lblAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAdmin.setText("Administrador");
+        panelLogo.add(lblAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 116, 180, 30));
 
-        panelAcciones.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 176, -1));
+        lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\resources\\icons8-engranaje-50.png")); // NOI18N
+        lblLogo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelLogo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 150));
+
+        panelAcciones.add(panelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, -1));
 
         lblRegistros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblRegistros.setForeground(new java.awt.Color(255, 255, 255));
         lblRegistros.setText("REGISTROS");
-        panelAcciones.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 216, 160, 36));
+        lblRegistros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblRegistrosMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblRegistrosMouseReleased(evt);
+            }
+        });
+        panelAcciones.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 160, 160, 36));
 
         lblConsultas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblConsultas.setForeground(new java.awt.Color(255, 255, 255));
         lblConsultas.setText("CONSULTAS");
-        panelAcciones.add(lblConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 386, 160, 36));
+        panelAcciones.add(lblConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 450, 160, 36));
 
-        btnRegActDeportiva.setBackground(new java.awt.Color(25, 104, 157));
-        btnRegActDeportiva.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnRegActDeportiva.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegActDeportiva.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnRegActDeportiva.setText("Registrar Actividad Deportiva");
-        btnRegActDeportiva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRegActDeportiva.setIconTextGap(45);
-        btnRegActDeportiva.setOpaque(true);
-        btnRegActDeportiva.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRegClase.setBackground(new java.awt.Color(25, 104, 157));
+        btnRegClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRegClase.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegClase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRegClase.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\resources\\icons8-añadir-usuario-tipo-de-piel-masculina-7-16.png")); // NOI18N
+        btnRegClase.setText("Registro a Clase");
+        btnRegClase.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegClase.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnRegClase.setIconTextGap(20);
+        btnRegClase.setOpaque(true);
+        btnRegClase.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegActDeportivaMouseClicked(evt);
+                btnRegClaseMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegActDeportivaMouseEntered(evt);
+                btnRegClaseMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegActDeportivaMouseExited(evt);
+                btnRegClaseMouseExited(evt);
             }
         });
-        panelAcciones.add(btnRegActDeportiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 177, 40));
+        panelAcciones.add(btnRegClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 180, 40));
 
         btnCliente.setBackground(new java.awt.Color(25, 104, 157));
         btnCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCliente.setForeground(new java.awt.Color(255, 255, 255));
         btnCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnCliente.setText("Registrar Cliente");
+        btnCliente.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\resources\\icons8-clientes-16.png")); // NOI18N
+        btnCliente.setText("Clientes");
         btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnCliente.setIconTextGap(45);
+        btnCliente.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCliente.setIconTextGap(20);
         btnCliente.setOpaque(true);
         btnCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -234,15 +266,17 @@ public class Main extends javax.swing.JFrame {
                 btnClienteMouseExited(evt);
             }
         });
-        panelAcciones.add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 177, 40));
+        panelAcciones.add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 180, 40));
 
         btnProfesor.setBackground(new java.awt.Color(25, 104, 157));
         btnProfesor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnProfesor.setForeground(new java.awt.Color(255, 255, 255));
         btnProfesor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnProfesor.setText("Registrar Profesor");
+        btnProfesor.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\resources\\icons8-aula-de-google-16.png")); // NOI18N
+        btnProfesor.setText("Profesores");
         btnProfesor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnProfesor.setIconTextGap(45);
+        btnProfesor.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnProfesor.setIconTextGap(20);
         btnProfesor.setOpaque(true);
         btnProfesor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -255,7 +289,76 @@ public class Main extends javax.swing.JFrame {
                 btnProfesorMouseExited(evt);
             }
         });
-        panelAcciones.add(btnProfesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 177, 40));
+        panelAcciones.add(btnProfesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 180, 40));
+
+        btnRegActDeportiva.setBackground(new java.awt.Color(25, 104, 157));
+        btnRegActDeportiva.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRegActDeportiva.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegActDeportiva.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRegActDeportiva.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\resources\\icons8-strength-16.png")); // NOI18N
+        btnRegActDeportiva.setText("Actividad Deportiva");
+        btnRegActDeportiva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegActDeportiva.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnRegActDeportiva.setIconTextGap(20);
+        btnRegActDeportiva.setOpaque(true);
+        btnRegActDeportiva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegActDeportivaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegActDeportivaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegActDeportivaMouseExited(evt);
+            }
+        });
+        panelAcciones.add(btnRegActDeportiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 180, 40));
+
+        btnRegDictadoClase.setBackground(new java.awt.Color(25, 104, 157));
+        btnRegDictadoClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRegDictadoClase.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegDictadoClase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRegDictadoClase.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\resources\\icons8-profesor-16.png")); // NOI18N
+        btnRegDictadoClase.setText("Dictado de Clase");
+        btnRegDictadoClase.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegDictadoClase.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnRegDictadoClase.setIconTextGap(20);
+        btnRegDictadoClase.setOpaque(true);
+        btnRegDictadoClase.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegDictadoClaseMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegDictadoClaseMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegDictadoClaseMouseExited(evt);
+            }
+        });
+        panelAcciones.add(btnRegDictadoClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 180, 40));
+
+        btnRegInstitucion.setBackground(new java.awt.Color(25, 104, 157));
+        btnRegInstitucion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRegInstitucion.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegInstitucion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRegInstitucion.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\resources\\icons8-colegio-16.png")); // NOI18N
+        btnRegInstitucion.setText("Institución Deportiva");
+        btnRegInstitucion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegInstitucion.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnRegInstitucion.setIconTextGap(20);
+        btnRegInstitucion.setOpaque(true);
+        btnRegInstitucion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegInstitucionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegInstitucionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegInstitucionMouseExited(evt);
+            }
+        });
+        panelAcciones.add(btnRegInstitucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 180, 40));
 
         panelPrincipal.add(panelAcciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 830));
 
@@ -357,15 +460,51 @@ public class Main extends javax.swing.JFrame {
         btnProfesor.setBackground(c);
     }//GEN-LAST:event_btnProfesorMouseExited
 
-    private void btnRegActDeportivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseClicked
+    private void btnRegClaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegClaseMouseClicked
         // TODO add your handling code here:
         actDeportiva.setVisible(true);
+    }//GEN-LAST:event_btnRegClaseMouseClicked
+
+    private void btnRegClaseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegClaseMouseEntered
+        // TODO add your handling code here:
+        Color c = new Color (16,69,104);
+        btnRegClase.setBackground(c);
+    }//GEN-LAST:event_btnRegClaseMouseEntered
+
+    private void btnRegClaseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegClaseMouseExited
+        // TODO add your handling code here:
+        Color c = new Color(25,104,157);
+        btnRegClase. setBackground(c);
+    }//GEN-LAST:event_btnRegClaseMouseExited
+
+    private void lblRegistrosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistrosMousePressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_lblRegistrosMousePressed
+
+    private void lblRegistrosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistrosMouseReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_lblRegistrosMouseReleased
+
+    private void btnMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseEntered
+        // TODO add your handling code here:
+        btnMinimizar.setBackground(new Color(40, 69, 108));
+    }//GEN-LAST:event_btnMinimizarMouseEntered
+
+    private void btnMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseExited
+        // TODO add your handling code here:
+        btnMinimizar.setBackground(new Color(46,124,209));
+    }//GEN-LAST:event_btnMinimizarMouseExited
+
+    private void btnRegActDeportivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseClicked
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnRegActDeportivaMouseClicked
 
     private void btnRegActDeportivaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseEntered
         // TODO add your handling code here:
-                Color c = new Color (16,69,104);
-        btnRegActDeportiva.setBackground(c);
+        Color c = new Color (16,69,104);
+        btnRegActDeportiva. setBackground(c);
     }//GEN-LAST:event_btnRegActDeportivaMouseEntered
 
     private void btnRegActDeportivaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseExited
@@ -373,6 +512,39 @@ public class Main extends javax.swing.JFrame {
         Color c = new Color(25,104,157);
         btnRegActDeportiva. setBackground(c);
     }//GEN-LAST:event_btnRegActDeportivaMouseExited
+
+    private void btnRegDictadoClaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegDictadoClaseMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegDictadoClaseMouseClicked
+
+    private void btnRegDictadoClaseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegDictadoClaseMouseEntered
+        // TODO add your handling code here:
+        Color c = new Color (16,69,104);
+        btnRegDictadoClase.setBackground(c);
+        
+    }//GEN-LAST:event_btnRegDictadoClaseMouseEntered
+
+    private void btnRegDictadoClaseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegDictadoClaseMouseExited
+        // TODO add your handling code here:
+        Color c = new Color(25,104,157);
+        btnRegDictadoClase. setBackground(c);
+    }//GEN-LAST:event_btnRegDictadoClaseMouseExited
+
+    private void btnRegInstitucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegInstitucionMouseClicked
+
+    private void btnRegInstitucionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseEntered
+        // TODO add your handling code here:
+        Color c = new Color (16,69,104);
+        btnRegInstitucion.setBackground(c);
+    }//GEN-LAST:event_btnRegInstitucionMouseEntered
+
+    private void btnRegInstitucionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseExited
+        // TODO add your handling code here:
+        Color c = new Color(25,104,157);
+        btnRegInstitucion. setBackground(c);
+    }//GEN-LAST:event_btnRegInstitucionMouseExited
 
     /**
      * @param args the command line arguments
@@ -415,10 +587,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel btnMinimizar;
     private javax.swing.JLabel btnProfesor;
     private javax.swing.JLabel btnRegActDeportiva;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel btnRegClase;
+    private javax.swing.JLabel btnRegDictadoClase;
+    private javax.swing.JLabel btnRegInstitucion;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblAdmin;
     private javax.swing.JLabel lblConsultas;
     private javax.swing.JLabel lblIcono;
+    private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblRegistros;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelAcciones;
@@ -427,6 +603,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel panelHeader;
     private javax.swing.JPanel panelHeading;
     private javax.swing.JPanel panelInicio;
+    private javax.swing.JPanel panelLogo;
     private javax.swing.JPanel panelPrincipal;
     // End of variables declaration//GEN-END:variables
 }
