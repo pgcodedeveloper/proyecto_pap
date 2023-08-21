@@ -5,22 +5,33 @@
 package logica;
 import java.util.List;
 import datatypes.DtFecha;
+import java.util.Date;
 /**
  *
  * @author PC
  */
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class ActividadDeportiva {
+    @Id
     private String nombre;
     private String descripcion;
     private Integer duracion;
     private float costo;
-    private DtFecha fechaReg;
+    private Date fechaReg;
+    
+    @OneToMany
     private List<Clase> clases;
 
+    public ActividadDeportiva(){
+        super();
+    }
     // Constructor
-    public ActividadDeportiva(String nombre, String descripcion, Integer duracion, float costo, DtFecha fechaReg, List<Clase> clases) {
+    public ActividadDeportiva(String nombre, String descripcion, Integer duracion, float costo, Date fechaReg, List<Clase> clases) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -48,7 +59,7 @@ public class ActividadDeportiva {
     }
 
     // Getter y Setter para 'duracion'
-    public Integer getDuracion() {
+    public int getDuracion() {
         return duracion;
     }
 
@@ -66,11 +77,11 @@ public class ActividadDeportiva {
     }
 
     // Getter y Setter para 'fechaReg'
-    public DtFecha getFechaReg() {
+    public Date getFechaReg() {
         return fechaReg;
     }
 
-    public void setFechaReg(DtFecha fechaReg) {
+    public void setFechaReg(Date fechaReg) {
         this.fechaReg = fechaReg;
     }
 

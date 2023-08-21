@@ -8,7 +8,7 @@ package datatypes;
  *
  * @author PC
  */
-public class DtFecha {
+public class DtFecha{
     private int dia;
     private int mes;
     private int anio;

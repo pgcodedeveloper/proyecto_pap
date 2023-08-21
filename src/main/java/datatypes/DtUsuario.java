@@ -4,6 +4,8 @@
  */
 package datatypes;
 
+import java.util.Date;
+
 /**
  *
  * @author PC
@@ -13,9 +15,9 @@ public class DtUsuario {
     private String nombre;
     private String apellido;
     private String email;
-    private DtFecha fechaNac;
+    private Date fechaNac;
 
-    public DtUsuario(String nickname, String nombre, String apellido, String email, DtFecha fechaNac) {
+    public DtUsuario(String nickname, String nombre, String apellido, String email, Date fechaNac) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -39,7 +41,7 @@ public class DtUsuario {
         return email;
     }
 
-    public DtFecha getFechaNac() {
+    public Date getFechaNac() {
         return fechaNac;
     }
 
@@ -59,7 +61,7 @@ public class DtUsuario {
         this.email = email;
     }
 
-    public void setFechaNac(DtFecha fechaNac) {
+    public void setFechaNac(Date fechaNac) {
         this.fechaNac = fechaNac;
     }
     

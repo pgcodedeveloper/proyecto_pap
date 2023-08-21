@@ -5,22 +5,33 @@
 package logica;
 import java.util.List;
 import datatypes.DtFecha;
+import java.util.Date;
 
 /**
  *
  * @author PC
  */
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Profesor extends Usuario {
     private String descripcion;
     private String biografia;
     private String sitioWeb;
+    
+    @ManyToOne
     private InstitucionDeportiva institucionDeportiva;
+    @OneToMany
     private List<Clase> clases;
 
+    public Profesor(){
+        super();
+    }
     // Constructor
-    public Profesor(String nc, String n, String a, String e, DtFecha df, String desc, String bio, String sitioWeb, InstitucionDeportiva insD, List<Clase> clases) {
+    public Profesor(String nc, String n, String a, String e, Date df, String desc, String bio, String sitioWeb, InstitucionDeportiva insD, List<Clase> clases) {
         super(nc, n, a, e, df);
         this.descripcion = desc;
         this.biografia = bio;

@@ -9,6 +9,7 @@ import datatypes.DtSocio;
 import datatypes.DtUsuario;
 import exceptions.UsuarioRepetidoException;
 import interfaces.IControlador;
+import java.util.Date;
 
 /**
  *
@@ -21,20 +22,15 @@ public class Controlador implements IControlador {
     }
     
     @Override
-    public void altaUsuario(DtUsuario usr) throws UsuarioRepetidoException{
+    public void altaUsuario(String nickname, String nombre, String apellido, String email, Date fechaNac) throws UsuarioRepetidoException{
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
-        Usuario u = mju.buscarUsuario(usr.getNickname(), usr.getNombre(), usr.getEmail());
-        if(u != null){
+        Usuario u;
+        // mju.buscarUsuario(usr.getId());
+        /*if(u != null){
             throw new UsuarioRepetidoException("El usuario con los datos ingresados ya existe");
-        }
-        if(usr instanceof DtSocio){
-            u = new Socio(usr.getNickname(),usr.getNombre(),usr.getApellido(),usr.getEmail(),usr.getFechaNac());
-        }
-        if(usr instanceof DtProfesor){
-            u = new Profesor(usr.getNickname(),usr.getNombre(),usr.getApellido(),usr.getEmail(),usr.getFechaNac(), ((DtProfesor) usr).getDescripcion()
-                    , ((DtProfesor) usr).getBiografia(), ((DtProfesor) usr).getSitioWeb(), ((DtProfesor) usr).getInstitucionDeportiva(), ((DtProfesor) usr).getClases());
-        }
+        }*/
         
+        u = new Socio(nickname,  nombre,  apellido,  email,  fechaNac);
         mju.agregarUsuario(u);
     }
     

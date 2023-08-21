@@ -6,6 +6,7 @@ package interfaces;
 
 import datatypes.DtUsuario;
 import exceptions.UsuarioRepetidoException;
+import java.util.Date;
 
 /**
  *
@@ -14,5 +15,5 @@ import exceptions.UsuarioRepetidoException;
 public interface IControlador {
     
     //Crear un nuevo usuario
-    public void altaUsuario(DtUsuario usr) throws UsuarioRepetidoException;
+    public void altaUsuario(String nickname, String nombre, String apellido, String email, Date fechaNac) throws UsuarioRepetidoException;
 }

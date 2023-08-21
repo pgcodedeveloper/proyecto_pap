@@ -4,6 +4,7 @@
  */
 package datatypes;
 
+import java.util.Date;
 import java.util.List;
 import logica.Clase;
 import logica.InstitucionDeportiva;
@@ -19,7 +20,7 @@ public class DtProfesor extends DtUsuario {
     private InstitucionDeportiva institucionDeportiva;
     private List<Clase> clases;
 
-    public DtProfesor(String descripcion, String biografia, String sitioWeb, InstitucionDeportiva institucionDeportiva, List<Clase> clases, String nickname, String nombre, String apellido, String email, DtFecha fechaNac) {
+    public DtProfesor(String descripcion, String biografia, String sitioWeb, InstitucionDeportiva institucionDeportiva, List<Clase> clases, String nickname, String nombre, String apellido, String email, Date fechaNac) {
         super(nickname, nombre, apellido, email, fechaNac);
         this.descripcion = descripcion;
         this.biografia = biografia;

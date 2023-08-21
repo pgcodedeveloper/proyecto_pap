@@ -6,6 +6,8 @@ package logica;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import persistencia.Conexion;
 
 /**
  *
@@ -13,7 +15,6 @@ import java.util.List;
  */
 public class ManejadorUsuario {
     private static ManejadorUsuario instancia = null;
-    private List<Usuario> usuarios = new ArrayList<>();
 
     private ManejadorUsuario() {
     }
@@ -26,20 +27,19 @@ public class ManejadorUsuario {
     
     
     public void agregarUsuario(Usuario usr){
-        usuarios.add(usr);
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        em.getTransaction().begin();
+        em.persist(usr);
+        em.getTransaction().commit();
     }
     
-    public Usuario buscarUsuario(String nickname, String nombre, String email){
-        Usuario retorno = null;
-        for (Usuario usuario : usuarios) {
-            if(usuario.getNickName() == nickname && usuario.getNombre() == nombre && usuario.getEmail() == email){
-                retorno = usuario;
-            }
-            else {
-                retorno = null;
-            }
-        }
-        return retorno;
+    public Usuario buscarUsuario(int id){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        
+        Usuario urs = em.find(Usuario.class, id);
+        return urs;
     }
     
 }

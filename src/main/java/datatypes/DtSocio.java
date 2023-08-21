@@ -4,6 +4,8 @@
  */
 package datatypes;
 
+import java.util.Date;
+
 /**
  *
  * @author PC
@@ -11,7 +13,7 @@ package datatypes;
 public class DtSocio extends DtUsuario {
 
     
-    public DtSocio(String nickname, String nombre, String apellido, String email, DtFecha fechaNac) {
+    public DtSocio(String nickname, String nombre, String apellido, String email, Date fechaNac) {
         super(nickname, nombre, apellido, email, fechaNac);
     }
     

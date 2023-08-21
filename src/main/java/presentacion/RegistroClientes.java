@@ -9,6 +9,8 @@ import datatypes.DtSocio;
 import datatypes.DtUsuario;
 import exceptions.UsuarioRepetidoException;
 import interfaces.IControlador;
+import java.time.Instant;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -324,9 +326,8 @@ public class RegistroClientes extends javax.swing.JInternalFrame {
                 int dia = Integer.parseInt(spDia.getValue().toString());
                 int mes = Integer.parseInt(spMes.getValue().toString());
                 int anio = Integer.parseInt(spAnio.getValue().toString());
-                DtFecha fecha = new DtFecha(dia, mes,anio);
-                DtUsuario usr = new DtSocio(txtNickN.getText(), txtNombre.getText(), txtApellido.getText(), txtEmail.getText(), fecha);
-                this.Icon.altaUsuario(usr);
+                Date d = new Date(anio,mes,dia);
+                this.Icon.altaUsuario(txtNickN.getText(), txtNombre.getText(), txtApellido.getText(), txtEmail.getText(), d);
                 JOptionPane.showMessageDialog(this, "Usuario creado correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
             } catch (UsuarioRepetidoException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

@@ -4,26 +4,45 @@
  */
 package logica;
 
-import datatypes.DtFecha;
 
-/**
- *
- * @author PC
- */
+import java.util.Date;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public class Usuario {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
     private String nickname;
     private String nombre;
     private String apellido;
     private String email;
-    private DtFecha fechaNac;
+    private Date fechaNac;
+
+    public Usuario() {
+        super();
+    }
     
     
-    public Usuario(String nc, String n, String a, String e, DtFecha df){
+    public Usuario(String nc, String n, String a, String e, Date df){
         this.nickname = nc;
         this.nombre = n;
         this.apellido = a;
         this.email = e;
         this.fechaNac = df;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     public String getNickName(){
@@ -42,7 +61,7 @@ public class Usuario {
         return this.email;
     }
     
-    public DtFecha getFecha(){
+    public Date getFecha(){
         return this.fechaNac;
     }
 
@@ -62,7 +81,7 @@ public class Usuario {
         this.email = email;
     }
 
-    public void setFechaNac(DtFecha fechaNac) {
+    public void setFechaNac(Date fechaNac) {
         this.fechaNac = fechaNac;
     }
   

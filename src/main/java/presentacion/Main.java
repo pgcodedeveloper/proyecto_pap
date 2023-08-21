@@ -123,7 +123,7 @@ public class Main extends javax.swing.JFrame {
         btnCerrar.setBackground(new java.awt.Color(46, 124, 209));
         btnCerrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons14-cerrar.png"))); // NOI18N
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-eliminar-16.png"))); // NOI18N
         btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrar.setOpaque(true);
         btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -163,6 +163,7 @@ public class Main extends javax.swing.JFrame {
         panelHeading.setOpaque(false);
 
         lblIcono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-gym-26.png"))); // NOI18N
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -204,6 +205,7 @@ public class Main extends javax.swing.JFrame {
         panelLogo.add(lblAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 116, 180, 30));
 
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-engranaje-50.png"))); // NOI18N
         lblLogo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         panelLogo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 150));
 
@@ -231,6 +233,7 @@ public class Main extends javax.swing.JFrame {
         btnRegClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnRegClase.setForeground(new java.awt.Color(255, 255, 255));
         btnRegClase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRegClase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-aula-de-google-16.png"))); // NOI18N
         btnRegClase.setText("Registro a Clase");
         btnRegClase.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegClase.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -253,6 +256,7 @@ public class Main extends javax.swing.JFrame {
         btnCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCliente.setForeground(new java.awt.Color(255, 255, 255));
         btnCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-clientes-16.png"))); // NOI18N
         btnCliente.setText("Clientes");
         btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCliente.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -275,6 +279,7 @@ public class Main extends javax.swing.JFrame {
         btnProfesor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnProfesor.setForeground(new java.awt.Color(255, 255, 255));
         btnProfesor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnProfesor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-profesor-16.png"))); // NOI18N
         btnProfesor.setText("Profesores");
         btnProfesor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnProfesor.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -297,6 +302,7 @@ public class Main extends javax.swing.JFrame {
         btnRegActDeportiva.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnRegActDeportiva.setForeground(new java.awt.Color(255, 255, 255));
         btnRegActDeportiva.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRegActDeportiva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-strength-16.png"))); // NOI18N
         btnRegActDeportiva.setText("Actividad Deportiva");
         btnRegActDeportiva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegActDeportiva.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -319,6 +325,7 @@ public class Main extends javax.swing.JFrame {
         btnRegDictadoClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnRegDictadoClase.setForeground(new java.awt.Color(255, 255, 255));
         btnRegDictadoClase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRegDictadoClase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-aula-de-google-16.png"))); // NOI18N
         btnRegDictadoClase.setText("Dictado de Clase");
         btnRegDictadoClase.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegDictadoClase.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -341,6 +348,7 @@ public class Main extends javax.swing.JFrame {
         btnRegInstitucion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnRegInstitucion.setForeground(new java.awt.Color(255, 255, 255));
         btnRegInstitucion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRegInstitucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-colegio-16.png"))); // NOI18N
         btnRegInstitucion.setText("Institución Deportiva");
         btnRegInstitucion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegInstitucion.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);

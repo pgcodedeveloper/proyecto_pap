@@ -10,13 +10,23 @@ import java.util.List;
  * @author PC
  */
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class InstitucionDeportiva {
+    @Id
     private String nombre;
     private String descripcion;
     private String url;
+    
+    @OneToMany
     private List<ActividadDeportiva> actividadesDeportiva;
 
+    public InstitucionDeportiva(){
+        super();
+    }
     // Constructor
     public InstitucionDeportiva(String nombre, String descripcion, String url, List<ActividadDeportiva> actividadesDeportiva) {
         this.nombre = nombre;
