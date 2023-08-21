@@ -1,4 +1,6 @@
 /home/gabriel/Escritorio/PAp/proyecto_pap/src/main/java/datatypes/DtSocio.java
+/home/gabriel/Escritorio/PAp/proyecto_pap/src/main/java/persistencia/Conexion.java
+/home/gabriel/Escritorio/PAp/proyecto_pap/src/main/java/presentacion/RegistroDictadoClase.java
 /home/gabriel/Escritorio/PAp/proyecto_pap/src/main/java/logica/Controlador.java
 /home/gabriel/Escritorio/PAp/proyecto_pap/src/main/java/exceptions/UsuarioRepetidoException.java
 /home/gabriel/Escritorio/PAp/proyecto_pap/src/main/java/interfaces/Fabrica.java
