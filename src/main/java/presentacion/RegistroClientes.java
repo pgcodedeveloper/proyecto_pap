@@ -23,7 +23,7 @@ public class RegistroClientes extends javax.swing.JInternalFrame {
      */
     public RegistroClientes(IControlador con) {
         initComponents();
-        Limpiar();
+        limpiar();
         this.Icon = con;
     }
     /**
@@ -292,7 +292,7 @@ public class RegistroClientes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    void Limpiar(){
+    void limpiar(){
         txtNickN.setText(null);
         txtNombre.setText(null);
         txtEmail.setText(null);
@@ -332,7 +332,7 @@ public class RegistroClientes extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             finally{
-                Limpiar();
+                limpiar();
                 this.setVisible(false);
             }
         }
@@ -343,7 +343,7 @@ public class RegistroClientes extends javax.swing.JInternalFrame {
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         // TODO add your handling code here:
-        Limpiar();
+        limpiar();
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
@@ -353,7 +353,7 @@ public class RegistroClientes extends javax.swing.JInternalFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        Limpiar();
+        limpiar();
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 

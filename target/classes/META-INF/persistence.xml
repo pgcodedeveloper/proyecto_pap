@@ -1,0 +1,24 @@
+0<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this template
+-->
+
+<persistence-unit name="entrenamosuy_hibernate" transaction-type="RESOURSE_LOCAL">
+
+<class>logica.Usuario</class>
+<class>logica.Profesor</class>
+<class>logica.Socio</class>
+<class>logica.InstitucionDeportiva</class>
+<class>logica.ActividadDeportiva</class>
+<class>logica.Clase</class>
+<class>logica.Registro</class>
+
+<properties>
+    <property name ="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> // Postgres
+    <property name ="hibernate.hbm2ddl.auto" value= "update"/> // En cada inicio crea todas las tablas
+    <property name ="hibernate.connection.username" value= "postgres"/> // cargar al instalar postgress!
+    <property name= "hibernate.hbm2ddl.password" value= "postgres"/> // cargar al instalar postgress!
+    <property name= "javax.persistence.jdbc.url" value= "jdbc:postgresql://localhost:5432/entrenamosuy"/> // cargar al instalar postgress!
+    <property name= "javax.persistence.jdbc.driver" value= "org.postrgessql.Driver"/>
+</properties>

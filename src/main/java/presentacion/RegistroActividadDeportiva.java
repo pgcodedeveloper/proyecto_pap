@@ -17,7 +17,7 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
      */
     public RegistroActividadDeportiva() {
         initComponents();
-        Limpiar();
+        limpiar();
     }
 
     /**
@@ -280,7 +280,7 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    void Limpiar(){
+    void limpiar(){
         txtNombre.setText(null);
         txtDescripcion.setText(null);
         txtCosto.setText(null);
@@ -313,12 +313,12 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         // TODO add your handling code here:
-        Limpiar();
+        limpiar();
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        Limpiar();
+        limpiar();
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 

@@ -102,9 +102,6 @@
                       <Color blue="d1" green="7c" red="2e" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\resources\icons8-arrows-16.png"/>
-                    </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Default Cursor"/>
                     </Property>
@@ -133,9 +130,6 @@
                       <Font name="Segoe UI" size="14" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\resources\icons8-eliminar-16.png"/>
-                    </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Default Cursor"/>
                     </Property>
@@ -186,9 +180,6 @@
                 <Component class="javax.swing.JLabel" name="lblIcono">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\resources\icons8-gym-26.png"/>
-                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblTitulo">
@@ -274,9 +265,6 @@
                     <Component class="javax.swing.JLabel" name="lblLogo">
                       <Properties>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="2" name="C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\resources\icons8-engranaje-50.png"/>
-                        </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
                       <Constraints>
@@ -335,9 +323,6 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\resources\icons8-a&#xf1;adir-usuario-tipo-de-piel-masculina-7-16.png"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="Registro a Clase"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Default Cursor"/>
@@ -369,9 +354,6 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\resources\icons8-clientes-16.png"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="Clientes"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Default Cursor"/>
@@ -403,9 +385,6 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\resources\icons8-aula-de-google-16.png"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="Profesores"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Default Cursor"/>
@@ -437,9 +416,6 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\resources\icons8-strength-16.png"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="Actividad Deportiva"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Default Cursor"/>
@@ -471,9 +447,6 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\resources\icons8-profesor-16.png"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="Dictado de Clase"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Default Cursor"/>
@@ -505,9 +478,6 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\resources\icons8-colegio-16.png"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="Instituci&#xf3;n Deportiva"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Default Cursor"/>

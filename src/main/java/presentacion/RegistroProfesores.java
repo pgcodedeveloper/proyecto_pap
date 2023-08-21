@@ -17,7 +17,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
      */
     public RegistroProfesores() {
         initComponents();
-        Limpiar();
+        limpiar();
     }
 
     /**
@@ -64,7 +64,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Registrar Profesor");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setFrameIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\java\\presentacion\\iconos\\icons8-registro-25.png")); // NOI18N
+        setFrameIcon(null);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -90,7 +90,6 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         txtNickN.setBackground(new java.awt.Color(214, 217, 223));
         txtNickN.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         txtNickN.setMargin(new java.awt.Insets(10, 2, 10, 2));
-        txtNickN.setOpaque(false);
         txtNickN.setPreferredSize(new java.awt.Dimension(9, 38));
         txtNickN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,7 +100,6 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         txtApellido.setBackground(new java.awt.Color(214, 217, 223));
         txtApellido.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         txtApellido.setMargin(new java.awt.Insets(10, 2, 10, 2));
-        txtApellido.setOpaque(false);
         txtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidoActionPerformed(evt);
@@ -111,7 +109,6 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         txtEmail.setBackground(new java.awt.Color(214, 217, 223));
         txtEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         txtEmail.setMargin(new java.awt.Insets(10, 2, 10, 2));
-        txtEmail.setOpaque(false);
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
@@ -121,7 +118,6 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         txtNombre.setBackground(new java.awt.Color(214, 217, 223));
         txtNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         txtNombre.setMargin(new java.awt.Insets(10, 2, 10, 2));
-        txtNombre.setOpaque(false);
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
@@ -145,16 +141,13 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
 
         spMes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
         spMes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        spMes.setOpaque(false);
 
         spAnio.setModel(new javax.swing.SpinnerNumberModel(2000, null, null, 1));
         spAnio.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         spAnio.setEditor(new javax.swing.JSpinner.NumberEditor(spAnio, ""));
-        spAnio.setOpaque(false);
 
         spDia.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
         spDia.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        spDia.setOpaque(false);
 
         panelExtra.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos extras"));
         panelExtra.setPreferredSize(new java.awt.Dimension(506, 400));
@@ -167,7 +160,6 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
 
         comboIntituto.setBackground(new java.awt.Color(214, 217, 223));
         comboIntituto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Item 2", "Item 3", "Item 4" }));
-        comboIntituto.setOpaque(false);
         comboIntituto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboIntitutoActionPerformed(evt);
@@ -190,7 +182,6 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         txtDescripcion.setBackground(new java.awt.Color(214, 217, 223));
         txtDescripcion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         txtDescripcion.setMargin(new java.awt.Insets(10, 2, 10, 2));
-        txtDescripcion.setOpaque(false);
         txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDescripcionActionPerformed(evt);
@@ -203,7 +194,6 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         txtWeb.setBackground(new java.awt.Color(214, 217, 223));
         txtWeb.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         txtWeb.setMargin(new java.awt.Insets(10, 2, 10, 2));
-        txtWeb.setOpaque(false);
 
         javax.swing.GroupLayout panelExtraLayout = new javax.swing.GroupLayout(panelExtra);
         panelExtra.setLayout(panelExtraLayout);
@@ -246,7 +236,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
                 .addGroup(panelExtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblWeb)
                     .addComponent(txtWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 16, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         panelExtraLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboIntituto, lblDescripcion, lblInstituto, lblWeb, txtDescripcion, txtWeb});
@@ -348,7 +338,6 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         );
 
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnGuardar.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\java\\presentacion\\iconos\\icons8-guardar-48.png")); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 153, 100), 2, true));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -358,9 +347,13 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         });
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCancelar.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\PAp\\entrenamosuy\\src\\main\\java\\presentacion\\iconos\\icons8-cancelar-25.png")); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(205, 73, 69), 2, true));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -397,7 +390,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    void Limpiar(){
+    void limpiar(){
         txtNickN.setText(null);
         txtNombre.setText(null);
         txtEmail.setText(null);
@@ -446,13 +439,19 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         // TODO add your handling code here:
-        Limpiar();
+        limpiar();
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         // TODO add your handling code here:
-        Limpiar();
+        limpiar();
     }//GEN-LAST:event_formInternalFrameClosing
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

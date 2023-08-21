@@ -499,6 +499,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnRegActDeportivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseClicked
         // TODO add your handling code here:
+        actDeportiva.setVisible(true);
     }//GEN-LAST:event_btnRegActDeportivaMouseClicked
 
     private void btnRegActDeportivaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseEntered
