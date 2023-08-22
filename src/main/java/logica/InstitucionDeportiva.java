@@ -4,6 +4,8 @@
  */
 package logica;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 /**
  *
@@ -13,9 +15,11 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class InstitucionDeportiva {
+@Table(name = "InstitucionDeportiva")
+public class InstitucionDeportiva implements Serializable{
     @Id
     private String nombre;
     private String descripcion;
@@ -23,16 +27,19 @@ public class InstitucionDeportiva {
     
     @OneToMany
     private List<ActividadDeportiva> actividadesDeportiva;
+    @OneToMany
+    private List<Profesor> profesores;
 
     public InstitucionDeportiva(){
         super();
     }
     // Constructor
-    public InstitucionDeportiva(String nombre, String descripcion, String url, List<ActividadDeportiva> actividadesDeportiva) {
+    public InstitucionDeportiva(String nombre, String descripcion, String url) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.url = url;
-        this.actividadesDeportiva = actividadesDeportiva;
+        this.actividadesDeportiva = new ArrayList<>();
+        this.profesores = new ArrayList<>();
     }
 
     // Getter y Setter para 'nombre'
@@ -69,5 +76,14 @@ public class InstitucionDeportiva {
 
     public void setActividadesDeportiva(List<ActividadDeportiva> actividadesDeportiva) {
         this.actividadesDeportiva = actividadesDeportiva;
+    }
+    
+    public void agregarActividad(ActividadDeportiva act){
+        this.actividadesDeportiva.add(act);
+    }
+    
+    public void agregarProfesor(Profesor p){
+        this.profesores.add(p);
+        p.setInstitucionDeportiva(this);
     }
 }

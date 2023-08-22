@@ -4,8 +4,6 @@
  */
 package logica;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 import persistencia.Conexion;
@@ -14,49 +12,43 @@ import persistencia.Conexion;
  *
  * @author PC
  */
-public class ManejadorUsuario {
-    private static ManejadorUsuario instancia = null;
+public class ManejadorInstitucion {
+    private static ManejadorInstitucion instancia = null;
 
-    private ManejadorUsuario() {
+    private ManejadorInstitucion() {
     }
     
-    public static ManejadorUsuario getInstancia() {
+    public static ManejadorInstitucion getInstancia() {
         if (instancia == null)
-                instancia = new ManejadorUsuario();
+                instancia = new ManejadorInstitucion();
         return instancia;
     }
     
-    
-    public void agregarUsuario(Usuario usr){
-        System.out.println(usr);
+    public void agregarInstitucion(InstitucionDeportiva ins){
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
         try {
             em.getTransaction().begin();
         
-            System.out.println(em);
-            em.persist(usr);
+            em.persist(ins);
 
             em.getTransaction().commit();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-    }
-    
-    public void agregarProfesor(Usuario usr){
-        Conexion con = Conexion.getInstancia();
-        EntityManager em = con.getEntityManager();
-        em.getTransaction().begin();
-        em.persist(usr);
-        em.getTransaction().commit();
-    }
-    
-    public Usuario buscarUsuario(int id){
-        Conexion con = Conexion.getInstancia();
-        EntityManager em = con.getEntityManager();
         
-        Usuario urs = em.find(Usuario.class, id);
-        return urs;
+    }
+    
+    public InstitucionDeportiva buscarInst(String nom){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        InstitucionDeportiva i = null;
+        try {
+            i = em.find(InstitucionDeportiva.class, nom);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return i;
     }
     
 }

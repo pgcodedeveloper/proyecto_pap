@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package logica;
+package persistencia;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,40 +11,35 @@ import java.util.Objects;
  *
  * @author PC
  */
-public class RegistroID implements Serializable{
+public class RegistroID implements Serializable {
     
-    private static final long serialVersionUID = 1L;
-	
-	private int clase;
-	private int socio;
-	
-	//Tiene que tener constructor por defecto
-	public RegistroID() {
-		super();
-	}
+    private String clase;
+    private int socio;
 
-	//Tiene que implementar los getters y setters
-	public int getClase() {
-		return clase;
-	}
+    public RegistroID() {
+    }
 
-	public void setClase(int clase) {
-		this.clase = clase;
-	}
+    public String getClase() {
+        return clase;
+    }
 
-	public int getSocio() {
-		return socio;
-	}
+    public void setClase(String clase) {
+        this.clase = clase;
+    }
 
-	public void setSocio(int socio) {
-		this.socio = socio;
-	}
+    public int getSocio() {
+        return socio;
+    }
+
+    public void setSocio(int socio) {
+        this.socio = socio;
+    }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + this.clase;
-        hash = 23 * hash + this.socio;
+        hash = 97 * hash + Objects.hashCode(this.clase);
+        hash = 97 * hash + this.socio;
         return hash;
     }
 
@@ -60,13 +55,11 @@ public class RegistroID implements Serializable{
             return false;
         }
         final RegistroID other = (RegistroID) obj;
-        if (this.clase != other.clase) {
+        if (this.socio != other.socio) {
             return false;
         }
-        return this.socio == other.socio;
+        return Objects.equals(this.clase, other.clase);
     }
-	
-	
     
     
 }

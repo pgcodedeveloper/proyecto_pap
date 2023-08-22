@@ -7,6 +7,7 @@ package logica;
 import datatypes.DtProfesor;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
+import exceptions.InstitucionRepetidaException;
 import exceptions.UsuarioRepetidoException;
 import interfaces.IControlador;
 import java.util.Date;
@@ -33,5 +34,34 @@ public class Controlador implements IControlador {
         u = new Socio(nickname,  nombre,  apellido,  email,  fechaNac);
         mju.agregarUsuario(u);
     }
+
+    @Override
+    public void altaProfesor(String nc, String n, String a, String e, Date df, String desc, String bio, String sitioWeb) throws UsuarioRepetidoException{
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        Usuario u;
+        
+        u = new Profesor(nc,n,a,e,df,desc,bio,sitioWeb);
+    }
+
+    @Override
+    public void altaInstitucion(String nombre, String descripcion, String url) throws InstitucionRepetidaException {
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        InstitucionDeportiva ins = mji.buscarInst(nombre);
+        
+        if(ins != null){
+            throw new InstitucionRepetidaException("La institucion: " + nombre + " ya existe");
+        }
+        else{
+            ins = new InstitucionDeportiva(nombre, descripcion, url);
+            mji.agregarInstitucion(ins);
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
     
 }

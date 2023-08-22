@@ -5,6 +5,8 @@
 package logica;
 import java.util.List;
 import datatypes.DtFecha;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 /**
  *
@@ -13,31 +15,40 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 @Entity
-public class ActividadDeportiva {
+@Table(name = "ActividadDeportiva")
+public class ActividadDeportiva implements Serializable{
     @Id
     private String nombre;
     private String descripcion;
     private Integer duracion;
     private float costo;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaReg;
     
     @OneToMany
-    private List<Clase> clases;
+    private List<Clase> clases ;
+    
+    @ManyToOne
+    private InstitucionDeportiva inst;
 
     public ActividadDeportiva(){
         super();
     }
     // Constructor
-    public ActividadDeportiva(String nombre, String descripcion, Integer duracion, float costo, Date fechaReg, List<Clase> clases) {
+    public ActividadDeportiva(String nombre, String descripcion, Integer duracion, float costo, Date fechaReg, InstitucionDeportiva ins) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
         this.costo = costo;
         this.fechaReg = fechaReg;
-        this.clases = clases;
+        this.inst = ins;
+        this.clases = new ArrayList<>();
     }
 
     // Getter y Setter para 'nombre'
@@ -92,5 +103,9 @@ public class ActividadDeportiva {
 
     public void setClases(List<Clase> clases) {
         this.clases = clases;
+    }
+    
+    public void altaClase(Clase c){
+        this.clases.add(c);
     }
 }

@@ -4,7 +4,6 @@
  */
 package logica;
 import java.util.List;
-import datatypes.DtFecha;
 import java.util.Date;
 
 /**
@@ -12,18 +11,28 @@ import java.util.Date;
  * @author PC
  */
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
-@Entity
+@Entity(name = "Profesor")
+@Table(name = "Profesor")
+@PrimaryKeyJoinColumn(name = "profesor_id")
 public class Profesor extends Usuario {
+    
+    @Column(name = "descripcion")
     private String descripcion;
+    @Column(name = "biografia")
     private String biografia;
+    @Column(name = "sitio_web")
     private String sitioWeb;
     
     @ManyToOne
     private InstitucionDeportiva institucionDeportiva;
+    
     @OneToMany
     private List<Clase> clases;
 
@@ -31,13 +40,11 @@ public class Profesor extends Usuario {
         super();
     }
     // Constructor
-    public Profesor(String nc, String n, String a, String e, Date df, String desc, String bio, String sitioWeb, InstitucionDeportiva insD, List<Clase> clases) {
+    public Profesor(String nc, String n, String a, String e, Date df, String desc, String bio, String sitioWeb) {
         super(nc, n, a, e, df);
         this.descripcion = desc;
         this.biografia = bio;
         this.sitioWeb = sitioWeb;
-        this.institucionDeportiva = insD;
-        this.clases = clases;
     }
 
     // Getter y Setter para 'descripcion'

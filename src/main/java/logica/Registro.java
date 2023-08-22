@@ -4,9 +4,14 @@
  */
 package logica;
 
+import persistencia.RegistroID;
 import datatypes.DtFecha;
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,23 +26,15 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @IdClass(RegistroID.class)
-public class Registro {
+public class Registro implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne
-    @JoinColumn(
-        insertable = false,
-        updatable = false
-    )
+    @JoinColumn(nullable = true, name = "socio_id", foreignKey = @ForeignKey(name = "SOCIO_ID_FK"))
     private Socio socio;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne
-    @JoinColumn(
-        insertable = false,
-        updatable = false
-    )
+    @JoinColumn(nullable = true, name = "clase_id", foreignKey = @ForeignKey(name = "CLASE_ID_FK"))
     private Clase clase;
     
     @Temporal(TemporalType.DATE)
@@ -62,8 +59,6 @@ public class Registro {
         this.fechaReg = fechaReg;
     }
     
-    
-
     // Getter y Setter para 'fechaReg'
     public Date getFechaReg() {
         return fechaReg;
@@ -74,19 +69,19 @@ public class Registro {
     }
 
     // Getter y Setter para 'socio'
-    public Socio getSocio() {
+    public Socio getSocioId() {
         return socio;
     }
 
-    public void setSocio(Socio socio) {
+    public void setSocioId(Socio socio) {
         this.socio = socio;
     }
 
-    public Clase getClase() {
+    public Clase getClaseId() {
         return clase;
     }
 
-    public void setClase(Clase clase) {
+    public void setClaseId(Clase clase) {
         this.clase = clase;
     }
     

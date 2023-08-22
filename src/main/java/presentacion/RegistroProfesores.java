@@ -90,6 +90,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         txtNickN.setBackground(new java.awt.Color(214, 217, 223));
         txtNickN.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         txtNickN.setMargin(new java.awt.Insets(10, 2, 10, 2));
+        txtNickN.setOpaque(false);
         txtNickN.setPreferredSize(new java.awt.Dimension(9, 38));
         txtNickN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +101,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         txtApellido.setBackground(new java.awt.Color(214, 217, 223));
         txtApellido.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         txtApellido.setMargin(new java.awt.Insets(10, 2, 10, 2));
+        txtApellido.setOpaque(false);
         txtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidoActionPerformed(evt);
@@ -109,6 +111,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         txtEmail.setBackground(new java.awt.Color(214, 217, 223));
         txtEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         txtEmail.setMargin(new java.awt.Insets(10, 2, 10, 2));
+        txtEmail.setOpaque(false);
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
@@ -118,6 +121,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         txtNombre.setBackground(new java.awt.Color(214, 217, 223));
         txtNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         txtNombre.setMargin(new java.awt.Insets(10, 2, 10, 2));
+        txtNombre.setOpaque(false);
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
@@ -182,6 +186,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         txtDescripcion.setBackground(new java.awt.Color(214, 217, 223));
         txtDescripcion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         txtDescripcion.setMargin(new java.awt.Insets(10, 2, 10, 2));
+        txtDescripcion.setOpaque(false);
         txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDescripcionActionPerformed(evt);
@@ -194,6 +199,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         txtWeb.setBackground(new java.awt.Color(214, 217, 223));
         txtWeb.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         txtWeb.setMargin(new java.awt.Insets(10, 2, 10, 2));
+        txtWeb.setOpaque(false);
 
         javax.swing.GroupLayout panelExtraLayout = new javax.swing.GroupLayout(panelExtra);
         panelExtra.setLayout(panelExtraLayout);
@@ -236,7 +242,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
                 .addGroup(panelExtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblWeb)
                     .addComponent(txtWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         panelExtraLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboIntituto, lblDescripcion, lblInstituto, lblWeb, txtDescripcion, txtWeb});

@@ -5,29 +5,46 @@
 package logica;
 
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.persistence.Temporal;
 
-@MappedSuperclass
-public class Usuario {
+
+@Entity(name = "Usuario")
+@Table(name = "Usuario")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Usuario implements Serializable {
     
     @Id
+    @Column(name = "usuario_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @Column(name = "nick_name", unique = true)
     private String nickname;
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "apellido")
     private String apellido;
+    @Column(name = "email" , unique = true)
     private String email;
+    @Column(name = "fecha_nacimiento")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaNac;
 
     public Usuario() {
         super();
     }
-    
     
     public Usuario(String nc, String n, String a, String e, Date df){
         this.nickname = nc;
@@ -84,5 +101,12 @@ public class Usuario {
     public void setFechaNac(Date fechaNac) {
         this.fechaNac = fechaNac;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "nickname=" + nickname + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", fechaNac=" + fechaNac + '}';
+    }
+    
+    
   
 }

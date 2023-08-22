@@ -23,6 +23,7 @@ public class Main extends javax.swing.JFrame {
     private RegistroProfesores profesores;
     private RegistroActividadDeportiva actDeportiva;  
     private RegistroDictadoClase dictClase;
+    private RegistroInstitucion inst;
     /**
      * Creates new form Main
      */
@@ -56,6 +57,12 @@ public class Main extends javax.swing.JFrame {
         dictClase.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
         panelContenido.add(dictClase);
         dictClase.setVisible(false);
+        
+        inst = new RegistroInstitucion(con);
+        jInternalFrameSize = inst.getSize();
+        inst.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
+        panelContenido.add(inst);
+        inst.setVisible(false);
     }
      
     /**
@@ -540,6 +547,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnRegInstitucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseClicked
         // TODO add your handling code here:
+        inst.setVisible(true);
     }//GEN-LAST:event_btnRegInstitucionMouseClicked
 
     private void btnRegInstitucionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseEntered
