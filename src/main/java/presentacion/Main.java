@@ -17,7 +17,7 @@ import org.w3c.dom.css.RGBColor;
  *
  * @author PC
  */
-public class Main extends javax.swing.JFrame {
+public class Main extends JFrame {
     int xMouse, yMouse;
     private RegistroClientes clientes;
     private RegistroProfesores profesores;
@@ -40,13 +40,13 @@ public class Main extends javax.swing.JFrame {
         clientes.setVisible(false);
         
         
-        profesores = new RegistroProfesores();
+        profesores = new RegistroProfesores(con);
         jInternalFrameSize = profesores.getSize();
         profesores.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
         panelContenido.add(profesores);
         profesores.setVisible(false);
         
-        actDeportiva  = new RegistroActividadDeportiva();
+        actDeportiva  = new RegistroActividadDeportiva(con);
         jInternalFrameSize = actDeportiva.getSize();
         actDeportiva.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
         panelContenido.add(actDeportiva);

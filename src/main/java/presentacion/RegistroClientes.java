@@ -327,7 +327,8 @@ public class RegistroClientes extends javax.swing.JInternalFrame {
                 int mes = Integer.parseInt(spMes.getValue().toString());
                 int anio = Integer.parseInt(spAnio.getValue().toString());
                 Date d = new Date(anio,mes,dia);
-                this.Icon.altaUsuario(txtNickN.getText(), txtNombre.getText(), txtApellido.getText(), txtEmail.getText(), d);
+                DtUsuario u = new DtSocio(txtNickN.getText(), txtNombre.getText(), txtApellido.getText(), txtEmail.getText(), d);
+                this.Icon.altaUsuario(u);
                 JOptionPane.showMessageDialog(this, "Usuario creado correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
             } catch (UsuarioRepetidoException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

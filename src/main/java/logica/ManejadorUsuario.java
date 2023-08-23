@@ -7,6 +7,8 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import persistencia.Conexion;
 
@@ -34,7 +36,6 @@ public class ManejadorUsuario {
         try {
             em.getTransaction().begin();
         
-            System.out.println(em);
             em.persist(usr);
 
             em.getTransaction().commit();
@@ -51,12 +52,21 @@ public class ManejadorUsuario {
         em.getTransaction().commit();
     }
     
-    public Usuario buscarUsuario(int id){
+    public Usuario buscarUsuario(String email, String nick){
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
         
-        Usuario urs = em.find(Usuario.class, id);
-        return urs;
+        Query q = em.createQuery("select u from Usuario u where u.email = :email and u.nickname = :nick", Usuario.class);
+        q.setParameter("email", email);
+        q.setParameter("nick", nick);
+        Usuario usr = null;
+        
+        try {
+            usr = (Usuario) q.getSingleResult();
+        } catch (NoResultException e) {
+            usr = null;
+        }
+        return usr;
     }
     
 }

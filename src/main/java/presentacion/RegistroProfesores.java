@@ -4,6 +4,12 @@
  */
 package presentacion;
 
+import datatypes.DtProfesor;
+import datatypes.DtUsuario;
+import exceptions.UsuarioRepetidoException;
+import interfaces.IControlador;
+import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,11 +21,19 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
     /**
      * Creates new form RegistroProfesores
      */
-    public RegistroProfesores() {
+    private IControlador icon;
+    public RegistroProfesores(IControlador con) {
         initComponents();
         limpiar();
+        this.icon = con;
+        iniciarCombo();
     }
 
+    void iniciarCombo(){
+        DefaultComboBoxModel<String> modelclases = new DefaultComboBoxModel<String>(icon.obtenerInstituciones());
+        comboIntituto.addItem("Seleccione");
+	comboIntituto.setModel(modelclases);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,9 +55,6 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         lblApellido = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
-        spMes = new javax.swing.JSpinner();
-        spAnio = new javax.swing.JSpinner();
-        spDia = new javax.swing.JSpinner();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         panelExtra = new javax.swing.JPanel();
         lblInstituto = new javax.swing.JLabel();
@@ -56,6 +67,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         lblWeb = new javax.swing.JLabel();
         txtWeb = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
+        dateNacimiento = new com.toedter.calendar.JDateChooser();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
@@ -142,16 +154,6 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
 
         lblFecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblFecha.setText("Fecha de nacimiento:");
-
-        spMes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
-        spMes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        spAnio.setModel(new javax.swing.SpinnerNumberModel(2000, null, null, 1));
-        spAnio.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        spAnio.setEditor(new javax.swing.JSpinner.NumberEditor(spAnio, ""));
-
-        spDia.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
-        spDia.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         panelExtra.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos extras"));
         panelExtra.setPreferredSize(new java.awt.Dimension(506, 400));
@@ -247,6 +249,8 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
 
         panelExtraLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboIntituto, lblDescripcion, lblInstituto, lblWeb, txtDescripcion, txtWeb});
 
+        dateNacimiento.setDateFormatString("dd MM yyy");
+
         javax.swing.GroupLayout panelRegistroLayout = new javax.swing.GroupLayout(panelRegistro);
         panelRegistro.setLayout(panelRegistroLayout);
         panelRegistroLayout.setHorizontalGroup(
@@ -268,17 +272,14 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegistroLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegistroLayout.createSequentialGroup()
-                                        .addComponent(spDia, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(179, 179, 179)
-                                        .addComponent(spMes, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(spAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(filler2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING))))))
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegistroLayout.createSequentialGroup()
+                                        .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                                            .addComponent(dateNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
                 .addContainerGap())
             .addGroup(panelRegistroLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
@@ -291,7 +292,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
                     .addComponent(lblEmail)
                     .addComponent(lblNombre)
                     .addComponent(lblFecha)))
-            .addComponent(panelExtra, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
+            .addComponent(panelExtra, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
             .addComponent(jSeparator2)
         );
 
@@ -322,20 +323,19 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelRegistroLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(spMes, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(spAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(spDia, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRegistroLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(lblFecha))
+                            .addGroup(panelRegistroLayout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(16, 16, 16))
                     .addGroup(panelRegistroLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(17, 17, 17)
+                        .addComponent(dateNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -388,7 +388,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnGuardar});
@@ -401,9 +401,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         txtNombre.setText(null);
         txtEmail.setText(null);
         txtApellido.setText(null);
-        spDia.setValue(1);
-        spMes.setValue(1);
-        spAnio.setValue(2000);
+        dateNacimiento.setDate(new Date());
         comboIntituto.setSelectedIndex(0);
         txtBiografia.setText(null);
         txtDescripcion.setText(null);
@@ -435,8 +433,23 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        if(!txtNickN.getText().isEmpty() && !txtNombre.getText().isEmpty() && !txtEmail.getText().isEmpty() && !txtApellido.getText().isEmpty() && comboIntituto.getSelectedIndex()!= 0){
-            
+        Date hoy = new Date();
+        int fechaValida = (hoy.getYear() - dateNacimiento.getDate().getYear());
+        if(!txtNickN.getText().isEmpty() && !txtNombre.getText().isEmpty() && !txtEmail.getText().isEmpty() && !txtApellido.getText().isEmpty()){
+            if(dateNacimiento.getDate().after(new Date()) && fechaValida >= 18){
+                try {
+                    DtUsuario u = new DtProfesor(txtDescripcion.getText(), txtDescripcion.getText(), txtWeb.getText(), txtNickN.getText(), txtNombre.getText(), txtApellido.getText(), txtEmail.getText(), dateNacimiento.getDate(),this.icon.obtenerInstitucion(comboIntituto.getSelectedItem().toString()));
+                    this.icon.altaUsuario(u);
+                    JOptionPane.showMessageDialog(null, "Profesor creado correctamente","Exito",JOptionPane.INFORMATION_MESSAGE);
+                    limpiar();
+                    this.setVisible(false);
+                } catch (UsuarioRepetidoException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Fecha no valida, ingrese otra", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         else{
             JOptionPane.showMessageDialog(null, "Debes ingresar datos en todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -464,6 +477,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> comboIntituto;
+    private com.toedter.calendar.JDateChooser dateNacimiento;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
@@ -480,9 +494,6 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblWeb;
     private javax.swing.JPanel panelExtra;
     private javax.swing.JPanel panelRegistro;
-    private javax.swing.JSpinner spAnio;
-    private javax.swing.JSpinner spDia;
-    private javax.swing.JSpinner spMes;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextArea txtBiografia;
     private javax.swing.JTextField txtDescripcion;

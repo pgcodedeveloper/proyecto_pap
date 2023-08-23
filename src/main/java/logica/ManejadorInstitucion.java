@@ -4,7 +4,10 @@
  */
 package logica;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import persistencia.Conexion;
 
@@ -51,4 +54,18 @@ public class ManejadorInstitucion {
         return i;
     }
     
+    public ArrayList<String> obtenerInst(){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        
+        Query query = em.createQuery("select i from InstitucionDeportiva i");
+		
+        List<InstitucionDeportiva> listInst = (List<InstitucionDeportiva>) query.getResultList();
+
+        ArrayList<String> aRetornar = new ArrayList<>();
+        for(InstitucionDeportiva i: listInst) {
+                aRetornar.add(i.getNombre());
+        }
+        return aRetornar;
+    }
 }

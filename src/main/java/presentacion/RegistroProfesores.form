@@ -64,7 +64,7 @@
                   <Component id="btnGuardar" linkSize="6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancelar" linkSize="6" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -114,18 +114,16 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtEmail" linkSize="2" alignment="1" min="-2" pref="457" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="spDia" min="-2" pref="85" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="filler3" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
-                                          <Component id="spMes" min="-2" pref="76" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                          <Component id="spAnio" min="-2" pref="80" max="-2" attributes="0"/>
-                                      </Group>
                                       <Component id="filler2" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtNombre" linkSize="2" alignment="1" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="filler3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txtEmail" linkSize="2" pref="457" max="32767" attributes="0"/>
+                                              <Component id="dateNacimiento" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -147,7 +145,7 @@
                       <Component id="lblFecha" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <Component id="panelExtra" alignment="0" pref="806" max="32767" attributes="0"/>
+              <Component id="panelExtra" alignment="0" pref="813" max="32767" attributes="0"/>
               <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
@@ -182,24 +180,23 @@
                       <Component id="txtEmail" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="lblEmail" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="spMes" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                                  <Component id="spAnio" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                                  <Component id="lblFecha" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="lblFecha" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="spDia" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="filler3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                          <Component id="filler3" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          <Component id="dateNacimiento" min="-2" pref="38" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -349,45 +346,6 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Fecha de nacimiento:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JSpinner" name="spMes">
-          <Properties>
-            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="1" maximum="12" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                <EmptyBorder/>
-              </Border>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JSpinner" name="spAnio">
-          <Properties>
-            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="2000" numberType="java.lang.Integer" stepSize="1" type="number"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                <EmptyBorder/>
-              </Border>
-            </Property>
-            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
-              <SpinnerEditor format="" type="3"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JSpinner" name="spDia">
-          <Properties>
-            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="1" maximum="31" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                <EmptyBorder/>
-              </Border>
-            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.Box$Filler" name="filler3">
@@ -583,6 +541,11 @@
           </SubComponents>
         </Container>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="dateNacimiento">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd MM yyy"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

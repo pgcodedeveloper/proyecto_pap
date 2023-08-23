@@ -22,40 +22,21 @@
     </repositories>
     
     <dependencies>
-        
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>6.3.0.CR1</version>
-        </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.2.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
-               <artifactId>hibernate-entitymanager</artifactId>
-                <version>6.0.0.Alpha7</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.6.0</version>
-        </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
-        <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging</artifactId>
-            <version>3.5.3.Final</version>
-        </dependency>
-
-        
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.4.4.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.4.4.Final</version>
+		</dependency>
         <dependency>
             <groupId>unknown.binary</groupId>
             <artifactId>AbsoluteLayout</artifactId>
@@ -101,6 +82,11 @@
             <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
             <version>2.7.12</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>unknown.binary</groupId>
+            <artifactId>jcalendar-1.4</artifactId>
+            <version>SNAPSHOT</version>
         </dependency>
     </dependencies>
    

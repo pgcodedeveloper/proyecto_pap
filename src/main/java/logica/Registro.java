@@ -29,12 +29,12 @@ import javax.persistence.TemporalType;
 public class Registro implements Serializable {
     @Id
     @ManyToOne
-    @JoinColumn(nullable = true, name = "socio_id", foreignKey = @ForeignKey(name = "SOCIO_ID_FK"))
+    @JoinColumn(nullable = true, name = "socio_id", foreignKey = @ForeignKey(name = "SOCIO_FK"))
     private Socio socio;
     
     @Id
     @ManyToOne
-    @JoinColumn(nullable = true, name = "clase_id", foreignKey = @ForeignKey(name = "CLASE_ID_FK"))
+    @JoinColumn(nullable = true, name = "clase_id", foreignKey = @ForeignKey(name = "CLASE_FK"))
     private Clase clase;
     
     @Temporal(TemporalType.DATE)

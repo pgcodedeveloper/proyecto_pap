@@ -4,6 +4,7 @@
  */
 package datatypes;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import logica.Clase;
@@ -20,13 +21,13 @@ public class DtProfesor extends DtUsuario {
     private InstitucionDeportiva institucionDeportiva;
     private List<Clase> clases;
 
-    public DtProfesor(String descripcion, String biografia, String sitioWeb, InstitucionDeportiva institucionDeportiva, List<Clase> clases, String nickname, String nombre, String apellido, String email, Date fechaNac) {
+    public DtProfesor(String descripcion, String biografia, String sitioWeb, String nickname, String nombre, String apellido, String email, Date fechaNac, InstitucionDeportiva i) {
         super(nickname, nombre, apellido, email, fechaNac);
         this.descripcion = descripcion;
         this.biografia = biografia;
         this.sitioWeb = sitioWeb;
-        this.institucionDeportiva = institucionDeportiva;
-        this.clases = clases;
+        this.institucionDeportiva = i;
+        this.clases = new ArrayList<>();
     }
 
     public String getDescripcion() {

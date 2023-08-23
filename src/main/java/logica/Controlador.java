@@ -10,6 +10,7 @@ import datatypes.DtUsuario;
 import exceptions.InstitucionRepetidaException;
 import exceptions.UsuarioRepetidoException;
 import interfaces.IControlador;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -23,24 +24,23 @@ public class Controlador implements IControlador {
     }
     
     @Override
-    public void altaUsuario(String nickname, String nombre, String apellido, String email, Date fechaNac) throws UsuarioRepetidoException{
+    public void altaUsuario(DtUsuario usr) throws UsuarioRepetidoException{
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
-        Usuario u;
-        // mju.buscarUsuario(usr.getId());
-        /*if(u != null){
+        Usuario u = mju.buscarUsuario(usr.getEmail(), usr.getNickname());
+        if(u != null){
             throw new UsuarioRepetidoException("El usuario con los datos ingresados ya existe");
-        }*/
+        }
         
-        u = new Socio(nickname,  nombre,  apellido,  email,  fechaNac);
-        mju.agregarUsuario(u);
-    }
-
-    @Override
-    public void altaProfesor(String nc, String n, String a, String e, Date df, String desc, String bio, String sitioWeb) throws UsuarioRepetidoException{
-        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
-        Usuario u;
+        if(usr instanceof DtSocio){
+            u = new Socio(usr.getNickname(),  usr.getNombre(),  usr.getApellido(),  usr.getEmail(),  usr.getFechaNac());
+            mju.agregarUsuario(u);
+        }
         
-        u = new Profesor(nc,n,a,e,df,desc,bio,sitioWeb);
+        if(usr instanceof DtProfesor){
+            u = new Profesor(usr.getNickname(),  usr.getNombre(),  usr.getApellido(),  usr.getEmail(),  usr.getFechaNac(),((DtProfesor)usr).getDescripcion(),((DtProfesor) usr).getBiografia(),((DtProfesor) usr).getSitioWeb());
+            ((Profesor) u).setInstitucionDeportiva(((DtProfesor)usr).getInstitucionDeportiva());
+            mju.agregarUsuario(u);
+        }
     }
 
     @Override
@@ -55,9 +55,30 @@ public class Controlador implements IControlador {
             ins = new InstitucionDeportiva(nombre, descripcion, url);
             mji.agregarInstitucion(ins);
         }
-        
-        
     }
+
+    @Override
+    public String[] obtenerInstituciones() {
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        ArrayList<String> list;
+        list = mji.obtenerInst();
+        String[] inst_ret = new String[list.size()];
+        int i=0;
+        inst_ret[0] = "Seleccione"; //Para que en el combo box aparezca seleccionada esta opción
+        for(String name:list) {
+        	inst_ret[i]=name;
+        	i++;
+        }
+        return inst_ret;
+    }
+    
+    public InstitucionDeportiva obtenerInstitucion(String nom){
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        InstitucionDeportiva i = mji.buscarInst(nom);
+        return i;
+    }
+    
+    
     
     
     
