@@ -4,9 +4,12 @@
  */
 package interfaces;
 
+import datatypes.DtProfesor;
+import datatypes.DtSocio;
 import datatypes.DtUsuario;
 import exceptions.UsuarioRepetidoException;
 import exceptions.InstitucionRepetidaException;
+import java.util.ArrayList;
 import java.util.Date;
 import logica.InstitucionDeportiva;
 
@@ -24,4 +27,8 @@ public interface IControlador {
     public String[] obtenerInstituciones();
     
     public InstitucionDeportiva obtenerInstitucion(String nom);
+    
+    public ArrayList<DtSocio> obtenerSocios();
+    
+    public ArrayList<DtProfesor> obtenerProfes();
 }

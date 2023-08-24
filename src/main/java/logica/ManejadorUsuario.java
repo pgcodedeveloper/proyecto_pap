@@ -4,6 +4,9 @@
  */
 package logica;
 
+import datatypes.DtProfesor;
+import datatypes.DtSocio;
+import datatypes.DtUsuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -69,4 +72,47 @@ public class ManejadorUsuario {
         return usr;
     }
     
+    public ArrayList<DtSocio> obtenerUsuariosSocio(){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        
+        Query q = em.createQuery("select u from Usuario u, Socio s where u.id = s.id", Usuario.class);
+        ArrayList<DtSocio> aRetornar = new ArrayList<>();
+		
+        try {
+            List<Socio> listU = (List<Socio>) q.getResultList();
+            for(Socio u: listU) {
+                DtSocio socio = new DtSocio(u.getNickName(), u.getNombre(), u.getApellido(), u.getEmail(), u.getFecha());
+                socio.setId(u.getId());
+                aRetornar.add(socio);
+            }
+        } catch (NoResultException e) {
+            aRetornar = null;
+        }
+        return aRetornar;
+    }
+    
+    public ArrayList<DtProfesor> obtenerUsuariosProfe(){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        
+        Query q = em.createQuery("select u,p from Usuario u, Profesor p where u.id = p.id", Usuario.class);
+        ArrayList<DtProfesor> aRetornar = new ArrayList<>();
+		
+        try {
+            List<Profesor> listU = (List<Profesor>) q.getResultList();
+            for(Profesor u: listU) {
+                DtProfesor prof = new DtProfesor(u.getDescripcion(), u.getDescripcion(), u.getSitioWeb(), u.getNickName(), u.getNombre()
+                    , u.getApellido(), u.getEmail(), u.getFecha(), u.getInstitucionDeportiva());
+                prof.setId(u.getId());
+                aRetornar.add(prof);
+            }
+        } catch (NoResultException e) {
+            aRetornar = null;
+        }
+        return aRetornar;
+    }
+    
 }
+
+

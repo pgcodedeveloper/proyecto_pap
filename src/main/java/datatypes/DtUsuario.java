@@ -11,6 +11,7 @@ import java.util.Date;
  * @author PC
  */
 public class DtUsuario {
+    private int id;
     private String nickname;
     private String nombre;
     private String apellido;
@@ -24,6 +25,16 @@ public class DtUsuario {
         this.email = email;
         this.fechaNac = fechaNac;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
 
     public String getNickname() {
         return nickname;

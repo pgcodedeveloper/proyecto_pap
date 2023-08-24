@@ -63,11 +63,16 @@ public class Controlador implements IControlador {
         ArrayList<String> list;
         list = mji.obtenerInst();
         String[] inst_ret = new String[list.size()];
-        int i=0;
-        inst_ret[0] = "Seleccione"; //Para que en el combo box aparezca seleccionada esta opción
-        for(String name:list) {
-        	inst_ret[i]=name;
-        	i++;
+        if(!list.isEmpty()){
+            int i=0;
+            inst_ret[0] = "Seleccione"; //Para que en el combo box aparezca seleccionada esta opción
+            for(String name:list) {
+                    inst_ret[i]=name;
+                    i++;
+            }
+        }
+        else{
+            inst_ret[0] = "No hay instituciones";
         }
         return inst_ret;
     }
@@ -77,12 +82,22 @@ public class Controlador implements IControlador {
         InstitucionDeportiva i = mji.buscarInst(nom);
         return i;
     }
-    
-    
-    
-    
-    
-    
+
+    @Override
+    public ArrayList<DtSocio> obtenerSocios() {
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        ArrayList<DtSocio> list;
+        list = mju.obtenerUsuariosSocio();
+        return list;
+    }
+
+    @Override
+    public ArrayList<DtProfesor> obtenerProfes() {
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        ArrayList<DtProfesor> list;
+        list = mju.obtenerUsuariosProfe();
+        return list;
+    }
     
     
 }

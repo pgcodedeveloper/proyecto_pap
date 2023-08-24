@@ -7,6 +7,7 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import persistencia.Conexion;
@@ -57,14 +58,16 @@ public class ManejadorInstitucion {
     public ArrayList<String> obtenerInst(){
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
-        
+        ArrayList<String> aRetornar = new ArrayList<>();
         Query query = em.createQuery("select i from InstitucionDeportiva i");
 		
-        List<InstitucionDeportiva> listInst = (List<InstitucionDeportiva>) query.getResultList();
-
-        ArrayList<String> aRetornar = new ArrayList<>();
-        for(InstitucionDeportiva i: listInst) {
-                aRetornar.add(i.getNombre());
+        try {
+            List<InstitucionDeportiva> listInst = (List<InstitucionDeportiva>) query.getResultList();
+            for(InstitucionDeportiva i: listInst) {
+                    aRetornar.add(i.getNombre());
+            }
+        } catch (NoResultException e) {
+            aRetornar = null;
         }
         return aRetornar;
     }
