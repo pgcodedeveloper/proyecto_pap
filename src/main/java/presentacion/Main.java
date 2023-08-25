@@ -508,7 +508,7 @@ public class Main extends JFrame {
 
     private void btnConsultaUsrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaUsrMouseClicked
         // TODO add your handling code here:
-        conUsr.setVisible(true);
+        conUsr.mostrarConsultas(true);
     }//GEN-LAST:event_btnConsultaUsrMouseClicked
 
     private void btnConsultaUsrMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaUsrMouseEntered

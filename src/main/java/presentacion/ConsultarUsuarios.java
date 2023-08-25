@@ -8,7 +8,10 @@ import datatypes.DtProfesor;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
 import interfaces.IControlador;
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -60,6 +63,44 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         
         tablaProfes.setModel(modelo);
     }
+    
+    public void mostrarConsultas(boolean flag){
+        tablaProfes();
+        tablaSocios();
+        this.setVisible(flag);
+    }
+    
+    public void mostrarClases(int idP){
+       ArrayList<String> li;
+       li = icon.obtenerClasesProfe(idP);
+       DefaultListModel<String> model = new DefaultListModel<>();
+       if(!li.isEmpty()){
+            for(String i:li){
+                model.addElement(i);
+            }
+       }
+       else{
+           model.addElement("No dicta clases aún");
+       }
+       
+       listClases.setModel(model);
+    }
+    
+    public void mostrarActividades(int idP){
+       ArrayList<String> li;
+       li = icon.obtenerActivDeporProfe(idP);
+       DefaultListModel<String> model = new DefaultListModel<>();
+       if(!li.isEmpty()){
+            for(String i:li){
+                model.addElement(i);
+            }
+       }
+       else{
+           model.addElement("No hay actividades aún");
+       }
+       
+       listActDepo.setModel(model);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,10 +124,18 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         lblInfoExtra2 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        listClases = new javax.swing.JList<>();
+        lblClases = new javax.swing.JLabel();
+        lblActDeport = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        listActDepo = new javax.swing.JList<>();
         lblInicio = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1120, 830));
 
+        tablaSocios.setBackground(new java.awt.Color(214, 217, 223));
         tablaSocios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -114,6 +163,10 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
             }
         });
         tablaSocios.setCellSelectionEnabled(true);
+        tablaSocios.setGridColor(new java.awt.Color(40, 69, 108));
+        tablaSocios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaSocios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaSocios.setShowGrid(true);
         jScrollPane1.setViewportView(tablaSocios);
 
         lblInfoExtra.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -125,7 +178,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         panelSocios.setLayout(panelSociosLayout);
         panelSociosLayout.setHorizontalGroup(
             panelSociosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 887, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1115, Short.MAX_VALUE)
             .addGroup(panelSociosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelSociosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,23 +195,48 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblInfoExtra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         tabbUsuarios.addTab("Socios", panelSocios);
 
+        tablaProfes.setBackground(new java.awt.Color(214, 217, 223));
         tablaProfes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "NickName", "Nombre", "Apellido", "Email"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaProfes.setGridColor(new java.awt.Color(40, 69, 108));
+        tablaProfes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaProfes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaProfes.setShowGrid(true);
+        tablaProfes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaProfesMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaProfes);
 
         lblInfoExtra2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -166,64 +244,162 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
 
         jScrollPane4.setViewportView(jTextPane1);
 
+        listClases.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane5.setViewportView(listClases);
+
+        lblClases.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblClases.setText("Clases que dicta:");
+
+        lblActDeport.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblActDeport.setText("Actividades deportivas:");
+
+        listActDepo.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane6.setViewportView(listActDepo);
+
         javax.swing.GroupLayout panelProfesLayout = new javax.swing.GroupLayout(panelProfes);
         panelProfes.setLayout(panelProfesLayout);
         panelProfesLayout.setHorizontalGroup(
             panelProfesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 887, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1115, Short.MAX_VALUE)
             .addGroup(panelProfesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelProfesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4)
+                    .addComponent(lblClases)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(panelProfesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblActDeport)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(panelProfesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelProfesLayout.createSequentialGroup()
                         .addComponent(lblInfoExtra2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4))
                 .addContainerGap())
         );
+
+        panelProfesLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane5, jScrollPane6});
+
         panelProfesLayout.setVerticalGroup(
             panelProfesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelProfesLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblInfoExtra2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(panelProfesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblClases)
+                    .addComponent(lblActDeport)
+                    .addGroup(panelProfesLayout.createSequentialGroup()
+                        .addComponent(lblInfoExtra2)
+                        .addGap(16, 16, 16)
+                        .addGroup(panelProfesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelProfesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
+                .addContainerGap(274, Short.MAX_VALUE))
         );
 
         tabbUsuarios.addTab("Profesores", panelProfes);
 
+        lblInicio.setBackground(new java.awt.Color(25, 104, 157));
         lblInicio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblInicio.setForeground(new java.awt.Color(255, 255, 255));
         lblInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblInicio.setText("Usuarios del Sistema");
         lblInicio.setToolTipText("");
+        lblInicio.setOpaque(true);
+
+        btnSalir.setBackground(new java.awt.Color(25, 104, 157));
+        btnSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-eliminar-16.png"))); // NOI18N
+        btnSalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSalir.setOpaque(true);
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalirMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbUsuarios, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(lblInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(tabbUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 1120, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(lblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabbUsuarios))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(tabbUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
+        // TODO add your handling code here:
+        this.mostrarConsultas(false);
+    }//GEN-LAST:event_btnSalirMouseClicked
+
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        // TODO add your handling code here:
+        btnSalir.setBackground(Color.RED);
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        // TODO add your handling code here:
+        btnSalir.setBackground(new Color(25, 104, 157));
+    }//GEN-LAST:event_btnSalirMouseExited
+
+    private void tablaProfesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProfesMouseClicked
+        // TODO add your handling code here:
+        System.out.println(tablaProfes.getValueAt(tablaProfes.getSelectedRow(), 0).toString());
+        
+        int idP = Integer.parseInt(tablaProfes.getValueAt(tablaProfes.getSelectedRow(), 0).toString());
+        
+        if(tablaProfes.getSelectedRow() >= 0){
+            mostrarClases(idP);
+            //mostrarActividades(idP);
+        }
+    }//GEN-LAST:event_tablaProfesMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnSalir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JLabel lblActDeport;
+    private javax.swing.JLabel lblClases;
     private javax.swing.JLabel lblInfoExtra;
     private javax.swing.JLabel lblInfoExtra2;
     private javax.swing.JLabel lblInicio;
+    private javax.swing.JList<String> listActDepo;
+    private javax.swing.JList<String> listClases;
     private javax.swing.JPanel panelProfes;
     private javax.swing.JPanel panelSocios;
     private javax.swing.JTabbedPane tabbUsuarios;

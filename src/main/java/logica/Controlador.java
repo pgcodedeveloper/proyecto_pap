@@ -98,6 +98,24 @@ public class Controlador implements IControlador {
         list = mju.obtenerUsuariosProfe();
         return list;
     }
+
+    @Override
+    public ArrayList<String> obtenerClasesProfe(int idP) {
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        ArrayList<String> li;
+        li = mju.obtenerClases(idP);
+        return li;
+    }
+
+    @Override
+    public ArrayList<String> obtenerActivDeporProfe(int idP) {
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        ArrayList<String> li;
+        li = mju.obtenerActividadesD(idP);
+        return li;
+    }
+    
+    
     
     
 }

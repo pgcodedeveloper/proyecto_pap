@@ -96,7 +96,7 @@ public class ManejadorUsuario {
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
         
-        Query q = em.createQuery("select u,p from Usuario u, Profesor p where u.id = p.id", Usuario.class);
+        Query q = em.createQuery("select p from Profesor p", Profesor.class);
         ArrayList<DtProfesor> aRetornar = new ArrayList<>();
 		
         try {
@@ -107,6 +107,46 @@ public class ManejadorUsuario {
                 prof.setId(u.getId());
                 aRetornar.add(prof);
             }
+        } catch (NoResultException e) {
+            aRetornar = null;
+        }
+        return aRetornar;
+    }
+    
+    public ArrayList<String> obtenerClases(int idProf){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        ArrayList<String> aRetornar = new ArrayList<>();
+        Profesor p = em.find(Profesor.class, idProf);
+        try {
+            List<Clase> l = p.getClases();
+            for(Clase c:l){
+                aRetornar.add(c.getNombre());
+            }
+ 
+        } catch (NoResultException e) {
+            aRetornar = null;
+        }
+        return aRetornar;
+    }
+    
+    public ArrayList<String> obtenerActividadesD(int idProf){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        ArrayList<String> aRetornar = new ArrayList<>();
+        Profesor p = em.find(Profesor.class, idProf);
+        try {
+            InstitucionDeportiva ins = p.getInstitucionDeportiva();
+            if(!ins.getActividadesDeportiva().isEmpty()){
+                List<ActividadDeportiva> act = ins.getActividadesDeportiva();
+                for(ActividadDeportiva a:act){
+                    aRetornar.add(a.getNombre());
+                }
+            }
+            else{
+                aRetornar = null;
+            }
+
         } catch (NoResultException e) {
             aRetornar = null;
         }

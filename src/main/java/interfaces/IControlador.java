@@ -31,4 +31,8 @@ public interface IControlador {
     public ArrayList<DtSocio> obtenerSocios();
     
     public ArrayList<DtProfesor> obtenerProfes();
+    
+    public ArrayList<String> obtenerClasesProfe(int idP);
+    
+    public ArrayList<String> obtenerActivDeporProfe(int idP);
 }
