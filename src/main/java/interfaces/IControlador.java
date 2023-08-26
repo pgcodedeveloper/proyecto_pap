@@ -11,7 +11,9 @@ import exceptions.UsuarioRepetidoException;
 import exceptions.InstitucionRepetidaException;
 import java.util.ArrayList;
 import java.util.Date;
+import logica.Clase;
 import logica.InstitucionDeportiva;
+import logica.Registro;
 
 /**
  *
@@ -35,4 +37,8 @@ public interface IControlador {
     public ArrayList<String> obtenerClasesProfe(int idP);
     
     public ArrayList<String> obtenerActivDeporProfe(int idP);
+    
+    public Clase obtenerInfoClase(String nombre);
+    
+    public ArrayList<Registro> obtenerRegistrosSocio(int idS);
 }

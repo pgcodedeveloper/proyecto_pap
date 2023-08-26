@@ -84,6 +84,6 @@ public class InstitucionDeportiva implements Serializable{
     
     public void agregarProfesor(Profesor p){
         this.profesores.add(p);
-        p.setInstitucionDeportiva(this);
+        //p.setInstitucionDeportiva(this);
     }
 }

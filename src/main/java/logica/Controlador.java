@@ -36,10 +36,10 @@ public class Controlador implements IControlador {
             mju.agregarUsuario(u);
         }
         
-        if(usr instanceof DtProfesor){
-            u = new Profesor(usr.getNickname(),  usr.getNombre(),  usr.getApellido(),  usr.getEmail(),  usr.getFechaNac(),((DtProfesor)usr).getDescripcion(),((DtProfesor) usr).getBiografia(),((DtProfesor) usr).getSitioWeb());
-            ((Profesor) u).setInstitucionDeportiva(((DtProfesor)usr).getInstitucionDeportiva());
-            mju.agregarUsuario(u);
+        if(usr instanceof DtProfesor dtProfesor){
+            u = new Profesor(usr.getNickname(),  usr.getNombre(),  usr.getApellido(),  usr.getEmail(),  usr.getFechaNac(),dtProfesor.getDescripcion(),dtProfesor.getBiografia(),dtProfesor.getSitioWeb());
+            ((Profesor) u).setInstitucionDeportiva(dtProfesor.getInstitucionDeportiva());
+            mju.agregarProfesor(u);
         }
     }
 
@@ -72,11 +72,13 @@ public class Controlador implements IControlador {
             }
         }
         else{
+            inst_ret = new String[1];
             inst_ret[0] = "No hay instituciones";
         }
         return inst_ret;
     }
     
+    @Override
     public InstitucionDeportiva obtenerInstitucion(String nom){
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         InstitucionDeportiva i = mji.buscarInst(nom);
@@ -114,6 +116,23 @@ public class Controlador implements IControlador {
         li = mju.obtenerActividadesD(idP);
         return li;
     }
+
+    @Override
+    public Clase obtenerInfoClase(String nombre) {
+        ManejadorClase mjc = ManejadorClase.getInstancia();
+        Clase c = mjc.obtenerInfoClase(nombre);
+        return c;
+    }
+
+    @Override
+    public ArrayList<Registro> obtenerRegistrosSocio(int idS) {
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        ArrayList<Registro> list;
+        list = mju.obtenerRegistrosSocio(idS);
+        return list;
+    }
+    
+    
     
     
     

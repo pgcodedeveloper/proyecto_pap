@@ -50,9 +50,16 @@ public class ManejadorUsuario {
     public void agregarProfesor(Usuario usr){
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
-        em.getTransaction().begin();
-        em.persist(usr);
-        em.getTransaction().commit();
+        InstitucionDeportiva i = ((Profesor)usr).getInstitucionDeportiva();
+        i.agregarProfesor(((Profesor)usr));
+        try {
+            em.getTransaction().begin();
+            em.persist(usr);
+            em.persist(i);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
     
     public Usuario buscarUsuario(String email, String nick){
@@ -117,13 +124,22 @@ public class ManejadorUsuario {
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
         ArrayList<String> aRetornar = new ArrayList<>();
-        Profesor p = em.find(Profesor.class, idProf);
         try {
-            List<Clase> l = p.getClases();
-            for(Clase c:l){
-                aRetornar.add(c.getNombre());
+            Profesor p = em.find(Profesor.class, idProf);
+            try {
+                List<Clase> l = p.getClases();
+                if(!l.isEmpty()){
+                    for(Clase c:l){
+                        aRetornar.add(c.getNombre());
+                    }
+                }
+                else{
+                    aRetornar = null;
+                }
+            } catch ( NullPointerException e) {
+                aRetornar = null;
             }
- 
+            
         } catch (NoResultException e) {
             aRetornar = null;
         }
@@ -134,22 +150,46 @@ public class ManejadorUsuario {
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
         ArrayList<String> aRetornar = new ArrayList<>();
-        Profesor p = em.find(Profesor.class, idProf);
         try {
-            InstitucionDeportiva ins = p.getInstitucionDeportiva();
-            if(!ins.getActividadesDeportiva().isEmpty()){
-                List<ActividadDeportiva> act = ins.getActividadesDeportiva();
-                for(ActividadDeportiva a:act){
-                    aRetornar.add(a.getNombre());
+            Profesor p = em.find(Profesor.class, idProf);
+            try {
+                InstitucionDeportiva ins = p.getInstitucionDeportiva();
+                if(!ins.getActividadesDeportiva().isEmpty()){
+                    List<ActividadDeportiva> act = ins.getActividadesDeportiva();
+                    for(ActividadDeportiva a:act){
+                        aRetornar.add(a.getNombre());
+                    }
                 }
-            }
-            else{
+                else{
+                    aRetornar = null;
+                }
+            } catch (NullPointerException e) {
                 aRetornar = null;
             }
+            
 
         } catch (NoResultException e) {
             aRetornar = null;
         }
+        return aRetornar;
+    }
+    
+    public ArrayList<Registro> obtenerRegistrosSocio(int idSocio){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        
+        ArrayList<Registro> aRetornar = new ArrayList<>();
+        Query q = em.createQuery("select r from Registro r where r.socio = :idS", Registro.class);
+        q.setParameter("idS", idSocio);
+        try {
+            List<Registro> li = (List<Registro>) q.getResultList();
+            for(Registro r:li){
+                aRetornar.add(r);
+            }
+        } catch (NoResultException e) {
+            aRetornar = null;
+        }
+        
         return aRetornar;
     }
     

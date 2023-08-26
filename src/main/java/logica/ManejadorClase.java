@@ -27,5 +27,16 @@ public class ManejadorClase {
         return instancia;
     }
     
-    
+    public Clase obtenerInfoClase(String nombre){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        Clase c;
+        try {
+            c = em.find(Clase.class, nombre);
+        } catch (NoResultException e) {
+            c = null;
+        }
+        
+        return c;
+    }
 }

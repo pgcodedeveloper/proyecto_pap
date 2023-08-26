@@ -491,6 +491,7 @@ public class Main extends JFrame {
 
     private void btnProfesorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProfesorMouseClicked
         // TODO add your handling code here:
+        profesores.iniciarCombo();
         profesores.setVisible(true);
     }//GEN-LAST:event_btnProfesorMouseClicked
 

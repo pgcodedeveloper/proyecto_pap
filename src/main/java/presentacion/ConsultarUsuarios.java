@@ -12,7 +12,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultTreeCellEditor;
+import logica.Clase;
+import logica.Registro;
 
 /**
  *
@@ -74,7 +78,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
        ArrayList<String> li;
        li = icon.obtenerClasesProfe(idP);
        DefaultListModel<String> model = new DefaultListModel<>();
-       if(!li.isEmpty()){
+       if(li != null && !li.isEmpty()){
             for(String i:li){
                 model.addElement(i);
             }
@@ -90,7 +94,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
        ArrayList<String> li;
        li = icon.obtenerActivDeporProfe(idP);
        DefaultListModel<String> model = new DefaultListModel<>();
-       if(!li.isEmpty()){
+       if(li != null && !li.isEmpty()){
             for(String i:li){
                 model.addElement(i);
             }
@@ -100,6 +104,40 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
        }
        
        listActDepo.setModel(model);
+    }
+    
+    public void registrosAClases(int idS){
+        ArrayList<Registro> li = new ArrayList<>();
+        li = icon.obtenerRegistrosSocio(idS);
+        infoExtra.setText("");
+        String datos;
+        if(li != null &&li.isEmpty()){
+            datos = "INFORMACIÓN DE REGISTROS";
+            for(Registro r:li){
+                datos = datos + "\n\n" + "Nombre de la Clase: " + r.getClaseId().getNombre();
+                datos = datos + "\n\n" + "Fecha de Registro: " + r.getFechaReg().toString();
+                datos = datos + "\n\n" + "Nombre del Socio: " + r.getSocioId().getNombre() + " " + r.getSocioId().getApellido();
+            }
+        }
+        else{
+            datos = "No está registrado a ningúna clase aún";
+        }
+        
+        infoExtra.setText(datos);
+        
+    }
+    
+    public void mostrarInfoClase(String nombre){
+        Clase c;
+        c = icon.obtenerInfoClase(nombre);
+        infoExtra.setText("");
+        String datos = "INFORMACIÓN DE CLASES";
+        datos = datos + "\n\n" + "Nombre: " + c.getNombre();
+        datos = datos + "\n\n" + "Fecha: " + c.getFecha().toString();
+        datos = datos + "\n\n" + "Fecha Registro: " + c.getFechaReg().toString();
+        datos = datos + "\n\n" + "Hora inicio: " + c.getHoraInicio().getTime();
+        datos = datos + "\n\n" + "URL: " + c.getUrl();
+        infoExtra.setText(datos);
     }
 
     /**
@@ -123,7 +161,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         tablaProfes = new javax.swing.JTable();
         lblInfoExtra2 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        infoExtra = new javax.swing.JTextPane();
         jScrollPane5 = new javax.swing.JScrollPane();
         listClases = new javax.swing.JList<>();
         lblClases = new javax.swing.JLabel();
@@ -167,6 +205,11 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         tablaSocios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaSocios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaSocios.setShowGrid(true);
+        tablaSocios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaSociosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaSocios);
 
         lblInfoExtra.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -242,12 +285,17 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         lblInfoExtra2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblInfoExtra2.setText("Información Extra:");
 
-        jScrollPane4.setViewportView(jTextPane1);
+        jScrollPane4.setViewportView(infoExtra);
 
         listClases.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        listClases.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listClasesMouseClicked(evt);
+            }
         });
         jScrollPane5.setViewportView(listClases);
 
@@ -379,20 +427,40 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         
         if(tablaProfes.getSelectedRow() >= 0){
             mostrarClases(idP);
-            //mostrarActividades(idP);
+            mostrarActividades(idP);
         }
     }//GEN-LAST:event_tablaProfesMouseClicked
+
+    private void listClasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listClasesMouseClicked
+        // TODO add your handling code here:
+        if(!listClases.getSelectedValue().equals("No hay actividades aún")){
+            String clase = listClases.getSelectedValue();
+            mostrarInfoClase(clase);
+        }
+        
+        
+    }//GEN-LAST:event_listClasesMouseClicked
+
+    private void tablaSociosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSociosMouseClicked
+        // TODO add your handling code here:
+        System.out.println(tablaSocios.getValueAt(tablaSocios.getSelectedRow(), 0).toString());
+        int idS = Integer.parseInt(tablaSocios.getValueAt(tablaSocios.getSelectedRow(), 0).toString());
+        
+        if(tablaSocios.getSelectedRow() >= 0){
+            //registrosAClases(idS);
+        }
+    }//GEN-LAST:event_tablaSociosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnSalir;
+    private javax.swing.JTextPane infoExtra;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel lblActDeport;
     private javax.swing.JLabel lblClases;
     private javax.swing.JLabel lblInfoExtra;

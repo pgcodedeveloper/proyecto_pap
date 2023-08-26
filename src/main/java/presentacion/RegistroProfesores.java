@@ -29,7 +29,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         iniciarCombo();
     }
 
-    void iniciarCombo(){
+    public void iniciarCombo(){
         DefaultComboBoxModel<String> modelclases = new DefaultComboBoxModel<String>(icon.obtenerInstituciones());
         comboIntituto.addItem("Seleccione");
 	comboIntituto.setModel(modelclases);
@@ -234,8 +234,8 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
                     .addComponent(comboIntituto, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelExtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblBiografia))
+                    .addComponent(lblBiografia)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelExtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDescripcion)
@@ -244,7 +244,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
                 .addGroup(panelExtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblWeb)
                     .addComponent(txtWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 16, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         panelExtraLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboIntituto, lblDescripcion, lblInstituto, lblWeb, txtDescripcion, txtWeb});
@@ -335,8 +335,8 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11))
+                .addComponent(panelExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         panelRegistroLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblNickN, txtNickN});
