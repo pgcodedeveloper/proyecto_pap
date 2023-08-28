@@ -88,6 +88,10 @@ public class Profesor extends Usuario {
         return clases;
     }
 
+    public void agregarClase(Clase c){
+        this.clases.add(c);
+    }
+    
     public void setClases(List<Clase> clases) {
         this.clases = clases;
     }

@@ -12,6 +12,7 @@ import exceptions.UsuarioRepetidoException;
 import interfaces.IControlador;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -130,6 +131,80 @@ public class Controlador implements IControlador {
         ArrayList<Registro> list;
         list = mju.obtenerRegistrosSocio(idS);
         return list;
+    }
+
+    @Override
+    public void altaActividadDeportiva(String nombre, String descripcion, int duracion, float costo, Date fechaR, String nomInst) {
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        InstitucionDeportiva i = mji.buscarInst(nomInst);
+        ActividadDeportiva a = new ActividadDeportiva(nombre, descripcion, duracion, costo, fechaR, i);
+        i.agregarActividad(a);
+        mji.agregarActividadDeportiva(a);
+    }
+
+    @Override
+    public boolean existeActividadDepo(String nomAct, String nomInst) {
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        InstitucionDeportiva i = mji.buscarInst(nomInst);
+        List<ActividadDeportiva> act = i.getActividadesDeportiva();
+        boolean aRetornar = false;
+        for(ActividadDeportiva a:act){
+            if(a.getNombre().equals(nomAct)){
+                aRetornar = true;
+            }
+        }
+        
+        return aRetornar;
+    }
+
+    @Override
+    public String[] obtenerActividades(String nom) {
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        ArrayList<String> list;
+        list = mji.obtenerAct(nom);
+        String[] inst_ret = new String[list.size()];
+        if(!list.isEmpty()){
+            int i=0;
+            //inst_ret[0] = "Seleccione"; //Para que en el combo box aparezca seleccionada esta opción
+            for(String name:list) {
+                    inst_ret[i]=name;
+                    i++;
+            }
+        }
+        else{
+            inst_ret = new String[1];
+            inst_ret[0] = "No hay actividades";
+        }
+        return inst_ret;
+    }
+
+    @Override
+    public String[] obtenerProfesInst(String nom) {
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        ArrayList<String> list;
+        list = mji.obtenerProfes(nom);
+        String[] inst_ret = new String[list.size()];
+        if(!list.isEmpty()){
+            int i=0;
+            //inst_ret[0] = "Seleccione"; //Para que en el combo box aparezca seleccionada esta opción
+            for(String name:list) {
+                    inst_ret[i]=name;
+                    i++;
+            }
+        }
+        else{
+            inst_ret = new String[1];
+            inst_ret[0] = "No hay profesores";
+        }
+        return inst_ret;
+    }
+
+    @Override
+    public void altaClaseActividad(String inst, String act, String nomC, String prof, String url, Date fechaI, Date fechaA) {
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        Clase c = new Clase(nomC, fechaA, fechaI, url, fechaA);
+        
+        mji.agregarClase(c, act, prof);
     }
     
     

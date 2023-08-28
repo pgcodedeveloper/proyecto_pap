@@ -55,7 +55,7 @@ public class Main extends JFrame {
         panelContenido.add(actDeportiva);
         actDeportiva.setVisible(false);
         
-        dictClase  = new RegistroDictadoClase();
+        dictClase  = new RegistroDictadoClase(con);
         jInternalFrameSize = dictClase.getSize();
         dictClase.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
         panelContenido.add(dictClase);

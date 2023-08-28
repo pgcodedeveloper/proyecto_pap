@@ -26,7 +26,15 @@ public interface IControlador {
     
     public void altaInstitucion(String nombre,String descripcion, String url) throws InstitucionRepetidaException;
     
+    public void altaActividadDeportiva(String nombre, String descripcion,int duracion,float costo, Date fechaR, String nomInst);
+    
     public String[] obtenerInstituciones();
+    
+    public String[] obtenerActividades(String nom);
+    
+    public String[] obtenerProfesInst(String nom);
+    
+    public boolean existeActividadDepo(String nomAct,String nomInst);
     
     public InstitucionDeportiva obtenerInstitucion(String nom);
     
@@ -41,4 +49,6 @@ public interface IControlador {
     public Clase obtenerInfoClase(String nombre);
     
     public ArrayList<Registro> obtenerRegistrosSocio(int idS);
+    
+    public void altaClaseActividad(String inst, String act, String nomC, String prof, String url, Date fechaI, Date fechaA);
 }

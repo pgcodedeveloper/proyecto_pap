@@ -5,6 +5,7 @@
 package logica;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -70,5 +71,73 @@ public class ManejadorInstitucion {
             aRetornar = null;
         }
         return aRetornar;
+    }
+    
+    public ArrayList<String> obtenerAct(String nom){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        ArrayList<String> aRetornar = new ArrayList<>();
+    	
+        try {
+            InstitucionDeportiva ins = (InstitucionDeportiva)em.find(InstitucionDeportiva.class, nom);
+            for(ActividadDeportiva a: ins.getActividadesDeportiva()) {
+                    aRetornar.add(a.getNombre());
+            }
+        } catch (NoResultException e) {
+            aRetornar = null;
+        }
+        return aRetornar;
+    }
+    
+    public ArrayList<String> obtenerProfes(String nom){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        ArrayList<String> aRetornar = new ArrayList<>();
+
+        try {
+            InstitucionDeportiva ins = (InstitucionDeportiva)em.find(InstitucionDeportiva.class, nom);
+            for(Profesor p: ins.getProfesores()) {
+                    aRetornar.add(p.getNickName());
+            }
+        } catch (NoResultException e) {
+            aRetornar = null;
+        }
+        return aRetornar;
+    }
+    
+    public void agregarActividadDeportiva(ActividadDeportiva act){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        
+        try {
+            em.getTransaction().begin();
+        
+            em.persist(act);
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void agregarClase(Clase c, String a, String p){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        ActividadDeportiva act = em.find(ActividadDeportiva.class, a);
+        Usuario u = (Usuario)em.createQuery("select u from Usuario u where u.nickname = :nick").setParameter("nick", p).getSingleResult();
+        Profesor prof = em.find(Profesor.class, u.getId());
+        act.altaClase(c);
+        prof.agregarClase(c);
+        try {
+            em.getTransaction().begin();
+        
+            em.persist(c);
+            em.persist(a);
+            em.persist(p);
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

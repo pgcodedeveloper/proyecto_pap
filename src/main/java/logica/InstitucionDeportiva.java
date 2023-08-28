@@ -69,6 +69,14 @@ public class InstitucionDeportiva implements Serializable{
         this.url = url;
     }
 
+    public List<Profesor> getProfesores() {
+        return profesores;
+    }
+
+    public void setProfesores(List<Profesor> profesores) {
+        this.profesores = profesores;
+    }
+
     // Getter y Setter para 'actividadesDeportiva'
     public List<ActividadDeportiva> getActividadesDeportiva() {
         return actividadesDeportiva;
