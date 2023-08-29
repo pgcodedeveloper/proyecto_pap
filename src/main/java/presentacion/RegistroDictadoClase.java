@@ -325,10 +325,12 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         if(!txtNombreClase.getText().isEmpty() && !txtURL.getText().isEmpty()) {
-            icon.altaClaseActividad(comboBoxInstitucion.getSelectedItem().toString(), comboBoxActDeportiva.getSelectedItem().toString(), txtNombreClase.getText(),
-                    comboBoxProfesor.getSelectedItem().toString(), txtURL.getText(), dateFechaInicio.getDate(), dateFechaAlta.getDate());
-            JOptionPane.showMessageDialog(null, "Clase creada correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-            this.setVisible(false);
+            if(!icon.existeClaseActividad(txtNombreClase.getText())){
+                icon.altaClaseActividad(comboBoxInstitucion.getSelectedItem().toString(), comboBoxActDeportiva.getSelectedItem().toString(), txtNombreClase.getText(),
+                        comboBoxProfesor.getSelectedItem().toString(), txtURL.getText(), dateFechaInicio.getDate(), dateFechaAlta.getDate());
+                JOptionPane.showMessageDialog(null, "Clase creada correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                this.setVisible(false);
+            }
         }
         else{
             JOptionPane.showMessageDialog(null, "Debes ingresar datos en todos los campos", "Error", JOptionPane.ERROR_MESSAGE);

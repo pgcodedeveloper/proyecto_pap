@@ -19,16 +19,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "InstitucionDeportiva")
-public class InstitucionDeportiva implements Serializable{
+public class InstitucionDeportiva{
     @Id
     private String nombre;
     private String descripcion;
     private String url;
     
     @OneToMany
-    private List<ActividadDeportiva> actividadesDeportiva;
+    private List<ActividadDeportiva> actividadesDeportiva = new ArrayList<>();
     @OneToMany
-    private List<Profesor> profesores;
+    private List<Profesor> profesores = new ArrayList<>();
 
     public InstitucionDeportiva(){
         super();
@@ -38,8 +38,6 @@ public class InstitucionDeportiva implements Serializable{
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.url = url;
-        this.actividadesDeportiva = new ArrayList<>();
-        this.profesores = new ArrayList<>();
     }
 
     // Getter y Setter para 'nombre'

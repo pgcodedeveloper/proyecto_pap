@@ -11,6 +11,7 @@ import exceptions.UsuarioRepetidoException;
 import exceptions.InstitucionRepetidaException;
 import java.util.ArrayList;
 import java.util.Date;
+import logica.ActividadDeportiva;
 import logica.Clase;
 import logica.InstitucionDeportiva;
 import logica.Registro;
@@ -51,4 +52,8 @@ public interface IControlador {
     public ArrayList<Registro> obtenerRegistrosSocio(int idS);
     
     public void altaClaseActividad(String inst, String act, String nomC, String prof, String url, Date fechaI, Date fechaA);
+    
+    public boolean existeClaseActividad(String clase);
+    
+    public ActividadDeportiva obtenerActividad(String nom);
 }

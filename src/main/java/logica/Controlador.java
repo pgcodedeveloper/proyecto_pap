@@ -202,9 +202,37 @@ public class Controlador implements IControlador {
     @Override
     public void altaClaseActividad(String inst, String act, String nomC, String prof, String url, Date fechaI, Date fechaA) {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
-        Clase c = new Clase(nomC, fechaA, fechaI, url, fechaA);
-        
-        mji.agregarClase(c, act, prof);
+        Clase c = new Clase(nomC, fechaI, fechaI, url, fechaA);
+        InstitucionDeportiva i = mji.buscarInst(inst);
+        for(ActividadDeportiva a: i.getActividadesDeportiva()) {
+            if(a.getNombre().equals(act)){
+                a.altaClase(c);
+            }
+        }
+        for(Profesor p: i.getProfesores()){
+            if(p.getNickName().equals(prof)){
+                p.agregarClase(c);
+            }
+        }
+        mji.agregarClase(c);
+    }
+    
+    @Override
+    public boolean existeClaseActividad(String clase) {
+        ManejadorClase mjc = ManejadorClase.getInstancia();
+        Clase c = mjc.obtenerInfoClase(clase);
+        boolean aRetornar = false;
+        if(c != null){
+            aRetornar = true;
+        }
+        return aRetornar;
+    }
+
+    @Override
+    public ActividadDeportiva obtenerActividad(String nom) {
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        ActividadDeportiva a = mji.obtenerActividad(nom);
+        return a;
     }
     
     

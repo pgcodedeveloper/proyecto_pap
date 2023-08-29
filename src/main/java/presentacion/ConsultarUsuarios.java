@@ -15,6 +15,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultTreeCellEditor;
+import logica.ActividadDeportiva;
 import logica.Clase;
 import logica.Registro;
 
@@ -32,6 +33,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         initComponents();
         this.icon = con;
         
+        tablaProfes();
         tablaSocios();
     }
     
@@ -75,6 +77,8 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
     }
     
     public void mostrarClases(int idP){
+       listClases.clearSelection();
+       //listClases.setModel(null);
        ArrayList<String> li;
        li = icon.obtenerClasesProfe(idP);
        DefaultListModel<String> model = new DefaultListModel<>();
@@ -91,6 +95,8 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
     }
     
     public void mostrarActividades(int idP){
+       listActDepo.clearSelection();
+       //listActDepo.setModel(null);
        ArrayList<String> li;
        li = icon.obtenerActivDeporProfe(idP);
        DefaultListModel<String> model = new DefaultListModel<>();
@@ -107,6 +113,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
     }
     
     public void registrosAClases(int idS){
+        infoExtra.setText("");
         ArrayList<Registro> li = new ArrayList<>();
         li = icon.obtenerRegistrosSocio(idS);
         infoExtra.setText("");
@@ -128,6 +135,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
     }
     
     public void mostrarInfoClase(String nombre){
+        infoExtra.setText("");
         Clase c;
         c = icon.obtenerInfoClase(nombre);
         infoExtra.setText("");
@@ -137,6 +145,25 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         datos = datos + "\n\n" + "Fecha Registro: " + c.getFechaReg().toString();
         datos = datos + "\n\n" + "Hora inicio: " + c.getHoraInicio().getTime();
         datos = datos + "\n\n" + "URL: " + c.getUrl();
+        infoExtra.setText(datos);
+    }
+    
+    public void mostrarInfoActividad(String act){
+        infoExtra.setText("");
+        ActividadDeportiva a;
+        a = icon.obtenerActividad(act);
+        String datos = "INFORMACIÓN DE ACTIVIDAD";
+        datos = datos + "\n\n" + "Nombre: " + a.getNombre();
+        datos = datos + "\n\n" + "Descripcion: " + a.getDescripcion();
+        datos = datos + "\n\n" + "Costo: " + a.getCosto();
+        datos = datos + "\n\n" + "Duración: " + a.getDuracion();
+        datos = datos + "\n\n" + "Fecha Registro: " + a.getFechaReg().toString();
+        datos = datos + "\n\n" + "--- CLASES ---";
+        for(Clase c: a.getClases()){
+            datos = datos + "\n\n" + "Nombre: " + c.getNombre();
+            datos = datos + "\n\n" + "Fecha: " + c.getFecha().toString();
+            datos = datos + "\n\n" + "Hora inicio: " + c.getHoraInicio().getTime();
+        }
         infoExtra.setText(datos);
     }
 
@@ -285,13 +312,9 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         lblInfoExtra2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblInfoExtra2.setText("Información Extra:");
 
+        infoExtra.setEditable(false);
         jScrollPane4.setViewportView(infoExtra);
 
-        listClases.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         listClases.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listClasesMouseClicked(evt);
@@ -305,10 +328,10 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         lblActDeport.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblActDeport.setText("Actividades deportivas:");
 
-        listActDepo.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        listActDepo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listActDepoMouseClicked(evt);
+            }
         });
         jScrollPane6.setViewportView(listActDepo);
 
@@ -407,6 +430,12 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
         // TODO add your handling code here:
         this.mostrarConsultas(false);
+        infoExtra.setText("");
+        listActDepo.clearSelection();
+        //listActDepo.setModel(null);
+        listClases.clearSelection();
+        //listClases.setModel(null);
+        
     }//GEN-LAST:event_btnSalirMouseClicked
 
     private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
@@ -450,6 +479,14 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
             //registrosAClases(idS);
         }
     }//GEN-LAST:event_tablaSociosMouseClicked
+
+    private void listActDepoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listActDepoMouseClicked
+        // TODO add your handling code here:
+        if(!listActDepo.getSelectedValue().equals("No hay actividades aún")){
+            String actividad = listActDepo.getSelectedValue();
+            mostrarInfoActividad(actividad);
+        }
+    }//GEN-LAST:event_listActDepoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

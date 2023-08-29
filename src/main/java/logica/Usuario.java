@@ -23,7 +23,7 @@ import javax.persistence.Temporal;
 @Entity(name = "Usuario")
 @Table(name = "Usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Usuario implements Serializable {
+public class Usuario{
     
     @Id
     @Column(name = "usuario_id")

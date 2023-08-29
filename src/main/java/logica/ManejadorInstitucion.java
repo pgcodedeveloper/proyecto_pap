@@ -89,6 +89,19 @@ public class ManejadorInstitucion {
         return aRetornar;
     }
     
+    public ActividadDeportiva obtenerActividad(String nom){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        ActividadDeportiva aRetornar = null;
+    	
+        try {
+            aRetornar = (ActividadDeportiva)em.find(ActividadDeportiva.class, nom);
+        } catch (NoResultException e) {
+            aRetornar = null;
+        }
+        return aRetornar;
+    }
+    
     public ArrayList<String> obtenerProfes(String nom){
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
@@ -120,21 +133,15 @@ public class ManejadorInstitucion {
         }
     }
     
-    public void agregarClase(Clase c, String a, String p){
+    public void agregarClase(Clase c){
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
-        ActividadDeportiva act = em.find(ActividadDeportiva.class, a);
-        Usuario u = (Usuario)em.createQuery("select u from Usuario u where u.nickname = :nick").setParameter("nick", p).getSingleResult();
-        Profesor prof = em.find(Profesor.class, u.getId());
-        act.altaClase(c);
-        prof.agregarClase(c);
+        //System.out.println(c);
         try {
             em.getTransaction().begin();
-        
-            em.persist(c);
-            em.persist(a);
-            em.persist(p);
-
+            
+            em.merge(c);
+            
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());

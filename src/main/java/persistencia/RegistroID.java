@@ -38,8 +38,8 @@ public class RegistroID implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.clase);
-        hash = 97 * hash + this.socio;
+        hash = 13 * hash + Objects.hashCode(this.clase);
+        hash = 13 * hash + this.socio;
         return hash;
     }
 
@@ -60,6 +60,8 @@ public class RegistroID implements Serializable {
         }
         return Objects.equals(this.clase, other.clase);
     }
+
+    
     
     
 }

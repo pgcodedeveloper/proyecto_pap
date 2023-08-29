@@ -22,7 +22,7 @@ import javax.persistence.Temporal;
 
 @Entity
 @Table(name = "ActividadDeportiva")
-public class ActividadDeportiva implements Serializable{
+public class ActividadDeportiva{
     @Id
     private String nombre;
     private String descripcion;
@@ -32,7 +32,7 @@ public class ActividadDeportiva implements Serializable{
     private Date fechaReg;
     
     @OneToMany
-    private List<Clase> clases ;
+    private List<Clase> clases = new ArrayList<>();;
     
     @ManyToOne
     private InstitucionDeportiva inst;
@@ -48,7 +48,6 @@ public class ActividadDeportiva implements Serializable{
         this.costo = costo;
         this.fechaReg = fechaReg;
         this.inst = ins;
-        this.clases = new ArrayList<>();
     }
 
     // Getter y Setter para 'nombre'

@@ -105,6 +105,7 @@ public class Main extends JFrame {
         btnRegDictadoClase = new javax.swing.JLabel();
         btnRegInstitucion = new javax.swing.JLabel();
         btnRegClase = new javax.swing.JLabel();
+        btnConsultaActividad = new javax.swing.JLabel();
         panelContenido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -266,7 +267,7 @@ public class Main extends JFrame {
                 btnConsultaUsrMouseExited(evt);
             }
         });
-        panelAcciones.add(btnConsultaUsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 180, 40));
+        panelAcciones.add(btnConsultaUsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 180, 40));
 
         btnCliente.setBackground(new java.awt.Color(25, 104, 157));
         btnCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -405,6 +406,29 @@ public class Main extends JFrame {
             }
         });
         panelAcciones.add(btnRegClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 180, 40));
+
+        btnConsultaActividad.setBackground(new java.awt.Color(25, 104, 157));
+        btnConsultaActividad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnConsultaActividad.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultaActividad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnConsultaActividad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-clientes-16.png"))); // NOI18N
+        btnConsultaActividad.setText("Actividad Deportiva");
+        btnConsultaActividad.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnConsultaActividad.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnConsultaActividad.setIconTextGap(20);
+        btnConsultaActividad.setOpaque(true);
+        btnConsultaActividad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnConsultaActividadMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnConsultaActividadMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnConsultaActividadMouseExited(evt);
+            }
+        });
+        panelAcciones.add(btnConsultaActividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 180, 40));
 
         panelPrincipal.add(panelAcciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 830));
 
@@ -613,6 +637,18 @@ public class Main extends JFrame {
         btnRegClase. setBackground(c);
     }//GEN-LAST:event_btnRegClaseMouseExited
 
+    private void btnConsultaActividadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaActividadMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultaActividadMouseClicked
+
+    private void btnConsultaActividadMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaActividadMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultaActividadMouseEntered
+
+    private void btnConsultaActividadMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaActividadMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultaActividadMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -651,6 +687,7 @@ public class Main extends JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCerrar;
     private javax.swing.JLabel btnCliente;
+    private javax.swing.JLabel btnConsultaActividad;
     private javax.swing.JLabel btnConsultaUsr;
     private javax.swing.JLabel btnMinimizar;
     private javax.swing.JLabel btnProfesor;

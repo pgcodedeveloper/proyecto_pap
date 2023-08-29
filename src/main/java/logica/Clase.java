@@ -26,10 +26,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 @Entity(name = "clase")
-public class Clase implements Serializable{
+public class Clase{
     @Id
     @Column(name = "clase_name")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String nombre;
     @Column(name = "fecha")
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -44,15 +43,13 @@ public class Clase implements Serializable{
     private Date fechaReg;
     
     @OneToMany(mappedBy = "clase",cascade = CascadeType.ALL,fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Registro> registros;
+    private List<Registro> registros = new ArrayList<>();;
 
     public Clase(){
         super();
-        this.registros = new ArrayList<>();
     }
     // Constructor
     public Clase(String nombre, Date fecha, Date horaInicio, String url, Date fechaReg) {
-        this.registros = new ArrayList<>();
         this.nombre = nombre;
         this.fecha = fecha;
         this.horaInicio = horaInicio;
@@ -119,4 +116,11 @@ public class Clase implements Serializable{
         this.registros.add(r);
         s.altaRegistro(r);
     }
+
+    @Override
+    public String toString() {
+        return "Clase{" + "nombre=" + nombre + ", fecha=" + fecha + ", horaInicio=" + horaInicio + ", url=" + url + ", fechaReg=" + fechaReg + ", registros=" + registros + '}';
+    }
+    
+    
 }

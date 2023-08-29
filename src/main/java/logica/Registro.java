@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @IdClass(RegistroID.class)
-public class Registro implements Serializable {
+public class Registro{
     @Id
     @ManyToOne
     @JoinColumn(nullable = true, name = "socio_id", foreignKey = @ForeignKey(name = "SOCIO_FK"))
