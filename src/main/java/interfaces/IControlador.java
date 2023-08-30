@@ -9,12 +9,14 @@ import datatypes.DtSocio;
 import datatypes.DtUsuario;
 import exceptions.UsuarioRepetidoException;
 import exceptions.InstitucionRepetidaException;
+import exceptions.SocioYaInscriptoException;
 import java.util.ArrayList;
 import java.util.Date;
 import logica.ActividadDeportiva;
 import logica.Clase;
 import logica.InstitucionDeportiva;
 import logica.Registro;
+import logica.Socio;
 
 /**
  *
@@ -29,11 +31,17 @@ public interface IControlador {
     
     public void altaActividadDeportiva(String nombre, String descripcion,int duracion,float costo, Date fechaR, String nomInst);
     
+    public void altaSocioClase (String socio, String clase, Date fecha) throws SocioYaInscriptoException;
+    
     public String[] obtenerInstituciones();
     
     public String[] obtenerActividades(String nom);
     
     public String[] obtenerProfesInst(String nom);
+    
+    public String [] obtenerListaSocios();
+    
+    public String [] obtenerClases(String nomAct);
     
     public boolean existeActividadDepo(String nomAct,String nomInst);
     
@@ -54,6 +62,8 @@ public interface IControlador {
     public void altaClaseActividad(String inst, String act, String nomC, String prof, String url, Date fechaI, Date fechaA);
     
     public boolean existeClaseActividad(String clase);
+    
+    public boolean existeSocioClase (Clase c, Socio s);
     
     public ActividadDeportiva obtenerActividad(String nom);
     

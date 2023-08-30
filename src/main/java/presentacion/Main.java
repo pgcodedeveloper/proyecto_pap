@@ -25,6 +25,7 @@ public class Main extends JFrame {
     private RegistroActividadDeportiva actDeportiva;  
     private RegistroDictadoClase dictClase;
     private RegistroInstitucion inst;
+    private RegistroSocioDictadoClase regDictClase;
     private ConsultarUsuarios conUsr;
     private ConsultaActividadD conAct;
     /**
@@ -66,6 +67,12 @@ public class Main extends JFrame {
         inst.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
         panelContenido.add(inst);
         inst.setVisible(false);
+        
+        regDictClase = new RegistroSocioDictadoClase (con);
+        jInternalFrameSize = regDictClase.getSize();
+        regDictClase.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
+        panelContenido.add(regDictClase);
+        regDictClase.setVisible(false);
         
         conUsr = new ConsultarUsuarios(con);
         conUsr.setSize(panelContenido.getSize());
@@ -627,7 +634,7 @@ public class Main extends JFrame {
 
     private void btnRegClaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegClaseMouseClicked
         // TODO add your handling code here:
-       
+       this.regDictClase.setVisible(true);
     }//GEN-LAST:event_btnRegClaseMouseClicked
 
     private void btnRegClaseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegClaseMouseEntered

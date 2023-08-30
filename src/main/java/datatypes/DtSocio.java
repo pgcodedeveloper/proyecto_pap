@@ -17,5 +17,4 @@ public class DtSocio extends DtUsuario {
         super(nickname, nombre, apellido, email, fechaNac);
     }
     
-    
 }

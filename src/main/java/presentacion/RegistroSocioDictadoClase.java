@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import exceptions.SocioYaInscriptoException;
 import interfaces.IControlador;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -12,13 +13,13 @@ import javax.swing.JOptionPane;
  *
  * @author PC
  */
-public class RegistroDictadoClase extends javax.swing.JInternalFrame {
+public class RegistroSocioDictadoClase extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form RegistroClientes
      */
     private IControlador icon;
-    public RegistroDictadoClase(IControlador con) {
+    public RegistroSocioDictadoClase(IControlador con) {
         initComponents();
         this.icon = con;
         limpiar();
@@ -30,6 +31,7 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
         DefaultComboBoxModel<String> modelInst = new DefaultComboBoxModel<String>(icon.obtenerInstituciones());
         comboBoxInstitucion.addItem("Seleccione");
 	comboBoxInstitucion.setModel(modelInst);
+ 
     }
     
     public void iniciarComboAct(){
@@ -39,12 +41,22 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
 	comboBoxActDeportiva.setModel(modelAct);
     }
     
-    public void iniciarComboProfe(){
-        DefaultComboBoxModel<String> modelP = new DefaultComboBoxModel<String>(icon.obtenerProfesInst(comboBoxInstitucion.getSelectedItem().toString()));
-        comboBoxProfesor.setEnabled(true);
-        comboBoxProfesor.addItem("Seleccione");
-	comboBoxProfesor.setModel(modelP);
+    public void iniciarComboClase(){
+        DefaultComboBoxModel<String> modelAct = new DefaultComboBoxModel<String>(icon.obtenerClases(comboBoxActDeportiva.getSelectedItem().toString()));
+        comboBoxNomClase.setEnabled(true);
+        comboBoxNomClase.addItem("Seleccione");
+	comboBoxNomClase.setModel(modelAct);
     }
+    
+ 
+    
+    public void iniciarComboUsr(){
+        DefaultComboBoxModel<String> modelP = new DefaultComboBoxModel<String>(icon.obtenerListaSocios());
+        comboBoxSocio.addItem("Seleccione");
+        comboBoxSocio.setModel(modelP);
+        comboBoxSocio.setEnabled(true);
+    }
+    
     /**
      * 
      * This method is called from within the constructor to initialize the form.
@@ -59,21 +71,25 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
         panelRegistro = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
-        txtNombreClase = new javax.swing.JTextField();
-        txtURL = new javax.swing.JTextField();
         lblInstitucion = new javax.swing.JLabel();
-        lblProfesor = new javax.swing.JLabel();
-        lblURL = new javax.swing.JLabel();
-        lblFechaIninio = new javax.swing.JLabel();
-        lblFechaAlta = new javax.swing.JLabel();
-        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         comboBoxInstitucion = new javax.swing.JComboBox<>();
-        comboBoxProfesor = new javax.swing.JComboBox<>();
-        lblNombreClase = new javax.swing.JLabel();
         lblActividadDeportiva = new javax.swing.JLabel();
         comboBoxActDeportiva = new javax.swing.JComboBox<>();
-        dateFechaInicio = new com.toedter.calendar.JDateChooser();
-        dateFechaAlta = new com.toedter.calendar.JDateChooser();
+        lblNombreClase = new javax.swing.JLabel();
+        comboBoxNomClase = new javax.swing.JComboBox<>();
+        lblProfesor = new javax.swing.JLabel();
+        txtProfesor = new javax.swing.JTextField();
+        lblURL = new javax.swing.JLabel();
+        txtURL = new javax.swing.JTextField();
+        lblFechaIninio = new javax.swing.JLabel();
+        txtFechaIni = new javax.swing.JTextField();
+        lblFechaAlta = new javax.swing.JLabel();
+        txtFechaAlta = new javax.swing.JTextField();
+        lblSocio = new javax.swing.JLabel();
+        comboBoxSocio = new javax.swing.JComboBox<>();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        dateFechaReg = new com.toedter.calendar.JDateChooser();
+        txtFechaReg = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
@@ -82,7 +98,8 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
         setForeground(java.awt.Color.darkGray);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Alta Dictado Clase");
+        setTitle("Registro a Dictado Clase");
+        setToolTipText("");
         setFrameIcon(null);
         setPreferredSize(new java.awt.Dimension(735, 640));
         setVisible(true);
@@ -104,39 +121,11 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
             }
         });
 
-        panelRegistro.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(2, 163, 239), 2, true)), "Alta Dictado Clase", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(2, 163, 239))); // NOI18N
+        panelRegistro.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(2, 163, 239), 2, true)), "Registro a Dictado Clase", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(2, 163, 239))); // NOI18N
         panelRegistro.setOpaque(false);
-
-        txtNombreClase.setBackground(new java.awt.Color(214, 217, 223));
-        txtNombreClase.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        txtNombreClase.setMargin(new java.awt.Insets(10, 2, 10, 2));
-        txtNombreClase.setPreferredSize(new java.awt.Dimension(9, 38));
-
-        txtURL.setBackground(new java.awt.Color(214, 217, 223));
-        txtURL.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        txtURL.setMargin(new java.awt.Insets(10, 2, 10, 2));
-        txtURL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtURLActionPerformed(evt);
-            }
-        });
 
         lblInstitucion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblInstitucion.setText("Institución:");
-
-        lblProfesor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblProfesor.setLabelFor(lblProfesor);
-        lblProfesor.setText("Profesor:");
-
-        lblURL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblURL.setLabelFor(txtURL);
-        lblURL.setText("URL:");
-
-        lblFechaIninio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblFechaIninio.setText("Fecha de Inicio");
-
-        lblFechaAlta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblFechaAlta.setText("Fecha de Alta:");
 
         comboBoxInstitucion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBoxInstitucion.setPreferredSize(new java.awt.Dimension(39, 9));
@@ -146,21 +135,74 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
             }
         });
 
-        comboBoxProfesor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboBoxProfesor.setEnabled(false);
-        comboBoxProfesor.setPreferredSize(new java.awt.Dimension(39, 9));
-
-        lblNombreClase.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblNombreClase.setText("Nombre Clase:");
-
         lblActividadDeportiva.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblActividadDeportiva.setText("Actividad Deportiva:");
 
         comboBoxActDeportiva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBoxActDeportiva.setEnabled(false);
         comboBoxActDeportiva.setPreferredSize(new java.awt.Dimension(39, 9));
+        comboBoxActDeportiva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxActDeportivaActionPerformed(evt);
+            }
+        });
 
-        dateFechaInicio.setDateFormatString("dd MM yyyy hh:mm");
+        lblNombreClase.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNombreClase.setText("Nombre Clase:");
+
+        comboBoxNomClase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxNomClase.setEnabled(false);
+        comboBoxNomClase.setPreferredSize(new java.awt.Dimension(39, 9));
+        comboBoxNomClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxNomClaseActionPerformed(evt);
+            }
+        });
+
+        lblProfesor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblProfesor.setLabelFor(lblSocio);
+        lblProfesor.setText("Profesor:");
+
+        txtProfesor.setBackground(new java.awt.Color(214, 217, 223));
+        txtProfesor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        txtProfesor.setEnabled(false);
+        txtProfesor.setMargin(new java.awt.Insets(10, 2, 10, 2));
+
+        lblURL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblURL.setLabelFor(txtURL);
+        lblURL.setText("URL:");
+
+        txtURL.setBackground(new java.awt.Color(214, 217, 223));
+        txtURL.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        txtURL.setEnabled(false);
+        txtURL.setMargin(new java.awt.Insets(10, 2, 10, 2));
+
+        lblFechaIninio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblFechaIninio.setText("Fecha de Inicio");
+
+        txtFechaIni.setBackground(new java.awt.Color(214, 217, 223));
+        txtFechaIni.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        txtFechaIni.setEnabled(false);
+        txtFechaIni.setMargin(new java.awt.Insets(10, 2, 10, 2));
+
+        lblFechaAlta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblFechaAlta.setText("Fecha de Alta:");
+
+        txtFechaAlta.setBackground(new java.awt.Color(214, 217, 223));
+        txtFechaAlta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        txtFechaAlta.setEnabled(false);
+        txtFechaAlta.setMargin(new java.awt.Insets(10, 2, 10, 2));
+
+        lblSocio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblSocio.setLabelFor(lblSocio);
+        lblSocio.setText("Socio:");
+
+        comboBoxSocio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxSocio.setEnabled(false);
+
+        txtFechaReg.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtFechaReg.setLabelFor(lblSocio);
+        txtFechaReg.setText("Fecha de Registro:");
 
         javax.swing.GroupLayout panelRegistroLayout = new javax.swing.GroupLayout(panelRegistro);
         panelRegistro.setLayout(panelRegistroLayout);
@@ -180,24 +222,10 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
                                 .addGap(46, 46, 46)
                                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(comboBoxActDeportiva, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtNombreClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(comboBoxInstitucion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(panelRegistroLayout.createSequentialGroup()
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFechaAlta)
-                            .addComponent(lblProfesor)
-                            .addComponent(lblURL)
-                            .addComponent(lblFechaIninio))
-                        .addGap(43, 43, 43)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtURL)
-                            .addComponent(comboBoxProfesor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(panelRegistroLayout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(dateFechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
-                            .addComponent(dateFechaAlta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(comboBoxInstitucion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegistroLayout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(comboBoxNomClase, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(panelRegistroLayout.createSequentialGroup()
                         .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblActividadDeportiva)
@@ -205,7 +233,27 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
                                 .addGap(2, 2, 2)
                                 .addComponent(lblInstitucion)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRegistroLayout.createSequentialGroup()
+                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFechaAlta)
+                            .addComponent(lblSocio)
+                            .addComponent(lblURL)
+                            .addComponent(lblFechaIninio)
+                            .addComponent(lblProfesor)
+                            .addComponent(txtFechaReg))
+                        .addGap(43, 43, 43)
+                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboBoxSocio, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtURL)
+                            .addComponent(txtFechaIni)
+                            .addComponent(txtFechaAlta)
+                            .addGroup(panelRegistroLayout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtProfesor)
+                            .addComponent(dateFechaReg, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         panelRegistroLayout.setVerticalGroup(
@@ -226,39 +274,44 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
                             .addComponent(comboBoxActDeportiva, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(10, 10, 10)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelRegistroLayout.createSequentialGroup()
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelRegistroLayout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(comboBoxProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtURL, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblURL, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(panelRegistroLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblNombreClase, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombreClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(16, 16, 16)
-                        .addComponent(lblFechaIninio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRegistroLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRegistroLayout.createSequentialGroup()
-                        .addComponent(lblFechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(dateFechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                        .addGap(8, 8, 8)
+                        .addComponent(comboBoxNomClase, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
+                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtURL, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblURL, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelRegistroLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNombreClase, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16)
+                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFechaIninio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaIni, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBoxSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelRegistroLayout.createSequentialGroup()
+                        .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dateFechaReg, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFechaReg, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
         );
 
-        panelRegistroLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dateFechaAlta, dateFechaInicio, lblFechaAlta, lblFechaIninio});
+        panelRegistroLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblFechaAlta, lblFechaIninio});
 
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGuardar.setText("Guardar");
@@ -302,8 +355,8 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(panelRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addComponent(panelRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
@@ -318,21 +371,24 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     void limpiar(){
+        txtProfesor.setText("");
         txtURL.setText("");
-        txtNombreClase.setText("");
+        txtFechaAlta.setText("");
+        txtFechaIni.setText("");
     }
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        if(!txtNombreClase.getText().isEmpty() && !txtURL.getText().isEmpty()) {
-            if(!icon.existeClaseActividad(txtNombreClase.getText())){
-                icon.altaClaseActividad(comboBoxInstitucion.getSelectedItem().toString(), comboBoxActDeportiva.getSelectedItem().toString(), txtNombreClase.getText(),
-                        comboBoxProfesor.getSelectedItem().toString(), txtURL.getText(), dateFechaInicio.getDate(), dateFechaAlta.getDate());
+        if(!comboBoxSocio.getSelectedItem().toString().equals("Seleccione") && !comboBoxNomClase.getSelectedItem().toString().equals("Seleccione")) {
+            try{
+                icon.altaSocioClase(comboBoxSocio.getSelectedItem().toString(), comboBoxNomClase.getSelectedItem().toString(), dateFechaReg.getDate());           
                 JOptionPane.showMessageDialog(null, "Clase creada correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                limpiar();
                 this.setVisible(false);
+            }catch (SocioYaInscriptoException e){
+                 JOptionPane.showMessageDialog(null, e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             }
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Debes ingresar datos en todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una clase y un socio", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -347,17 +403,30 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void txtURLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtURLActionPerformed
+    private void comboBoxNomClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxNomClaseActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtURLActionPerformed
+        
+        this.txtProfesor.setText(icon.obtenerInfoClase(this.comboBoxNomClase.getSelectedItem().toString()).getNombre());
+        this.txtURL.setText(icon.obtenerInfoClase(this.comboBoxNomClase.getSelectedItem().toString()).getUrl());
+        String horaIni = icon.obtenerInfoClase(this.comboBoxNomClase.getSelectedItem().toString()).getFecha().toString();
+        horaIni = horaIni.concat(" ");
+        horaIni= horaIni.concat(icon.obtenerInfoClase(this.comboBoxNomClase.getSelectedItem().toString()).getHoraInicio().toString());
+        this.txtFechaIni.setText(horaIni);
+        this.txtFechaAlta.setText(icon.obtenerInfoClase(this.comboBoxNomClase.getSelectedItem().toString()).getFechaReg().toString());
+        
+        this.iniciarComboUsr();
+        
+    }//GEN-LAST:event_comboBoxNomClaseActionPerformed
 
     private void comboBoxInstitucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxInstitucionActionPerformed
         // TODO add your handling code here:
         this.iniciarComboAct();
-        this.iniciarComboProfe();
-        txtNombreClase.setEnabled(true);
-        txtURL.setEnabled(true);
     }//GEN-LAST:event_comboBoxInstitucionActionPerformed
+
+    private void comboBoxActDeportivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActDeportivaActionPerformed
+        // TODO add your handling code here:
+        this.iniciarComboClase();
+    }//GEN-LAST:event_comboBoxActDeportivaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -365,9 +434,9 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> comboBoxActDeportiva;
     private javax.swing.JComboBox<String> comboBoxInstitucion;
-    private javax.swing.JComboBox<String> comboBoxProfesor;
-    private com.toedter.calendar.JDateChooser dateFechaAlta;
-    private com.toedter.calendar.JDateChooser dateFechaInicio;
+    private javax.swing.JComboBox<String> comboBoxNomClase;
+    private javax.swing.JComboBox<String> comboBoxSocio;
+    private com.toedter.calendar.JDateChooser dateFechaReg;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
@@ -377,9 +446,13 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblInstitucion;
     private javax.swing.JLabel lblNombreClase;
     private javax.swing.JLabel lblProfesor;
+    private javax.swing.JLabel lblSocio;
     private javax.swing.JLabel lblURL;
     private javax.swing.JPanel panelRegistro;
-    private javax.swing.JTextField txtNombreClase;
+    private javax.swing.JTextField txtFechaAlta;
+    private javax.swing.JTextField txtFechaIni;
+    private javax.swing.JLabel txtFechaReg;
+    private javax.swing.JTextField txtProfesor;
     private javax.swing.JTextField txtURL;
     // End of variables declaration//GEN-END:variables
 }

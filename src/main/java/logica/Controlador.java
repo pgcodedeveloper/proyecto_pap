@@ -8,11 +8,14 @@ import datatypes.DtProfesor;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
 import exceptions.InstitucionRepetidaException;
+import exceptions.SocioYaInscriptoException;
 import exceptions.UsuarioRepetidoException;
 import interfaces.IControlador;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.EntityManager;
+import persistencia.Conexion;
 
 /**
  *
@@ -257,4 +260,86 @@ public class Controlador implements IControlador {
     }
     
     
+    
+    @Override
+        public String [] obtenerListaSocios(){
+        ArrayList<DtSocio> list;
+        list = this.obtenerSocios();
+        String[] usr_ret = new String[list.size()];
+        if(!list.isEmpty()){
+            int i=0;
+            for(DtSocio u:list) {
+                    usr_ret[i]=u.getNickname();
+                    i++;
+            }
+        }
+        else{
+            usr_ret = new String[1];
+            usr_ret[0] = "No hay profesores";
+        }
+        return usr_ret;
+    }
+    
+    @Override
+        public String [] obtenerClases(String nomAct){
+         
+            ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+            
+            List<Clase> cs= (mji.obtenerActividad(nomAct).getClases());
+            String[] ret= new String [cs.size()];
+            if (!cs.isEmpty()){
+                int i = 0;
+                for (Clase c:cs){
+                    ret[i]= c.getNombre();
+                    i++;
+                }
+            }
+            else{
+                ret = new String [1];
+                ret[0] = "No hay clases";
+            }
+            return ret;
+        }
+
+    @Override
+   public void altaSocioClase (String nomSocio, String nomClase, Date fecha) throws SocioYaInscriptoException{
+        ManejadorClase mjc = ManejadorClase.getInstancia();
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        
+        String email = null;
+        for(DtSocio s:obtenerSocios()){
+            if (s.getNickname().equals(nomSocio))
+                email = s.getEmail();
+        }
+        
+        Socio socio = (Socio) mju.buscarUsuario(email,nomSocio);
+        Clase clase = mjc.obtenerInfoClase(nomClase);
+        
+                  
+        if(this.existeSocioClase(clase, socio)){
+           throw new SocioYaInscriptoException ("El socio ya esta inscripto en esta clase");
+        }
+        else{
+            clase.agregarRegistro(socio, fecha);
+        }
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        em.getTransaction().begin();
+        em.persist(clase);
+        em.getTransaction().commit();
+    }   
+    
+    @Override
+    public boolean existeSocioClase (Clase c, Socio s){
+        
+        Boolean aRetornar=false;
+        for (Registro r:c.getRegistros()){
+            if (r.getSocioId().getId() == s.getId())
+                    aRetornar = true;
+        }
+        return aRetornar;
+    }
 }
+
+
+ 
