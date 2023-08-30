@@ -234,10 +234,27 @@ public class Controlador implements IControlador {
         ActividadDeportiva a = mji.obtenerActividad(nom);
         return a;
     }
-    
-    
-    
-    
+
+    @Override
+    public ArrayList<ActividadDeportiva> obtenerActividadesInstitucion(String institucion) {
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        ArrayList<ActividadDeportiva> aRetornar = mji.obtenerActividadesInst(institucion);
+        return aRetornar;
+    }
+
+    @Override
+    public ArrayList<String> obtenerClasesAct(String act) {
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        ArrayList<String> aRetornar = mji.obtenerClasesAct(act);
+        return aRetornar;
+    }
+
+    @Override
+    public ArrayList<Clase> obtenerClasesDeActividad(String act) {
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        ArrayList<Clase> aRetornar = mji.obtenerClaseDeActividad(act);
+        return aRetornar;
+    }
     
     
 }

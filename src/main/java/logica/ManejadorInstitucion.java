@@ -49,7 +49,7 @@ public class ManejadorInstitucion {
         EntityManager em = con.getEntityManager();
         InstitucionDeportiva i = null;
         try {
-            i = em.find(InstitucionDeportiva.class, nom);
+            i = (InstitucionDeportiva) em.find(InstitucionDeportiva.class, nom);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -133,6 +133,51 @@ public class ManejadorInstitucion {
         }
     }
     
+    public ArrayList<ActividadDeportiva> obtenerActividadesInst(String inst){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        ArrayList<ActividadDeportiva> list = new ArrayList<>();
+        try {
+            InstitucionDeportiva i = (InstitucionDeportiva) em.find(InstitucionDeportiva.class, inst);
+            for(ActividadDeportiva a: i.getActividadesDeportiva()){
+                list.add(a);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+    
+    public ArrayList<String> obtenerClasesAct(String act){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        ArrayList<String> list = new ArrayList<>();
+        try {
+            ActividadDeportiva acti = (ActividadDeportiva)em.find(ActividadDeportiva.class, act);
+            for(Clase c: acti.getClases()){
+                list.add(c.getNombre());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+    
+    public ArrayList<Clase> obtenerClaseDeActividad(String act){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        ArrayList<Clase> list = new ArrayList<>();
+        try {
+            ActividadDeportiva acti = (ActividadDeportiva)em.find(ActividadDeportiva.class, act);
+            for(Clase c: acti.getClases()){
+                list.add(c);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+   
     public void agregarClase(Clase c){
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();

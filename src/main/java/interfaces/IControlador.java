@@ -56,4 +56,10 @@ public interface IControlador {
     public boolean existeClaseActividad(String clase);
     
     public ActividadDeportiva obtenerActividad(String nom);
+    
+    public ArrayList<ActividadDeportiva> obtenerActividadesInstitucion(String institucion);
+    
+    public ArrayList<String> obtenerClasesAct(String act);
+    
+    public ArrayList<Clase> obtenerClasesDeActividad(String act);
 }

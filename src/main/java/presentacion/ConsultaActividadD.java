@@ -11,6 +11,7 @@ import interfaces.IControlador;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -32,10 +33,78 @@ public class ConsultaActividadD extends javax.swing.JPanel {
     public ConsultaActividadD(IControlador con) {
         initComponents();
         this.icon = con;
-        
+        comboI();
     }
     
+    public void tablaAct(String ins){
+        DefaultTableModel modelo = new DefaultTableModel();
+        ArrayList<ActividadDeportiva> list;
+        list = icon.obtenerActividadesInstitucion(ins);
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Costo");
+        modelo.addColumn("Duración");
+        modelo.addColumn("Fecha registro");
+        modelo.addColumn("Nombre Inst");
+        
+        for (ActividadDeportiva a : list) {
+            modelo.addRow(new Object[]{a.getNombre(),a.getDescripcion(),a.getCosto(),a.getDuracion(),a.getFechaReg(),a.getInst().getNombre()});
+        }
+        
+        tablaActividades.setModel(modelo);
+    }
     
+    public void comboI(){
+        DefaultComboBoxModel<String> modelInst = new DefaultComboBoxModel<String>(icon.obtenerInstituciones());
+        comboInsti.addItem("Seleccione");
+	comboInsti.setModel(modelInst);
+        comboInsti1.setModel(modelInst);
+    }
+    
+    public void comboA(String inst){
+        DefaultComboBoxModel<String> modelA = new DefaultComboBoxModel<String>(icon.obtenerActividades(inst));
+        comboAct.addItem("Seleccione");
+	comboAct.setModel(modelA);
+    }
+    
+    public void clasesAct(String act){
+       listClasesA.clearSelection();
+       ArrayList<String> li;
+       li = icon.obtenerClasesAct(act);
+       DefaultListModel<String> model = new DefaultListModel<>();
+       if(li != null && !li.isEmpty()){
+            for(String i:li){
+                model.addElement(i);
+            }
+       }
+       else{
+           model.addElement("No tiene clases aún");
+       }
+       
+       listClasesA.setModel(model);
+    }
+    
+    public void llenarTablaClases(String act){
+        DefaultTableModel modelo = new DefaultTableModel();
+        ArrayList<Clase> list;
+        list = icon.obtenerClasesDeActividad(act);
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Fecha registro");
+        modelo.addColumn("Hora inicio");
+        modelo.addColumn("Url");
+        
+        for (Clase c : list) {
+            modelo.addRow(new Object[]{c.getNombre(),c.getFecha(),c.getFechaReg(),c.getHoraInicio().getTime(),c.getUrl()});
+        }
+        
+        tablaClases.setModel(modelo);
+    }
+    
+    public void mostrarConsulta(boolean flag){
+        this.setVisible(flag);
+        this.comboI();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,6 +117,24 @@ public class ConsultaActividadD extends javax.swing.JPanel {
 
         lblInicio = new javax.swing.JLabel();
         btnSalir = new javax.swing.JLabel();
+        tabbActividades = new javax.swing.JTabbedPane();
+        panelActividades = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaActividades = new javax.swing.JTable();
+        lblInsti = new javax.swing.JLabel();
+        comboInsti = new javax.swing.JComboBox<>();
+        lblAct = new javax.swing.JLabel();
+        lblClasesAct = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listClasesA = new javax.swing.JList<>();
+        panelClases = new javax.swing.JPanel();
+        comboInsti1 = new javax.swing.JComboBox<>();
+        lblInsti1 = new javax.swing.JLabel();
+        lblInsti2 = new javax.swing.JLabel();
+        comboAct = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaClases = new javax.swing.JTable();
+        lblClases = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1120, 830));
 
@@ -55,7 +142,7 @@ public class ConsultaActividadD extends javax.swing.JPanel {
         lblInicio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblInicio.setForeground(new java.awt.Color(255, 255, 255));
         lblInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblInicio.setText("Actividades Deportivas del Sistema");
+        lblInicio.setText("Actividades y Clases del Sistema");
         lblInicio.setToolTipText("");
         lblInicio.setOpaque(true);
 
@@ -76,6 +163,222 @@ public class ConsultaActividadD extends javax.swing.JPanel {
             }
         });
 
+        tablaActividades.setBackground(new java.awt.Color(214, 217, 223));
+        tablaActividades.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Descripción", "Costo", "Duración", "Fecha registro", "Nombre Inst"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaActividades.setEnabled(false);
+        tablaActividades.setGridColor(new java.awt.Color(40, 69, 108));
+        tablaActividades.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaActividades.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaActividades.setShowGrid(true);
+        tablaActividades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaActividadesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaActividades);
+
+        lblInsti.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblInsti.setText("Institución Deportiva:");
+
+        comboInsti.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comboInstiMouseClicked(evt);
+            }
+        });
+
+        lblAct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAct.setText("Actividades de la Institución:");
+
+        lblClasesAct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblClasesAct.setText("Clases de la Actividad:");
+
+        jScrollPane2.setViewportView(listClasesA);
+
+        javax.swing.GroupLayout panelActividadesLayout = new javax.swing.GroupLayout(panelActividades);
+        panelActividades.setLayout(panelActividadesLayout);
+        panelActividadesLayout.setHorizontalGroup(
+            panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelActividadesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelActividadesLayout.createSequentialGroup()
+                        .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelActividadesLayout.createSequentialGroup()
+                                .addComponent(lblInsti)
+                                .addGap(85, 85, 85)
+                                .addComponent(comboInsti, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblAct)
+                            .addComponent(lblClasesAct)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 544, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelActividadesLayout.setVerticalGroup(
+            panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelActividadesLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblInsti)
+                    .addComponent(comboInsti, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60)
+                .addComponent(lblAct)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblClasesAct)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        panelActividadesLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboInsti, lblInsti});
+
+        tabbActividades.addTab("Actividades", panelActividades);
+
+        comboInsti1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comboInsti1MouseClicked(evt);
+            }
+        });
+        comboInsti1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboInsti1ActionPerformed(evt);
+            }
+        });
+
+        lblInsti1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblInsti1.setText("Institución Deportiva:");
+
+        lblInsti2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblInsti2.setText("Actividad Deportiva:");
+
+        comboAct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comboActMouseClicked(evt);
+            }
+        });
+        comboAct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboActActionPerformed(evt);
+            }
+        });
+
+        tablaClases.setBackground(new java.awt.Color(214, 217, 223));
+        tablaClases.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Fecha", "Fecha registro", "Hora inicio", "Url"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaClases.setEnabled(false);
+        tablaClases.setGridColor(new java.awt.Color(40, 69, 108));
+        tablaClases.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaClases.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaClases.setShowGrid(true);
+        tablaClases.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaClasesMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tablaClases);
+
+        lblClases.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblClases.setText("Clases:");
+
+        javax.swing.GroupLayout panelClasesLayout = new javax.swing.GroupLayout(panelClases);
+        panelClases.setLayout(panelClasesLayout);
+        panelClasesLayout.setHorizontalGroup(
+            panelClasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelClasesLayout.createSequentialGroup()
+                .addGroup(panelClasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelClasesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3))
+                    .addGroup(panelClasesLayout.createSequentialGroup()
+                        .addGroup(panelClasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelClasesLayout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(lblInsti1)
+                                .addGap(70, 70, 70)
+                                .addComponent(comboInsti1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblInsti2)
+                                .addGap(70, 70, 70)
+                                .addComponent(comboAct, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelClasesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblClases)))
+                        .addGap(0, 10, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelClasesLayout.setVerticalGroup(
+            panelClasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelClasesLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(panelClasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblInsti1)
+                    .addComponent(comboInsti1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboAct, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblInsti2))
+                .addGap(50, 50, 50)
+                .addComponent(lblClases)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(222, Short.MAX_VALUE))
+        );
+
+        panelClasesLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboAct, lblInsti2});
+
+        panelClasesLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboInsti1, lblInsti1});
+
+        tabbActividades.addTab("Clases", panelClases);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,22 +386,24 @@ public class ConsultaActividadD extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(tabbActividades)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(797, 797, 797))
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tabbActividades))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
         // TODO add your handling code here:
-        
-        
+        this.mostrarConsulta(false);
     }//GEN-LAST:event_btnSalirMouseClicked
 
     private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
@@ -111,9 +416,74 @@ public class ConsultaActividadD extends javax.swing.JPanel {
         btnSalir.setBackground(new Color(25, 104, 157));
     }//GEN-LAST:event_btnSalirMouseExited
 
+    private void comboInstiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboInstiMouseClicked
+        // TODO add your handling code here:
+        this.tablaActividades.setEnabled(true);
+        if(!comboInsti.getSelectedItem().equals("No hay instituciones")){
+            String insti = comboInsti.getSelectedItem().toString();
+            this.tablaAct(insti);
+        }
+    }//GEN-LAST:event_comboInstiMouseClicked
+
+    private void tablaActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaActividadesMouseClicked
+        // TODO add your handling code here:
+        System.out.println(tablaActividades.getValueAt(tablaActividades.getSelectedRow(), 0).toString());
+        String nombreA = tablaActividades.getValueAt(tablaActividades.getSelectedRow(), 0).toString();
+
+        if(tablaActividades.getSelectedRow() >= 0){
+            clasesAct(nombreA);
+        }
+    }//GEN-LAST:event_tablaActividadesMouseClicked
+
+    private void comboInsti1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboInsti1MouseClicked
+        // TODO add your handling code here:
+        String ins = comboInsti.getSelectedItem().toString();
+        if(!ins.equals("No hay instituciones")){
+            this.comboA(ins);
+        }
+    }//GEN-LAST:event_comboInsti1MouseClicked
+
+    private void comboActMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboActMouseClicked
+        // TODO add your handling code here:
+        String act = comboAct.getSelectedItem().toString();
+        this.llenarTablaClases(act);
+    }//GEN-LAST:event_comboActMouseClicked
+
+    private void tablaClasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClasesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaClasesMouseClicked
+
+    private void comboInsti1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboInsti1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_comboInsti1ActionPerformed
+
+    private void comboActActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_comboActActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnSalir;
+    private javax.swing.JComboBox<String> comboAct;
+    private javax.swing.JComboBox<String> comboInsti;
+    private javax.swing.JComboBox<String> comboInsti1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblAct;
+    private javax.swing.JLabel lblClases;
+    private javax.swing.JLabel lblClasesAct;
     private javax.swing.JLabel lblInicio;
+    private javax.swing.JLabel lblInsti;
+    private javax.swing.JLabel lblInsti1;
+    private javax.swing.JLabel lblInsti2;
+    private javax.swing.JList<String> listClasesA;
+    private javax.swing.JPanel panelActividades;
+    private javax.swing.JPanel panelClases;
+    private javax.swing.JTabbedPane tabbActividades;
+    private javax.swing.JTable tablaActividades;
+    private javax.swing.JTable tablaClases;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,8 +25,8 @@ public class Main extends JFrame {
     private RegistroActividadDeportiva actDeportiva;  
     private RegistroDictadoClase dictClase;
     private RegistroInstitucion inst;
-    
     private ConsultarUsuarios conUsr;
+    private ConsultaActividadD conAct;
     /**
      * Creates new form Main
      */
@@ -71,6 +71,11 @@ public class Main extends JFrame {
         conUsr.setSize(panelContenido.getSize());
         panelContenido.add(conUsr);
         conUsr.setVisible(false);
+        
+        conAct = new ConsultaActividadD(con);
+        conAct.setSize(panelContenido.getSize());
+        panelContenido.add(conAct);
+        conAct.setVisible(false);
     }
      
     /**
@@ -411,8 +416,8 @@ public class Main extends JFrame {
         btnConsultaActividad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnConsultaActividad.setForeground(new java.awt.Color(255, 255, 255));
         btnConsultaActividad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnConsultaActividad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-clientes-16.png"))); // NOI18N
-        btnConsultaActividad.setText("Actividad Deportiva");
+        btnConsultaActividad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-colegio-16.png"))); // NOI18N
+        btnConsultaActividad.setText("Actividades y Clases");
         btnConsultaActividad.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnConsultaActividad.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnConsultaActividad.setIconTextGap(20);
@@ -639,14 +644,19 @@ public class Main extends JFrame {
 
     private void btnConsultaActividadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaActividadMouseClicked
         // TODO add your handling code here:
+        this.conAct.mostrarConsulta(true);
     }//GEN-LAST:event_btnConsultaActividadMouseClicked
 
     private void btnConsultaActividadMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaActividadMouseEntered
         // TODO add your handling code here:
+        Color c = new Color (16,69,104);
+        btnConsultaActividad.setBackground(c);
     }//GEN-LAST:event_btnConsultaActividadMouseEntered
 
     private void btnConsultaActividadMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaActividadMouseExited
         // TODO add your handling code here:
+        Color c = new Color(25,104,157);
+        btnConsultaActividad. setBackground(c);
     }//GEN-LAST:event_btnConsultaActividadMouseExited
 
     /**

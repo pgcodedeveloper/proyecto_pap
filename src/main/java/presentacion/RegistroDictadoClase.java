@@ -30,7 +30,6 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
         DefaultComboBoxModel<String> modelInst = new DefaultComboBoxModel<String>(icon.obtenerInstituciones());
         comboBoxInstitucion.addItem("Seleccione");
 	comboBoxInstitucion.setModel(modelInst);
- 
     }
     
     public void iniciarComboAct(){

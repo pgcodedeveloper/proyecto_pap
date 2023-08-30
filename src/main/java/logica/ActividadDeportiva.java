@@ -107,4 +107,13 @@ public class ActividadDeportiva{
     public void altaClase(Clase c){
         this.clases.add(c);
     }
+
+    public InstitucionDeportiva getInst() {
+        return inst;
+    }
+
+    public void setInst(InstitucionDeportiva inst) {
+        this.inst = inst;
+    }
+
 }
