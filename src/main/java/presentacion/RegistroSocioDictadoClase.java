@@ -407,7 +407,7 @@ public class RegistroSocioDictadoClase extends javax.swing.JInternalFrame {
     private void comboBoxNomClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxNomClaseActionPerformed
         // TODO add your handling code here:
         Clase c = icon.obtenerInfoClase(this.comboBoxNomClase.getSelectedItem().toString());
-        this.txtProfesor.setText(c.getNombre());
+        this.txtProfesor.setText(icon.obtenerProfesorClase(c.getNombre(),comboBoxInstitucion.getSelectedItem().toString()));
         this.txtURL.setText(c.getUrl());
         String horaIni = c.getFecha().toString();
         horaIni = horaIni.concat(" ");
