@@ -8,6 +8,7 @@ import exceptions.SocioYaInscriptoException;
 import interfaces.IControlador;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import logica.Clase;
 
 /**
  *
@@ -354,13 +355,13 @@ public class RegistroSocioDictadoClase extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(panelRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
+                .addComponent(panelRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnGuardar});
@@ -381,7 +382,7 @@ public class RegistroSocioDictadoClase extends javax.swing.JInternalFrame {
         if(!comboBoxSocio.getSelectedItem().toString().equals("Seleccione") && !comboBoxNomClase.getSelectedItem().toString().equals("Seleccione")) {
             try{
                 icon.altaSocioClase(comboBoxSocio.getSelectedItem().toString(), comboBoxNomClase.getSelectedItem().toString(), dateFechaReg.getDate());           
-                JOptionPane.showMessageDialog(null, "Clase creada correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Socio registrado correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 limpiar();
                 this.setVisible(false);
             }catch (SocioYaInscriptoException e){
@@ -405,14 +406,14 @@ public class RegistroSocioDictadoClase extends javax.swing.JInternalFrame {
 
     private void comboBoxNomClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxNomClaseActionPerformed
         // TODO add your handling code here:
-        
-        this.txtProfesor.setText(icon.obtenerInfoClase(this.comboBoxNomClase.getSelectedItem().toString()).getNombre());
-        this.txtURL.setText(icon.obtenerInfoClase(this.comboBoxNomClase.getSelectedItem().toString()).getUrl());
-        String horaIni = icon.obtenerInfoClase(this.comboBoxNomClase.getSelectedItem().toString()).getFecha().toString();
+        Clase c = icon.obtenerInfoClase(this.comboBoxNomClase.getSelectedItem().toString());
+        this.txtProfesor.setText(c.getNombre());
+        this.txtURL.setText(c.getUrl());
+        String horaIni = c.getFecha().toString();
         horaIni = horaIni.concat(" ");
-        horaIni= horaIni.concat(icon.obtenerInfoClase(this.comboBoxNomClase.getSelectedItem().toString()).getHoraInicio().toString());
+        horaIni= horaIni.concat(c.getHoraInicio().toString());
         this.txtFechaIni.setText(horaIni);
-        this.txtFechaAlta.setText(icon.obtenerInfoClase(this.comboBoxNomClase.getSelectedItem().toString()).getFechaReg().toString());
+        this.txtFechaAlta.setText(c.getFechaReg().toString());
         
         this.iniciarComboUsr();
         

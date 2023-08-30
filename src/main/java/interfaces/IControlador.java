@@ -15,6 +15,7 @@ import java.util.Date;
 import logica.ActividadDeportiva;
 import logica.Clase;
 import logica.InstitucionDeportiva;
+import logica.Profesor;
 import logica.Registro;
 import logica.Socio;
 
@@ -72,4 +73,5 @@ public interface IControlador {
     public ArrayList<String> obtenerClasesAct(String act);
     
     public ArrayList<Clase> obtenerClasesDeActividad(String act);
+
 }

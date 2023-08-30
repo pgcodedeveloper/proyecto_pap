@@ -177,12 +177,11 @@ public class ManejadorUsuario {
     public ArrayList<Registro> obtenerRegistrosSocio(int idSocio){
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
-        
+        Socio s;
         ArrayList<Registro> aRetornar = new ArrayList<>();
-        Query q = em.createQuery("select r from Registro r where r.socio = :idS", Registro.class);
-        q.setParameter("idS", idSocio);
         try {
-            List<Registro> li = (List<Registro>) q.getResultList();
+            s = (Socio) em.find(Socio.class, idSocio);
+            List<Registro> li = s.getRegistros();
             for(Registro r:li){
                 aRetornar.add(r);
             }

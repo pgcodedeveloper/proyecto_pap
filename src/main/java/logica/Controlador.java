@@ -258,11 +258,10 @@ public class Controlador implements IControlador {
         ArrayList<Clase> aRetornar = mji.obtenerClaseDeActividad(act);
         return aRetornar;
     }
-    
-    
+
     
     @Override
-        public String [] obtenerListaSocios(){
+    public String [] obtenerListaSocios(){
         ArrayList<DtSocio> list;
         list = this.obtenerSocios();
         String[] usr_ret = new String[list.size()];

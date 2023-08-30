@@ -113,24 +113,27 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
     }
     
     public void registrosAClases(int idS){
-        infoExtra.setText("");
+        txtPaneSocio.setText("");
         ArrayList<Registro> li = new ArrayList<>();
         li = icon.obtenerRegistrosSocio(idS);
         infoExtra.setText("");
         String datos;
-        if(li != null &&li.isEmpty()){
+        int cont = 1;
+        if(li != null && !li.isEmpty()){
             datos = "INFORMACIÓN DE REGISTROS";
             for(Registro r:li){
+                datos = datos + "\n\n" + "+--- Registro Nº" + cont + " ---+";
                 datos = datos + "\n\n" + "Nombre de la Clase: " + r.getClaseId().getNombre();
                 datos = datos + "\n\n" + "Fecha de Registro: " + r.getFechaReg().toString();
                 datos = datos + "\n\n" + "Nombre del Socio: " + r.getSocioId().getNombre() + " " + r.getSocioId().getApellido();
+                cont++;
             }
         }
         else{
             datos = "No está registrado a ningúna clase aún";
         }
         
-        infoExtra.setText(datos);
+        txtPaneSocio.setText(datos);
         
     }
     
@@ -242,6 +245,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         lblInfoExtra.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblInfoExtra.setText("Información Extra:");
 
+        txtPaneSocio.setEditable(false);
         jScrollPane3.setViewportView(txtPaneSocio);
 
         javax.swing.GroupLayout panelSociosLayout = new javax.swing.GroupLayout(panelSocios);
@@ -265,8 +269,8 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblInfoExtra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         tabbUsuarios.addTab("Socios", panelSocios);
@@ -376,7 +380,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
                             .addGroup(panelProfesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
-                .addContainerGap(274, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         tabbUsuarios.addTab("Profesores", panelProfes);
@@ -423,7 +427,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
                     .addComponent(lblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(tabbUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tabbUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -476,7 +480,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         int idS = Integer.parseInt(tablaSocios.getValueAt(tablaSocios.getSelectedRow(), 0).toString());
         
         if(tablaSocios.getSelectedRow() >= 0){
-            //registrosAClases(idS);
+            this.registrosAClases(idS);
         }
     }//GEN-LAST:event_tablaSociosMouseClicked
 
