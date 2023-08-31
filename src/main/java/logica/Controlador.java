@@ -345,7 +345,23 @@ public class Controlador implements IControlador {
         }
         return aRetornar;
     }
+    
+    @Override
+    public String obtenerProfesorClase(String nomClase, String nomInst){
+        
+        String aRet = null;
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        List<Profesor> profes = mji.buscarInst(nomInst).getProfesores();
+        for (Profesor p:profes){
+            for(Clase c:p.getClases()){
+                if(c.getNombre().equals(nomClase))
+                    aRet = p.getNickName();
+            }
+        }
+        return aRet;
+    }   
 }
+
 
 
  

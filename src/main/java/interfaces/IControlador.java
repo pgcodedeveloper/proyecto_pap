@@ -44,6 +44,8 @@ public interface IControlador {
     
     public String [] obtenerClases(String nomAct);
     
+    public String obtenerProfesorClase(String nomClase, String nomInst);
+    
     public boolean existeActividadDepo(String nomAct,String nomInst);
     
     public InstitucionDeportiva obtenerInstitucion(String nom);

@@ -61,7 +61,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Component id="panelRegistro" min="-2" pref="529" max="-2" attributes="0"/>
+              <Component id="panelRegistro" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnCancelar" linkSize="1" max="32767" attributes="0"/>
@@ -218,7 +218,7 @@
                       <Component id="lblFechaAlta" linkSize="4" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                       <Component id="txtFechaAlta" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="comboBoxSocio" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="lblSocio" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
