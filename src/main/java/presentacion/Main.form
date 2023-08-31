@@ -44,7 +44,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelInicio" max="32767" attributes="0"/>
+          <Component id="panelInicio" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -209,7 +209,7 @@
         <Container class="javax.swing.JPanel" name="panelPrincipal">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="30" width="1300" height="830"/>
+              <AbsoluteConstraints x="0" y="30" width="1300" height="770"/>
             </Constraint>
           </Constraints>
 
@@ -225,7 +225,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="0" y="0" width="180" height="830"/>
+                  <AbsoluteConstraints x="0" y="0" width="180" height="770"/>
                 </Constraint>
               </Constraints>
 
@@ -600,7 +600,7 @@
             <Container class="javax.swing.JPanel" name="panelContenido">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="180" y="0" width="1120" height="830"/>
+                  <AbsoluteConstraints x="180" y="0" width="1120" height="770"/>
                 </Constraint>
               </Constraints>
 
@@ -612,7 +612,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="830" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="770" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>

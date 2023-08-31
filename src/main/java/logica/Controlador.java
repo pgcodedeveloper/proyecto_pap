@@ -11,6 +11,9 @@ import exceptions.InstitucionRepetidaException;
 import exceptions.SocioYaInscriptoException;
 import exceptions.UsuarioRepetidoException;
 import interfaces.IControlador;
+import java.time.Instant;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -205,7 +208,11 @@ public class Controlador implements IControlador {
     @Override
     public void altaClaseActividad(String inst, String act, String nomC, String prof, String url, Date fechaI, Date fechaA) {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
-        Clase c = new Clase(nomC, fechaI, fechaI, url, fechaA);
+        Instant instant = fechaI.toInstant();
+        ZoneId zona = ZoneId.systemDefault();
+        LocalTime hora = instant.atZone(zona).toLocalTime();
+        System.out.println(hora);
+        Clase c = new Clase(nomC, fechaI, hora, url, fechaA);
         InstitucionDeportiva i = mji.buscarInst(inst);
         for(ActividadDeportiva a: i.getActividadesDeportiva()) {
             if(a.getNombre().equals(act)){

@@ -49,7 +49,11 @@ public class RegistroSocioDictadoClase extends javax.swing.JInternalFrame {
 	comboBoxNomClase.setModel(modelAct);
     }
     
- 
+    public void mostrarRegistroSocioClase(boolean flag){
+        limpiar();
+        iniciarCombo();
+        this.setVisible(flag);
+    }
     
     public void iniciarComboUsr(){
         DefaultComboBoxModel<String> modelP = new DefaultComboBoxModel<String>(icon.obtenerListaSocios());

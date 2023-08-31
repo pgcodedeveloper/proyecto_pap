@@ -315,6 +315,12 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
         txtDuracion.setText(null);
         dateFecha.setDate(new Date());
     }
+    
+    public void mostrarRegistroActividad(boolean flag){
+        limpiar();
+        iniciarCombo();
+        this.setVisible(flag);
+    }
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDescripcionActionPerformed

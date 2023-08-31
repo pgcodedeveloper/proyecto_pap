@@ -415,6 +415,13 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         txtDescripcion.setText(null);
         txtWeb.setText(null);
     }
+    
+    public void mostrarRegistroProfesor(boolean flag){
+        limpiar();
+        iniciarCombo();
+        this.setVisible(flag);
+    }
+    
     private void txtNickNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNickNActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNickNActionPerformed

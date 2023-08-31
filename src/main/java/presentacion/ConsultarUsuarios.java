@@ -146,7 +146,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         datos = datos + "\n\n" + "Nombre: " + c.getNombre();
         datos = datos + "\n\n" + "Fecha: " + c.getFecha().toString();
         datos = datos + "\n\n" + "Fecha Registro: " + c.getFechaReg().toString();
-        datos = datos + "\n\n" + "Hora inicio: " + c.getHoraInicio().getTime();
+        datos = datos + "\n\n" + "Hora inicio: " + c.getHoraInicio();
         datos = datos + "\n\n" + "URL: " + c.getUrl();
         infoExtra.setText(datos);
     }
@@ -165,7 +165,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         for(Clase c: a.getClases()){
             datos = datos + "\n\n" + "Nombre: " + c.getNombre();
             datos = datos + "\n\n" + "Fecha: " + c.getFecha().toString();
-            datos = datos + "\n\n" + "Hora inicio: " + c.getHoraInicio().getTime();
+            datos = datos + "\n\n" + "Hora inicio: " + c.getHoraInicio();
         }
         infoExtra.setText(datos);
     }

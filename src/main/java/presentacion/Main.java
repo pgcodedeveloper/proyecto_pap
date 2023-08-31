@@ -442,7 +442,7 @@ public class Main extends JFrame {
         });
         panelAcciones.add(btnConsultaActividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 180, 40));
 
-        panelPrincipal.add(panelAcciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 830));
+        panelPrincipal.add(panelAcciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 770));
 
         javax.swing.GroupLayout panelContenidoLayout = new javax.swing.GroupLayout(panelContenido);
         panelContenido.setLayout(panelContenidoLayout);
@@ -452,12 +452,12 @@ public class Main extends JFrame {
         );
         panelContenidoLayout.setVerticalGroup(
             panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 830, Short.MAX_VALUE)
+            .addGap(0, 770, Short.MAX_VALUE)
         );
 
-        panelPrincipal.add(panelContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 1120, 830));
+        panelPrincipal.add(panelContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 1120, 770));
 
-        panelInicio.add(panelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1300, 830));
+        panelInicio.add(panelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1300, 770));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -467,12 +467,23 @@ public class Main extends JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void ocultarVentanas(){
+        clientes.setVisible(false);
+        profesores.mostrarRegistroProfesor(false);
+        actDeportiva.mostrarRegistroActividad(false);
+        dictClase.mostrarDictadoClase(false);
+        inst.setVisible(false);
+        regDictClase.mostrarRegistroSocioClase(false);
+        conAct.mostrarConsulta(false);
+        conUsr.mostrarConsultas(false);
+    }
+    
     private void panelHeaderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelHeaderMousePressed
         // TODO add your handling code here:
         this.setExtendedState(NORMAL);
@@ -510,6 +521,7 @@ public class Main extends JFrame {
 
     private void btnClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClienteMouseClicked
         // TODO add your handling code here:
+        this.ocultarVentanas();
         clientes.setVisible(true);
     }//GEN-LAST:event_btnClienteMouseClicked
 
@@ -527,8 +539,8 @@ public class Main extends JFrame {
 
     private void btnProfesorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProfesorMouseClicked
         // TODO add your handling code here:
-        profesores.iniciarCombo();
-        profesores.setVisible(true);
+        this.ocultarVentanas();
+        profesores.mostrarRegistroProfesor(true);
     }//GEN-LAST:event_btnProfesorMouseClicked
 
     private void btnProfesorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProfesorMouseEntered
@@ -545,6 +557,7 @@ public class Main extends JFrame {
 
     private void btnConsultaUsrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaUsrMouseClicked
         // TODO add your handling code here:
+        this.ocultarVentanas();
         conUsr.mostrarConsultas(true);
     }//GEN-LAST:event_btnConsultaUsrMouseClicked
 
@@ -582,7 +595,8 @@ public class Main extends JFrame {
 
     private void btnRegActDeportivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseClicked
         // TODO add your handling code here:
-        actDeportiva.setVisible(true);
+        this.ocultarVentanas();
+        actDeportiva.mostrarRegistroActividad(true);
     }//GEN-LAST:event_btnRegActDeportivaMouseClicked
 
     private void btnRegActDeportivaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseEntered
@@ -599,7 +613,8 @@ public class Main extends JFrame {
 
     private void btnRegDictadoClaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegDictadoClaseMouseClicked
         // TODO add your handling code here:
-        dictClase.setVisible(true);
+        this.ocultarVentanas();
+        dictClase.mostrarDictadoClase(true);
     }//GEN-LAST:event_btnRegDictadoClaseMouseClicked
 
     private void btnRegDictadoClaseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegDictadoClaseMouseEntered
@@ -617,6 +632,7 @@ public class Main extends JFrame {
 
     private void btnRegInstitucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseClicked
         // TODO add your handling code here:
+        this.ocultarVentanas();
         inst.setVisible(true);
     }//GEN-LAST:event_btnRegInstitucionMouseClicked
 
@@ -634,7 +650,8 @@ public class Main extends JFrame {
 
     private void btnRegClaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegClaseMouseClicked
         // TODO add your handling code here:
-       this.regDictClase.setVisible(true);
+        this.ocultarVentanas();
+       this.regDictClase.mostrarRegistroSocioClase(true);
     }//GEN-LAST:event_btnRegClaseMouseClicked
 
     private void btnRegClaseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegClaseMouseEntered
@@ -651,6 +668,7 @@ public class Main extends JFrame {
 
     private void btnConsultaActividadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaActividadMouseClicked
         // TODO add your handling code here:
+        this.ocultarVentanas();
         this.conAct.mostrarConsulta(true);
     }//GEN-LAST:event_btnConsultaActividadMouseClicked
 

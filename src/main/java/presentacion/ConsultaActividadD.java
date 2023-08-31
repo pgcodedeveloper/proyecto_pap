@@ -9,6 +9,7 @@ import datatypes.DtSocio;
 import datatypes.DtUsuario;
 import interfaces.IControlador;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -95,7 +96,7 @@ public class ConsultaActividadD extends javax.swing.JPanel {
         modelo.addColumn("Url");
         
         for (Clase c : list) {
-            modelo.addRow(new Object[]{c.getNombre(),c.getFecha(),c.getFechaReg(),c.getHoraInicio().getTime(),c.getUrl()});
+            modelo.addRow(new Object[]{c.getNombre(),c.getFecha(),c.getFechaReg(),c.getHoraInicio(),c.getUrl()});
         }
         
         tablaClases.setModel(modelo);
@@ -208,6 +209,11 @@ public class ConsultaActividadD extends javax.swing.JPanel {
         comboInsti.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 comboInstiMouseClicked(evt);
+            }
+        });
+        comboInsti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboInstiActionPerformed(evt);
             }
         });
 
@@ -418,11 +424,7 @@ public class ConsultaActividadD extends javax.swing.JPanel {
 
     private void comboInstiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboInstiMouseClicked
         // TODO add your handling code here:
-        this.tablaActividades.setEnabled(true);
-        if(!comboInsti.getSelectedItem().equals("No hay instituciones")){
-            String insti = comboInsti.getSelectedItem().toString();
-            this.tablaAct(insti);
-        }
+        
     }//GEN-LAST:event_comboInstiMouseClicked
 
     private void tablaActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaActividadesMouseClicked
@@ -437,16 +439,12 @@ public class ConsultaActividadD extends javax.swing.JPanel {
 
     private void comboInsti1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboInsti1MouseClicked
         // TODO add your handling code here:
-        String ins = comboInsti.getSelectedItem().toString();
-        if(!ins.equals("No hay instituciones")){
-            this.comboA(ins);
-        }
+        
     }//GEN-LAST:event_comboInsti1MouseClicked
 
     private void comboActMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboActMouseClicked
         // TODO add your handling code here:
-        String act = comboAct.getSelectedItem().toString();
-        this.llenarTablaClases(act);
+        
     }//GEN-LAST:event_comboActMouseClicked
 
     private void tablaClasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClasesMouseClicked
@@ -455,13 +453,27 @@ public class ConsultaActividadD extends javax.swing.JPanel {
 
     private void comboInsti1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboInsti1ActionPerformed
         // TODO add your handling code here:
+        String ins = comboInsti.getSelectedItem().toString();
+        if(!ins.equals("No hay instituciones")){
+            this.comboA(ins);
+        }
         
     }//GEN-LAST:event_comboInsti1ActionPerformed
 
     private void comboActActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActActionPerformed
         // TODO add your handling code here:
-        
+        String act = comboAct.getSelectedItem().toString();
+        this.llenarTablaClases(act);
     }//GEN-LAST:event_comboActActionPerformed
+
+    private void comboInstiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboInstiActionPerformed
+        // TODO add your handling code here:
+        this.tablaActividades.setEnabled(true);
+        if(!comboInsti.getSelectedItem().equals("No hay instituciones")){
+            String insti = comboInsti.getSelectedItem().toString();
+            this.tablaAct(insti);
+        }
+    }//GEN-LAST:event_comboInstiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,6 +6,8 @@ package logica;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,8 +36,7 @@ public class Clase{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     @Column(name = "hora_inicio")
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date horaInicio;
+    private LocalTime horaInicio;
     @Column(name = "clase_url")
     private String url;
     @Column(name = "fecha_registro")
@@ -49,7 +50,7 @@ public class Clase{
         super();
     }
     // Constructor
-    public Clase(String nombre, Date fecha, Date horaInicio, String url, Date fechaReg) {
+    public Clase(String nombre, Date fecha, LocalTime horaInicio, String url, Date fechaReg) {
         this.nombre = nombre;
         this.fecha = fecha;
         this.horaInicio = horaInicio;
@@ -76,11 +77,11 @@ public class Clase{
     }
 
     // Getter y Setter para 'horaInicio'
-    public Date getHoraInicio() {
+    public LocalTime getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Date horaInicio) {
+    public void setHoraInicio(LocalTime horaInicio) {
         this.horaInicio = horaInicio;
     }
 

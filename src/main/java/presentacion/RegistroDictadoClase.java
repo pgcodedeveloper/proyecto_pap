@@ -160,7 +160,9 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
         comboBoxActDeportiva.setEnabled(false);
         comboBoxActDeportiva.setPreferredSize(new java.awt.Dimension(39, 9));
 
-        dateFechaInicio.setDateFormatString("dd MM yyyy hh:mm");
+        dateFechaInicio.setDateFormatString("dd/MM/yyyy hh:mm");
+
+        dateFechaAlta.setDateFormatString("dd/MM/yyyy");
 
         javax.swing.GroupLayout panelRegistroLayout = new javax.swing.GroupLayout(panelRegistro);
         panelRegistro.setLayout(panelRegistroLayout);
@@ -321,6 +323,13 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
         txtURL.setText("");
         txtNombreClase.setText("");
     }
+    
+    public void mostrarDictadoClase(boolean flag){
+        limpiar();
+        iniciarCombo();
+        this.setVisible(flag);
+    }
+    
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         if(!txtNombreClase.getText().isEmpty() && !txtURL.getText().isEmpty()) {
