@@ -28,6 +28,7 @@ public class Main extends JFrame {
     private RegistroSocioDictadoClase regDictClase;
     private ConsultarUsuarios conUsr;
     private ConsultaActividadD conAct;
+    private ModificarUsuarios modUsr;
     /**
      * Creates new form Main
      */
@@ -83,6 +84,11 @@ public class Main extends JFrame {
         conAct.setSize(panelContenido.getSize());
         panelContenido.add(conAct);
         conAct.setVisible(false);
+        
+        modUsr = new ModificarUsuarios(con);
+        modUsr.setSize(panelContenido.getSize());
+        panelContenido.add(modUsr);
+        modUsr.setVisible(false);
     }
      
     /**
@@ -110,6 +116,8 @@ public class Main extends JFrame {
         lblLogo = new javax.swing.JLabel();
         lblRegistros = new javax.swing.JLabel();
         lblConsultas = new javax.swing.JLabel();
+        lblModificaciones = new javax.swing.JLabel();
+        btnModificaUsr = new javax.swing.JLabel();
         btnConsultaUsr = new javax.swing.JLabel();
         btnCliente = new javax.swing.JLabel();
         btnProfesor = new javax.swing.JLabel();
@@ -257,6 +265,34 @@ public class Main extends JFrame {
         lblConsultas.setForeground(new java.awt.Color(255, 255, 255));
         lblConsultas.setText("CONSULTAS");
         panelAcciones.add(lblConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 450, 160, 36));
+
+        lblModificaciones.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblModificaciones.setForeground(new java.awt.Color(255, 255, 255));
+        lblModificaciones.setText("MODIFICACIONES");
+        panelAcciones.add(lblModificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 160, 36));
+
+        btnModificaUsr.setBackground(new java.awt.Color(25, 104, 157));
+        btnModificaUsr.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnModificaUsr.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificaUsr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnModificaUsr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-clientes-16.png"))); // NOI18N
+        btnModificaUsr.setText("Usuarios");
+        btnModificaUsr.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnModificaUsr.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnModificaUsr.setIconTextGap(20);
+        btnModificaUsr.setOpaque(true);
+        btnModificaUsr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModificaUsrMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnModificaUsrMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnModificaUsrMouseExited(evt);
+            }
+        });
+        panelAcciones.add(btnModificaUsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 180, 40));
 
         btnConsultaUsr.setBackground(new java.awt.Color(25, 104, 157));
         btnConsultaUsr.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -684,6 +720,24 @@ public class Main extends JFrame {
         btnConsultaActividad. setBackground(c);
     }//GEN-LAST:event_btnConsultaActividadMouseExited
 
+    private void btnModificaUsrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificaUsrMouseClicked
+        // TODO add your handling code here:
+        this.ocultarVentanas();
+        this.modUsr.setVisible(true);
+    }//GEN-LAST:event_btnModificaUsrMouseClicked
+
+    private void btnModificaUsrMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificaUsrMouseEntered
+        // TODO add your handling code here:
+        Color c = new Color (16,69,104);
+        btnModificaUsr.setBackground(c);
+    }//GEN-LAST:event_btnModificaUsrMouseEntered
+
+    private void btnModificaUsrMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificaUsrMouseExited
+        // TODO add your handling code here:
+        Color c = new Color(25,104,157);
+        btnModificaUsr.setBackground(c);
+    }//GEN-LAST:event_btnModificaUsrMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -725,6 +779,7 @@ public class Main extends JFrame {
     private javax.swing.JLabel btnConsultaActividad;
     private javax.swing.JLabel btnConsultaUsr;
     private javax.swing.JLabel btnMinimizar;
+    private javax.swing.JLabel btnModificaUsr;
     private javax.swing.JLabel btnProfesor;
     private javax.swing.JLabel btnRegActDeportiva;
     private javax.swing.JLabel btnRegClase;
@@ -735,6 +790,7 @@ public class Main extends JFrame {
     private javax.swing.JLabel lblConsultas;
     private javax.swing.JLabel lblIcono;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblModificaciones;
     private javax.swing.JLabel lblRegistros;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelAcciones;

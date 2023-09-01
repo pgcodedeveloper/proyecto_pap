@@ -8,6 +8,7 @@ import datatypes.DtProfesor;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -47,6 +48,55 @@ public class ManejadorUsuario {
         }
     }
     
+    public void actualizaUser (DtUsuario u){
+        System.out.println(u);
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Usuario user = em.find(Usuario.class, u.getId());
+            em.getTransaction().commit();
+            
+            em.getTransaction().begin();
+            user.setNombre(u.getNombre());
+            user.setApellido(u.getApellido());
+            user.setFechaNac(u.getFechaNac());
+            em.getTransaction().commit();
+            
+            em.getTransaction().begin();
+            em.merge(user);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
+      public void actualizaProfe (DtProfesor p){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Profesor user = em.find(Profesor.class, p.getId());
+            em.getTransaction().commit();
+            
+            em.getTransaction().begin();
+            user.setNombre(p.getNombre());
+            user.setApellido(p.getApellido());
+            user.setFechaNac(p.getFechaNac());
+            user.setBiografia(p.getBiografia());
+            user.setDescripcion(p.getDescripcion());
+            user.setSitioWeb(p.getSitioWeb());
+                    
+            em.getTransaction().commit();
+            
+            em.getTransaction().begin();
+            em.merge(user);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+            
     public void agregarProfesor(Usuario usr){
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
@@ -189,6 +239,25 @@ public class ManejadorUsuario {
             aRetornar = null;
         }
         
+        return aRetornar;
+    }
+    
+        public ArrayList<DtUsuario> obtenerUsuarios(){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        
+        Query q = em.createQuery("select u from Usuario u", Usuario.class);
+        ArrayList<DtUsuario> aRetornar = new ArrayList<>();
+		
+        try {
+            List<Usuario> listU = q.getResultList();
+            for(Usuario u: listU) {
+                DtUsuario usuario = new DtUsuario (u.getNickName(), u.getNombre() , u.getApellido(),u.getEmail(), u.getFecha());
+                aRetornar.add(usuario);
+            }
+        } catch (NoResultException e) {
+            aRetornar = null;
+        }
         return aRetornar;
     }
     

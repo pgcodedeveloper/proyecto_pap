@@ -360,6 +360,88 @@ public class Controlador implements IControlador {
         }
         return aRet;
     }   
+    
+    @Override
+    public String[] obtenerUsuarios(){
+        
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        ArrayList<DtUsuario> list;
+        list = mju.obtenerUsuarios();
+        String[] aRet = new String[list.size()];
+        int i = 0;
+        for (DtUsuario u:list){
+            aRet[i]=u.getNickname();
+            i++;
+        }
+        return aRet;
+    }
+    
+    
+    @Override
+    public DtUsuario obtenerUsuario(String nickname){
+        
+        DtUsuario ret = null;
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        ArrayList<DtUsuario> list;
+        list = mju.obtenerUsuarios();
+        for (DtUsuario u:list){
+            if(u.getNickname().equals(nickname)){
+                ret = u;
+            }
+        }
+      
+        return ret;
+    }
+    
+    @Override
+    public DtProfesor obtenerProfesor (String nickname){
+        
+        DtProfesor ret = null;
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        ArrayList<DtProfesor> list;
+        list = mju.obtenerUsuariosProfe();
+        for (DtProfesor p:list){
+            if(p.getNickname().equals(nickname)){
+                ret = p;
+            }
+        }
+        return ret;
+    }
+    
+    @Override
+    public void actualizarUsuario (String nick, String nombre, String apellido, Date fNac){
+        
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        ArrayList<DtUsuario> list;
+        list = mju.obtenerUsuarios();
+        for (DtUsuario u:list){
+            if (u.getNickname().equals(nick)){
+                u.setNombre(nombre);
+                u.setApellido(apellido);
+                u.setFechaNac(fNac);
+                mju.actualizaUser(u);
+            }
+        }
+    }
+    
+    @Override
+    public void actualizarProfe (String nick, String nombre, String apellido, Date fNac, String bio, String desc, String web){
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        ArrayList<DtProfesor> list;
+        list = mju.obtenerUsuariosProfe();
+        for (DtProfesor p:list){
+            if (p.getNickname().equals(nick)){
+                p.setNombre(nombre);
+                p.setApellido(apellido);
+                p.setFechaNac(fNac);
+                p.setBiografia(bio);
+                p.setDescripcion(desc);
+                p.setSitioWeb(web);
+                mju.actualizaProfe(p);
+            }
+        }
+    }
+
 }
 
 

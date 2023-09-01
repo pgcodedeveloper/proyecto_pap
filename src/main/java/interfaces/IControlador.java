@@ -42,6 +42,8 @@ public interface IControlador {
     
     public String [] obtenerListaSocios();
     
+    public String[] obtenerUsuarios();
+    
     public String [] obtenerClases(String nomAct);
     
     public String obtenerProfesorClase(String nomClase, String nomInst);
@@ -53,7 +55,7 @@ public interface IControlador {
     public ArrayList<DtSocio> obtenerSocios();
     
     public ArrayList<DtProfesor> obtenerProfes();
-    
+       
     public ArrayList<String> obtenerClasesProfe(int idP);
     
     public ArrayList<String> obtenerActivDeporProfe(int idP);
@@ -75,5 +77,13 @@ public interface IControlador {
     public ArrayList<String> obtenerClasesAct(String act);
     
     public ArrayList<Clase> obtenerClasesDeActividad(String act);
+    
+    public DtUsuario obtenerUsuario(String nickname); 
+    
+    public DtProfesor obtenerProfesor (String nickname); 
+    
+    public void actualizarUsuario (String nick, String nombre, String apellido, Date fNac);
+    
+    public void actualizarProfe (String nick, String nombre, String apellido, Date fNac, String bio, String desc, String web);
 
 }
