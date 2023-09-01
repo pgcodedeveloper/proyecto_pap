@@ -48,12 +48,12 @@ public class ManejadorUsuario {
         }
     }
     
-    public void actualizaUser (DtUsuario u){
+    public void actualizaUser (Usuario u){
         System.out.println(u);
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
         try {
-            em.getTransaction().begin();
+            /*em.getTransaction().begin();
             Usuario user = em.find(Usuario.class, u.getId());
             em.getTransaction().commit();
             
@@ -61,21 +61,23 @@ public class ManejadorUsuario {
             user.setNombre(u.getNombre());
             user.setApellido(u.getApellido());
             user.setFechaNac(u.getFechaNac());
-            em.getTransaction().commit();
+            em.getTransaction().commit();*/
             
             em.getTransaction().begin();
-            em.merge(user);
+            em.merge(u);
             em.getTransaction().commit();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
     
-      public void actualizaProfe (DtProfesor p){
+      public void actualizaProfe (Usuario u){
+        System.out.println(u);
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
         try {
-            em.getTransaction().begin();
+            
+            /*em.getTransaction().begin();
             Profesor user = em.find(Profesor.class, p.getId());
             em.getTransaction().commit();
             
@@ -87,10 +89,10 @@ public class ManejadorUsuario {
             user.setDescripcion(p.getDescripcion());
             user.setSitioWeb(p.getSitioWeb());
                     
-            em.getTransaction().commit();
+            em.getTransaction().commit();*/
             
             em.getTransaction().begin();
-            em.merge(user);
+            em.merge(u);
             em.getTransaction().commit();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -159,7 +161,7 @@ public class ManejadorUsuario {
         try {
             List<Profesor> listU = (List<Profesor>) q.getResultList();
             for(Profesor u: listU) {
-                DtProfesor prof = new DtProfesor(u.getDescripcion(), u.getDescripcion(), u.getSitioWeb(), u.getNickName(), u.getNombre()
+                DtProfesor prof = new DtProfesor(u.getDescripcion(), u.getBiografia(), u.getSitioWeb(), u.getNickName(), u.getNombre()
                     , u.getApellido(), u.getEmail(), u.getFecha(), u.getInstitucionDeportiva());
                 prof.setId(u.getId());
                 aRetornar.add(prof);
@@ -242,7 +244,7 @@ public class ManejadorUsuario {
         return aRetornar;
     }
     
-        public ArrayList<DtUsuario> obtenerUsuarios(){
+    public ArrayList<DtUsuario> obtenerUsuarios(){
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
         
@@ -250,7 +252,7 @@ public class ManejadorUsuario {
         ArrayList<DtUsuario> aRetornar = new ArrayList<>();
 		
         try {
-            List<Usuario> listU = q.getResultList();
+            List<Usuario> listU = (List<Usuario>)q.getResultList();
             for(Usuario u: listU) {
                 DtUsuario usuario = new DtUsuario (u.getNickName(), u.getNombre() , u.getApellido(),u.getEmail(), u.getFecha());
                 aRetornar.add(usuario);

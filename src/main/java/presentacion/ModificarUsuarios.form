@@ -95,7 +95,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="panelExtra" alignment="0" pref="813" max="32767" attributes="0"/>
+              <Component id="panelExtra" alignment="0" pref="816" max="32767" attributes="0"/>
               <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -165,7 +165,7 @@
                           <Component id="filler2" min="-2" pref="0" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace pref="13" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="comboNickN" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                               <Component id="lblNickN" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>

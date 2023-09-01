@@ -270,7 +270,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
                 .addComponent(lblInfoExtra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         tabbUsuarios.addTab("Socios", panelSocios);
@@ -330,7 +330,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
         lblClases.setText("Clases que dicta:");
 
         lblActDeport.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblActDeport.setText("Actividades deportivas:");
+        lblActDeport.setText("Actividades deportivas de la institución:");
 
         listActDepo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -350,9 +350,9 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
                     .addComponent(lblClases)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
-                .addGroup(panelProfesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblActDeport)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelProfesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblActDeport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
                 .addGroup(panelProfesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelProfesLayout.createSequentialGroup()
@@ -361,9 +361,6 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
                     .addComponent(jScrollPane4))
                 .addContainerGap())
         );
-
-        panelProfesLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane5, jScrollPane6});
-
         panelProfesLayout.setVerticalGroup(
             panelProfesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelProfesLayout.createSequentialGroup()
@@ -380,7 +377,7 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
                             .addGroup(panelProfesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         tabbUsuarios.addTab("Profesores", panelProfes);
@@ -426,8 +423,8 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(tabbUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tabbUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -470,8 +467,6 @@ public class ConsultarUsuarios extends javax.swing.JPanel {
             String clase = listClases.getSelectedValue();
             mostrarInfoClase(clase);
         }
-        
-        
     }//GEN-LAST:event_listClasesMouseClicked
 
     private void tablaSociosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSociosMouseClicked

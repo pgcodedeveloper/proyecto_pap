@@ -82,8 +82,8 @@ public interface IControlador {
     
     public DtProfesor obtenerProfesor (String nickname); 
     
-    public void actualizarUsuario (String nick, String nombre, String apellido, Date fNac);
+    public void actualizarUsuario (String email,String nick, String nombre, String apellido, Date fNac);
     
-    public void actualizarProfe (String nick, String nombre, String apellido, Date fNac, String bio, String desc, String web);
+    public void actualizarProfe (String email,String nick, String nombre, String apellido, Date fNac, String bio, String desc, String web);
 
 }

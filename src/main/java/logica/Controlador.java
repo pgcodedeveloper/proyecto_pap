@@ -409,27 +409,39 @@ public class Controlador implements IControlador {
     }
     
     @Override
-    public void actualizarUsuario (String nick, String nombre, String apellido, Date fNac){
+    public void actualizarUsuario (String email,String nick, String nombre, String apellido, Date fNac){
         
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
-        ArrayList<DtUsuario> list;
-        list = mju.obtenerUsuarios();
-        for (DtUsuario u:list){
+        //ArrayList<DtUsuario> list = mju.obtenerUsuarios();
+        Usuario u = mju.buscarUsuario(email, nick);
+        u.setNombre(nombre);
+        u.setApellido(apellido);
+        u.setFechaNac(fNac);
+        mju.actualizaUser(u);
+        
+        /*for (DtUsuario u:list){
             if (u.getNickname().equals(nick)){
                 u.setNombre(nombre);
                 u.setApellido(apellido);
                 u.setFechaNac(fNac);
                 mju.actualizaUser(u);
             }
-        }
+        }*/
     }
     
     @Override
-    public void actualizarProfe (String nick, String nombre, String apellido, Date fNac, String bio, String desc, String web){
+    public void actualizarProfe (String email,String nick, String nombre, String apellido, Date fNac, String bio, String desc, String web){
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
-        ArrayList<DtProfesor> list;
-        list = mju.obtenerUsuariosProfe();
-        for (DtProfesor p:list){
+        //ArrayList<DtProfesor> list = mju.obtenerUsuariosProfe();
+        Usuario u = mju.buscarUsuario(email, nick);
+        u.setNombre(nombre);
+        u.setApellido(apellido);
+        u.setFechaNac(fNac);
+        ((Profesor)u).setBiografia(bio);
+        ((Profesor)u).setDescripcion(desc);
+        ((Profesor)u).setSitioWeb(web);
+        mju.actualizaProfe(u);
+        /*for (DtProfesor p:list){
             if (p.getNickname().equals(nick)){
                 p.setNombre(nombre);
                 p.setApellido(apellido);
@@ -439,7 +451,7 @@ public class Controlador implements IControlador {
                 p.setSitioWeb(web);
                 mju.actualizaProfe(p);
             }
-        }
+        }*/
     }
 
 }

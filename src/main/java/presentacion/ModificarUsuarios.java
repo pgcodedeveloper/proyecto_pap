@@ -464,10 +464,10 @@ public class ModificarUsuarios extends javax.swing.JInternalFrame {
                 try {
                     if (this.txtBiografia.getText().toString().isEmpty()) {// Es un socio
                         System.out.println("Socio");
-                        this.icon.actualizarUsuario(comboNickN.getSelectedItem().toString(), txtNombre.getText(), txtApellido.getText(), dateNacimiento.getDate());
+                        this.icon.actualizarUsuario(txtEmail.getText(),comboNickN.getSelectedItem().toString(), txtNombre.getText(), txtApellido.getText(), dateNacimiento.getDate());
                     }else{
                         System.out.println("Profe");
-                        this.icon.actualizarProfe(comboNickN.getSelectedItem().toString(), txtNombre.getText(), txtApellido.getText(), dateNacimiento.getDate(), this.txtBiografia.getText(), this.txtDescripcion.getText(), this.txtWeb.getText());
+                        this.icon.actualizarProfe(txtEmail.getText(),comboNickN.getSelectedItem().toString(), txtNombre.getText(), txtApellido.getText(), dateNacimiento.getDate(), this.txtBiografia.getText(), this.txtDescripcion.getText(), this.txtWeb.getText());
                     } 
                     JOptionPane.showMessageDialog(this, "Usuario actualizado correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -503,7 +503,6 @@ public class ModificarUsuarios extends javax.swing.JInternalFrame {
 
     private void btnCargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarDatosActionPerformed
         // TODO add your handling code here:
-        
         limpiar();
         DtUsuario u = icon.obtenerUsuario(comboNickN.getSelectedItem().toString());
         txtNombre.setEnabled(true);
@@ -516,6 +515,7 @@ public class ModificarUsuarios extends javax.swing.JInternalFrame {
         
         DtProfesor p = icon.obtenerProfesor(comboNickN.getSelectedItem().toString());
         if (p != null) {
+            //System.out.println("Profe: " + p.getBiografia() + ", " + p.getDescripcion());
             DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
             comboBoxModel.addElement(p.getInstitucionDeportiva().getNombre());
             comboIntituto.setModel(comboBoxModel);
@@ -525,7 +525,7 @@ public class ModificarUsuarios extends javax.swing.JInternalFrame {
             txtDescripcion.setText(p.getDescripcion());
             txtWeb.setEnabled(true);
             txtWeb.setText(p.getSitioWeb());
-            }
+        }
         
         this.btnGuardar.setEnabled(true);
     }//GEN-LAST:event_btnCargarDatosActionPerformed
