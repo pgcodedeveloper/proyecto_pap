@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import exceptions.ClaseException;
 import interfaces.IControlador;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -83,7 +84,7 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Alta Dictado Clase");
-        setFrameIcon(null);
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-aula-de-google-16.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(735, 640));
         setVisible(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -263,6 +264,7 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
         panelRegistroLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dateFechaAlta, dateFechaInicio, lblFechaAlta, lblFechaIninio});
 
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-guardar-48.png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 153, 100), 2, true));
         btnGuardar.setIconTextGap(2);
@@ -273,6 +275,7 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
         });
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-cancelar-25.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(205, 73, 69), 2, true));
         btnCancelar.setMinimumSize(new java.awt.Dimension(83, 30));
@@ -333,11 +336,13 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         if(!txtNombreClase.getText().isEmpty() && !txtURL.getText().isEmpty()) {
-            if(!icon.existeClaseActividad(txtNombreClase.getText())){
+            try {
                 icon.altaClaseActividad(comboBoxInstitucion.getSelectedItem().toString(), comboBoxActDeportiva.getSelectedItem().toString(), txtNombreClase.getText(),
                         comboBoxProfesor.getSelectedItem().toString(), txtURL.getText(), dateFechaInicio.getDate(), dateFechaAlta.getDate());
                 JOptionPane.showMessageDialog(null, "Clase creada correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 this.setVisible(false);
+            } catch (ClaseException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
         else{

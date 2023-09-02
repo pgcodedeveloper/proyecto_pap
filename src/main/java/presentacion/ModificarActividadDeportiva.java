@@ -4,23 +4,23 @@
  */
 package presentacion;
 
-import exceptions.ActividadDException;
 import interfaces.IControlador;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import logica.ActividadDeportiva;
 
 /**
  *
  * @author PC
  */
-public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
+public class ModificarActividadDeportiva extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form RegistroClientes
      */
     private IControlador icon;
-    public RegistroActividadDeportiva(IControlador con) {
+    public ModificarActividadDeportiva(IControlador con) {
         initComponents();
         limpiar();
         this.icon = con;
@@ -49,10 +49,11 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
         lblCosto = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
-        comboInstitucion = new javax.swing.JComboBox<>();
         dateFecha = new com.toedter.calendar.JDateChooser();
         lblNombreAct = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        comboActividad = new javax.swing.JComboBox<>();
+        btnBuscar = new javax.swing.JButton();
+        txtInstitucion = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
@@ -61,8 +62,8 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
         setForeground(java.awt.Color.darkGray);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Registro Actividad Deportiva");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-strength-16.png"))); // NOI18N
+        setTitle("Modificar Actividad Deportiva");
+        setFrameIcon(null);
         setVisible(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -82,11 +83,12 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
             }
         });
 
-        panelRegistro.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(2, 163, 239), 2, true)), "Registro Actividad Deportiva", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(2, 163, 239))); // NOI18N
+        panelRegistro.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(2, 163, 239), 2, true)), "Modificar Actividad Deportiva", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(2, 163, 239))); // NOI18N
         panelRegistro.setOpaque(false);
 
         txtDescripcion.setBackground(new java.awt.Color(214, 217, 223));
         txtDescripcion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        txtDescripcion.setEnabled(false);
         txtDescripcion.setMargin(new java.awt.Insets(10, 2, 10, 2));
         txtDescripcion.setOpaque(false);
         txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +99,7 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
 
         txtDuracion.setBackground(new java.awt.Color(214, 217, 223));
         txtDuracion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        txtDuracion.setEnabled(false);
         txtDuracion.setMargin(new java.awt.Insets(10, 2, 10, 2));
         txtDuracion.setOpaque(false);
         txtDuracion.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +110,7 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
 
         txtCosto.setBackground(new java.awt.Color(214, 217, 223));
         txtCosto.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        txtCosto.setEnabled(false);
         txtCosto.setMargin(new java.awt.Insets(10, 2, 10, 2));
         txtCosto.setOpaque(false);
         txtCosto.addActionListener(new java.awt.event.ActionListener() {
@@ -134,18 +138,31 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
         lblFecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblFecha.setText("Fecha de alta:");
 
-        comboInstitucion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        dateFecha.setEnabled(false);
 
         lblNombreAct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNombreAct.setText("Nombre Actividad:");
 
-        txtNombre.setBackground(new java.awt.Color(214, 217, 223));
-        txtNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        txtNombre.setMargin(new java.awt.Insets(10, 2, 10, 2));
-        txtNombre.setOpaque(false);
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+        comboActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-búsqueda-24.png"))); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
+        btnBuscar.setBorderPainted(false);
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        txtInstitucion.setBackground(new java.awt.Color(214, 217, 223));
+        txtInstitucion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        txtInstitucion.setEnabled(false);
+        txtInstitucion.setMargin(new java.awt.Insets(10, 2, 10, 2));
+        txtInstitucion.setOpaque(false);
+        txtInstitucion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtInstitucionActionPerformed(evt);
             }
         });
 
@@ -154,11 +171,22 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
         panelRegistroLayout.setHorizontalGroup(
             panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRegistroLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRegistroLayout.createSequentialGroup()
+                        .addComponent(lblDuración)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addComponent(lblCosto)))
+            .addGroup(panelRegistroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegistroLayout.createSequentialGroup()
-                        .addGap(0, 601, Short.MAX_VALUE)
-                        .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 230, Short.MAX_VALUE)
+                        .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtInstitucion, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegistroLayout.createSequentialGroup()
                         .addComponent(lblFecha)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -173,59 +201,47 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
                                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(panelRegistroLayout.createSequentialGroup()
-                                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblDescripcion)
-                                    .addComponent(lblNombre)
-                                    .addComponent(lblNombreAct))
+                                .addComponent(lblDescripcion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegistroLayout.createSequentialGroup()
                         .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboInstitucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
-            .addGroup(panelRegistroLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRegistroLayout.createSequentialGroup()
-                        .addComponent(lblDuración)
+                            .addComponent(lblNombre)
+                            .addComponent(lblNombreAct))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addComponent(lblCosto)))
+                        .addComponent(comboActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar)))
+                .addContainerGap())
         );
-
-        panelRegistroLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {comboInstitucion, txtDescripcion});
 
         panelRegistroLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dateFecha, txtCosto});
 
         panelRegistroLayout.setVerticalGroup(
             panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRegistroLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRegistroLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))
+                        .addGap(100, 100, 100)
+                        .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRegistroLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblNombreAct)
+                                .addComponent(comboActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboInstitucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelRegistroLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(lblNombreAct)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegistroLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, Short.MAX_VALUE)))))
+                            .addComponent(txtInstitucion, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDuración, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -241,16 +257,15 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31))
         );
 
-        panelRegistroLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboInstitucion, txtDescripcion});
+        panelRegistroLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBuscar, comboActividad, lblDescripcion, lblNombre, lblNombreAct, txtDescripcion});
 
         panelRegistroLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dateFecha, lblFecha});
-
-        panelRegistroLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblNombreAct, txtNombre});
 
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-guardar-48.png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 153, 100), 2, true));
+        btnGuardar.setEnabled(false);
         btnGuardar.setIconTextGap(2);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,19 +320,29 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     void iniciarCombo(){
-        DefaultComboBoxModel<String> modelInst = new DefaultComboBoxModel<String>(icon.obtenerInstituciones());
-        comboInstitucion.addItem("Seleccione");
-	comboInstitucion.setModel(modelInst);
+        DefaultComboBoxModel<String> modelAct = new DefaultComboBoxModel<String>(icon.obtenerActividades());
+        comboActividad.addItem("Seleccione");
+	comboActividad.setModel(modelAct);
+        
     }
     void limpiar(){
-        comboInstitucion.setSelectedIndex(0);
+        comboActividad.setSelectedIndex(0);
+        txtInstitucion.setText(null);
         txtDescripcion.setText(null);
         txtCosto.setText(null);
         txtDuracion.setText(null);
         dateFecha.setDate(new Date());
+        btnBuscar.setEnabled(true);
+        comboActividad.setEnabled(true);
+        txtInstitucion.setEnabled(false);
+        txtDescripcion.setEnabled(false);
+        txtCosto.setEnabled(false);
+        txtDuracion.setEnabled(false);
+        dateFecha.setEnabled(false);
+        btnGuardar.setEnabled(false);
     }
     
-    public void mostrarRegistroActividad(boolean flag){
+    public void mostrarModificarActividad(boolean flag){
         limpiar();
         iniciarCombo();
         this.setVisible(flag);
@@ -340,16 +365,15 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
             try {
                 float costo = Float.parseFloat(txtCosto.getText());
                 int duracion = Integer.parseInt(txtDuracion.getText());
-                try {
-                    icon.altaActividadDeportiva(txtNombre.getText(), txtDescripcion.getText(), duracion, costo, dateFecha.getDate(), comboInstitucion.getSelectedItem().toString());
-                    JOptionPane.showMessageDialog(null, "Actividad creada correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                    this.setVisible(false);
-                } catch (ActividadDException a) {
-                    JOptionPane.showMessageDialog(null, a.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
+                icon.modificarActividadDeportiva(comboActividad.getSelectedItem().toString(), txtDescripcion.getText(), duracion, costo);
+                JOptionPane.showMessageDialog(null, "Actividad modificada correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                limpiar();
+                this.setVisible(false); 
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Formato de número incorrecto","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Formato de números incorrectos","Error",JOptionPane.ERROR_MESSAGE);
             }
+            
+            
         }
         else{
             JOptionPane.showMessageDialog(null, "Debes ingresar datos en todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -367,15 +391,40 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
+        String act = comboActividad.getSelectedItem().toString();
+        btnBuscar.setEnabled(false);
+        ActividadDeportiva a = icon.obtenerActividad(act);
+        comboActividad.setEnabled(false);
+        
+        txtInstitucion.setEnabled(true);
+        txtInstitucion.setText(a.getInst().getNombre());
+        
+        txtDescripcion.setEnabled(true);
+        txtDescripcion.setText(a.getDescripcion());
+        
+        txtDuracion.setEnabled(true);
+        txtDuracion.setText(""+a.getDuracion());
+        
+        txtCosto.setEnabled(true);
+        txtCosto.setText(""+a.getCosto());
+        
+        dateFecha.setDate(a.getFechaReg());
+        
+        btnGuardar.setEnabled(true);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtInstitucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInstitucionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtInstitucionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JComboBox<String> comboInstitucion;
+    private javax.swing.JComboBox<String> comboActividad;
     private com.toedter.calendar.JDateChooser dateFecha;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
@@ -390,6 +439,6 @@ public class RegistroActividadDeportiva extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtDuracion;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtInstitucion;
     // End of variables declaration//GEN-END:variables
 }

@@ -88,6 +88,7 @@ public class InstitucionDeportiva{
         this.actividadesDeportiva.add(act);
     }
     
+    
     public void agregarProfesor(Profesor p){
         this.profesores.add(p);
         //p.setInstitucionDeportiva(this);

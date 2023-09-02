@@ -429,7 +429,7 @@ public class ModificarUsuarios extends javax.swing.JInternalFrame {
         txtWeb.setText(null);
     }
     
-    public void mostrarRegistroProfesor(boolean flag){
+    public void mostrarModificarUsuario(boolean flag){
         limpiar();
         iniciarCombo();
         this.setVisible(flag);

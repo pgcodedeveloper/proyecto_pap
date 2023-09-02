@@ -44,6 +44,20 @@ public class ManejadorInstitucion {
         
     }
     
+    public void modificarInst(InstitucionDeportiva ins){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        try {
+            em.getTransaction().begin();
+        
+            em.merge(ins);
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
     public InstitucionDeportiva buscarInst(String nom){
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
@@ -81,6 +95,22 @@ public class ManejadorInstitucion {
         try {
             InstitucionDeportiva ins = (InstitucionDeportiva)em.find(InstitucionDeportiva.class, nom);
             for(ActividadDeportiva a: ins.getActividadesDeportiva()) {
+                    aRetornar.add(a.getNombre());
+            }
+        } catch (NoResultException e) {
+            aRetornar = null;
+        }
+        return aRetornar;
+    }
+    
+    public ArrayList<String> obtenerActividades(){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        ArrayList<String> aRetornar = new ArrayList<>();
+    	Query query = em.createQuery("select a from ActividadDeportiva a");
+        try {
+            List<ActividadDeportiva> list = (List<ActividadDeportiva>)query.getResultList();
+            for(ActividadDeportiva a: list) {
                     aRetornar.add(a.getNombre());
             }
         } catch (NoResultException e) {
@@ -132,6 +162,21 @@ public class ManejadorInstitucion {
             System.out.println(e.getMessage());
         }
     }
+    
+    public void modificarActividadDeportiva(ActividadDeportiva a){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        try {
+            em.getTransaction().begin();
+        
+            em.persist(a);
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     
     public ArrayList<ActividadDeportiva> obtenerActividadesInst(String inst){
         Conexion con = Conexion.getInstancia();

@@ -7,6 +7,8 @@ package logica;
 import datatypes.DtProfesor;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
+import exceptions.ActividadDException;
+import exceptions.ClaseException;
 import exceptions.InstitucionRepetidaException;
 import exceptions.SocioYaInscriptoException;
 import exceptions.UsuarioRepetidoException;
@@ -140,12 +142,18 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void altaActividadDeportiva(String nombre, String descripcion, int duracion, float costo, Date fechaR, String nomInst) {
+    public void altaActividadDeportiva(String nombre, String descripcion, int duracion, float costo, Date fechaR, String nomInst) throws ActividadDException{
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         InstitucionDeportiva i = mji.buscarInst(nomInst);
-        ActividadDeportiva a = new ActividadDeportiva(nombre, descripcion, duracion, costo, fechaR, i);
-        i.agregarActividad(a);
-        mji.agregarActividadDeportiva(a);
+        if(this.existeActividadDepo(nombre, nomInst)){
+            throw new ActividadDException("Ya existe una actividad con ese nombre");
+        }
+        else{
+            ActividadDeportiva a = new ActividadDeportiva(nombre, descripcion, duracion, costo, fechaR, i);
+            i.agregarActividad(a);
+            mji.agregarActividadDeportiva(a);
+        }
+        
     }
 
     @Override
@@ -168,6 +176,27 @@ public class Controlador implements IControlador {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         ArrayList<String> list;
         list = mji.obtenerAct(nom);
+        String[] inst_ret = new String[list.size()];
+        if(!list.isEmpty()){
+            int i=0;
+            //inst_ret[0] = "Seleccione"; //Para que en el combo box aparezca seleccionada esta opción
+            for(String name:list) {
+                    inst_ret[i]=name;
+                    i++;
+            }
+        }
+        else{
+            inst_ret = new String[1];
+            inst_ret[0] = "No hay actividades";
+        }
+        return inst_ret;
+    }
+    
+    @Override
+    public String[] obtenerActividades() {
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        ArrayList<String> list;
+        list = mji.obtenerActividades();
         String[] inst_ret = new String[list.size()];
         if(!list.isEmpty()){
             int i=0;
@@ -206,25 +235,32 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void altaClaseActividad(String inst, String act, String nomC, String prof, String url, Date fechaI, Date fechaA) {
+    public void altaClaseActividad(String inst, String act, String nomC, String prof, String url, Date fechaI, Date fechaA) throws ClaseException{
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
-        Instant instant = fechaI.toInstant();
-        ZoneId zona = ZoneId.systemDefault();
-        LocalTime hora = instant.atZone(zona).toLocalTime();
-        System.out.println(hora);
-        Clase c = new Clase(nomC, fechaI, hora, url, fechaA);
         InstitucionDeportiva i = mji.buscarInst(inst);
-        for(ActividadDeportiva a: i.getActividadesDeportiva()) {
-            if(a.getNombre().equals(act)){
-                a.altaClase(c);
-            }
+        
+        if(this.existeClaseActividad(nomC)){
+            throw new ClaseException("Ya existe esa clase");
         }
-        for(Profesor p: i.getProfesores()){
-            if(p.getNickName().equals(prof)){
-                p.agregarClase(c);
+        else{
+            Instant instant = fechaI.toInstant();
+            ZoneId zona = ZoneId.systemDefault();
+            LocalTime hora = instant.atZone(zona).toLocalTime();
+            Clase c = new Clase(nomC, fechaI, hora, url, fechaA);
+
+            for(ActividadDeportiva a: i.getActividadesDeportiva()) {
+                if(a.getNombre().equals(act)){
+                    a.altaClase(c);
+                }
             }
+            for(Profesor p: i.getProfesores()){
+                if(p.getNickName().equals(prof)){
+                    p.agregarClase(c);
+                }
+            }
+            mji.agregarClase(c);
         }
-        mji.agregarClase(c);
+        
     }
     
     @Override
@@ -451,15 +487,37 @@ public class Controlador implements IControlador {
         
         int i=0;
         List<String> nomC= aRet.get(1);
-            for(String s:nomC){
+        for(String s:nomC){
             clase.add(i, mjc.obtenerInfoClase(s));
             i++;
         }
         aRet.add(2, clase);
         return aRet;
     }
-    
 
+    @Override
+    public void modificarActividadDeportiva(String nombre, String descripcion, int duracion, float costo) {
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        ActividadDeportiva a = mji.obtenerActividad(nombre);
+        
+        a.setDescripcion(descripcion);
+        a.setDuracion(duracion);
+        a.setCosto(costo);
+        mji.modificarActividadDeportiva(a);
+    }
+
+    @Override
+    public void modificarInstitucion(String nombre, String descripcion, String url) {
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        InstitucionDeportiva ins = mji.buscarInst(nombre);
+        ins.setDescripcion(descripcion);
+        ins.setUrl(url);
+        
+        mji.modificarInst(ins);
+        
+    }
+    
+    
 }
 
 

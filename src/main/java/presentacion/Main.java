@@ -29,6 +29,8 @@ public class Main extends JFrame {
     private ConsultarUsuarios conUsr;
     private ConsultaActividadD conAct;
     private ModificarUsuarios modUsr;
+    private ModificarActividadDeportiva modAct;
+    private ModificarInstitucion modIns;
     private RankingClases rankCl;
     /**
      * Creates new form Main
@@ -76,6 +78,12 @@ public class Main extends JFrame {
         panelContenido.add(regDictClase);
         regDictClase.setVisible(false);
         
+        modAct  = new ModificarActividadDeportiva(con);
+        jInternalFrameSize = modAct.getSize();
+        modAct.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
+        panelContenido.add(modAct);
+        modAct.setVisible(false);
+        
         conUsr = new ConsultarUsuarios(con);
         conUsr.setSize(panelContenido.getSize());
         panelContenido.add(conUsr);
@@ -87,13 +95,20 @@ public class Main extends JFrame {
         conAct.setVisible(false);
         
         modUsr = new ModificarUsuarios(con);
-        modUsr.setSize(panelContenido.getSize());
+        jInternalFrameSize = modUsr.getSize();
+        modUsr.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
         panelContenido.add(modUsr);
         modUsr.setVisible(false);
         
+        modIns  = new ModificarInstitucion(con);
+        jInternalFrameSize = modIns.getSize();
+        modIns.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
+        panelContenido.add(modIns);
+        modIns.setVisible(false);
         
-        rankCl = new RankingClases(con);
-        modUsr.setSize(panelContenido.getSize());
+        rankCl  = new RankingClases(con);
+        jInternalFrameSize = rankCl.getSize();
+        rankCl.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
         panelContenido.add(rankCl);
         rankCl.setVisible(false);
     }
@@ -242,7 +257,7 @@ public class Main extends JFrame {
 
         panelAcciones.setBackground(new java.awt.Color(25, 104, 157));
         panelAcciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelAcciones.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 153, 180, 10));
+        panelAcciones.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 123, 180, 10));
 
         panelLogo.setOpaque(false);
         panelLogo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -251,12 +266,12 @@ public class Main extends JFrame {
         lblAdmin.setForeground(new java.awt.Color(255, 255, 255));
         lblAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAdmin.setText("Administrador");
-        panelLogo.add(lblAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 116, 180, 30));
+        panelLogo.add(lblAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 180, 30));
 
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-engranaje-50.png"))); // NOI18N
         lblLogo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelLogo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 150));
+        panelLogo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 100));
 
         panelAcciones.add(panelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, -1));
 
@@ -271,22 +286,22 @@ public class Main extends JFrame {
                 lblRegistrosMouseReleased(evt);
             }
         });
-        panelAcciones.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 160, 160, 36));
+        panelAcciones.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 160, 36));
 
         lblConsultas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblConsultas.setForeground(new java.awt.Color(255, 255, 255));
         lblConsultas.setText("CONSULTAS");
-        panelAcciones.add(lblConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 160, 36));
+        panelAcciones.add(lblConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 160, 36));
 
         lblModificaciones.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblModificaciones.setForeground(new java.awt.Color(255, 255, 255));
         lblModificaciones.setText("MODIFICACIONES");
-        panelAcciones.add(lblModificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 160, 36));
+        panelAcciones.add(lblModificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 160, 36));
 
         lblRankings.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblRankings.setForeground(new java.awt.Color(255, 255, 255));
         lblRankings.setText("RANKINGS");
-        panelAcciones.add(lblRankings, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 660, 160, 36));
+        panelAcciones.add(lblRankings, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 160, 36));
 
         btnCliente.setBackground(new java.awt.Color(25, 104, 157));
         btnCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -294,7 +309,7 @@ public class Main extends JFrame {
         btnCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-añadir-usuario-tipo-de-piel-masculina-7-16.png"))); // NOI18N
         btnCliente.setText("Clientes");
-        btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCliente.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnCliente.setIconTextGap(20);
         btnCliente.setOpaque(true);
@@ -309,7 +324,7 @@ public class Main extends JFrame {
                 btnClienteMouseExited(evt);
             }
         });
-        panelAcciones.add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 180, 40));
+        panelAcciones.add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 180, 30));
 
         btnProfesor.setBackground(new java.awt.Color(25, 104, 157));
         btnProfesor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -317,7 +332,7 @@ public class Main extends JFrame {
         btnProfesor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnProfesor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-profesor-16.png"))); // NOI18N
         btnProfesor.setText("Profesores");
-        btnProfesor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnProfesor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProfesor.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnProfesor.setIconTextGap(20);
         btnProfesor.setOpaque(true);
@@ -332,7 +347,7 @@ public class Main extends JFrame {
                 btnProfesorMouseExited(evt);
             }
         });
-        panelAcciones.add(btnProfesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 180, 40));
+        panelAcciones.add(btnProfesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 180, 30));
 
         btnRegActDeportiva.setBackground(new java.awt.Color(25, 104, 157));
         btnRegActDeportiva.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -340,7 +355,7 @@ public class Main extends JFrame {
         btnRegActDeportiva.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRegActDeportiva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-strength-16.png"))); // NOI18N
         btnRegActDeportiva.setText("Actividad Deportiva");
-        btnRegActDeportiva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegActDeportiva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegActDeportiva.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnRegActDeportiva.setIconTextGap(20);
         btnRegActDeportiva.setOpaque(true);
@@ -355,7 +370,7 @@ public class Main extends JFrame {
                 btnRegActDeportivaMouseExited(evt);
             }
         });
-        panelAcciones.add(btnRegActDeportiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 180, 40));
+        panelAcciones.add(btnRegActDeportiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 180, 30));
 
         btnRankDictadoClase.setBackground(new java.awt.Color(25, 104, 157));
         btnRankDictadoClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -363,7 +378,7 @@ public class Main extends JFrame {
         btnRankDictadoClase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRankDictadoClase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-aula-de-google-16.png"))); // NOI18N
         btnRankDictadoClase.setText("Dictado de Clase");
-        btnRankDictadoClase.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRankDictadoClase.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRankDictadoClase.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnRankDictadoClase.setIconTextGap(20);
         btnRankDictadoClase.setOpaque(true);
@@ -378,7 +393,7 @@ public class Main extends JFrame {
                 btnRankDictadoClaseMouseExited(evt);
             }
         });
-        panelAcciones.add(btnRankDictadoClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 690, 180, 40));
+        panelAcciones.add(btnRankDictadoClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 180, 30));
 
         btnRegInstitucion.setBackground(new java.awt.Color(25, 104, 157));
         btnRegInstitucion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -386,7 +401,7 @@ public class Main extends JFrame {
         btnRegInstitucion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRegInstitucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-colegio-16.png"))); // NOI18N
         btnRegInstitucion.setText("Institución Deportiva");
-        btnRegInstitucion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegInstitucion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegInstitucion.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnRegInstitucion.setIconTextGap(20);
         btnRegInstitucion.setOpaque(true);
@@ -401,7 +416,7 @@ public class Main extends JFrame {
                 btnRegInstitucionMouseExited(evt);
             }
         });
-        panelAcciones.add(btnRegInstitucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 180, 40));
+        panelAcciones.add(btnRegInstitucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 180, 30));
 
         btnRegClase.setBackground(new java.awt.Color(25, 104, 157));
         btnRegClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -409,7 +424,7 @@ public class Main extends JFrame {
         btnRegClase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRegClase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-aula-de-google-16.png"))); // NOI18N
         btnRegClase.setText("Registro a Clase");
-        btnRegClase.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegClase.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegClase.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnRegClase.setIconTextGap(20);
         btnRegClase.setOpaque(true);
@@ -424,7 +439,7 @@ public class Main extends JFrame {
                 btnRegClaseMouseExited(evt);
             }
         });
-        panelAcciones.add(btnRegClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 180, 40));
+        panelAcciones.add(btnRegClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 180, 30));
 
         btnConsultaUsr.setBackground(new java.awt.Color(25, 104, 157));
         btnConsultaUsr.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -432,7 +447,7 @@ public class Main extends JFrame {
         btnConsultaUsr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnConsultaUsr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-clientes-16.png"))); // NOI18N
         btnConsultaUsr.setText("Usuarios");
-        btnConsultaUsr.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnConsultaUsr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConsultaUsr.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnConsultaUsr.setIconTextGap(20);
         btnConsultaUsr.setOpaque(true);
@@ -447,7 +462,7 @@ public class Main extends JFrame {
                 btnConsultaUsrMouseExited(evt);
             }
         });
-        panelAcciones.add(btnConsultaUsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 180, 40));
+        panelAcciones.add(btnConsultaUsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 180, 30));
 
         btnConsultaActividad.setBackground(new java.awt.Color(25, 104, 157));
         btnConsultaActividad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -455,7 +470,7 @@ public class Main extends JFrame {
         btnConsultaActividad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnConsultaActividad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-colegio-16.png"))); // NOI18N
         btnConsultaActividad.setText("Actividades y Clases");
-        btnConsultaActividad.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnConsultaActividad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConsultaActividad.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnConsultaActividad.setIconTextGap(20);
         btnConsultaActividad.setOpaque(true);
@@ -470,7 +485,7 @@ public class Main extends JFrame {
                 btnConsultaActividadMouseExited(evt);
             }
         });
-        panelAcciones.add(btnConsultaActividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 180, 40));
+        panelAcciones.add(btnConsultaActividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 180, 30));
 
         btnModificaUsr.setBackground(new java.awt.Color(25, 104, 157));
         btnModificaUsr.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -478,7 +493,7 @@ public class Main extends JFrame {
         btnModificaUsr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnModificaUsr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-clientes-16.png"))); // NOI18N
         btnModificaUsr.setText("Usuarios");
-        btnModificaUsr.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnModificaUsr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnModificaUsr.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnModificaUsr.setIconTextGap(20);
         btnModificaUsr.setOpaque(true);
@@ -493,7 +508,7 @@ public class Main extends JFrame {
                 btnModificaUsrMouseExited(evt);
             }
         });
-        panelAcciones.add(btnModificaUsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 180, 40));
+        panelAcciones.add(btnModificaUsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 180, 30));
 
         btnModActDeportiva.setBackground(new java.awt.Color(25, 104, 157));
         btnModActDeportiva.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -501,7 +516,7 @@ public class Main extends JFrame {
         btnModActDeportiva.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnModActDeportiva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-strength-16.png"))); // NOI18N
         btnModActDeportiva.setText("Actividad Deportiva");
-        btnModActDeportiva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnModActDeportiva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnModActDeportiva.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnModActDeportiva.setIconTextGap(20);
         btnModActDeportiva.setOpaque(true);
@@ -516,7 +531,7 @@ public class Main extends JFrame {
                 btnModActDeportivaMouseExited(evt);
             }
         });
-        panelAcciones.add(btnModActDeportiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 180, 40));
+        panelAcciones.add(btnModActDeportiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 180, 30));
 
         btnModInstitucion.setBackground(new java.awt.Color(25, 104, 157));
         btnModInstitucion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -524,7 +539,7 @@ public class Main extends JFrame {
         btnModInstitucion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnModInstitucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-colegio-16.png"))); // NOI18N
         btnModInstitucion.setText("Institución Deportiva");
-        btnModInstitucion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnModInstitucion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnModInstitucion.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnModInstitucion.setIconTextGap(20);
         btnModInstitucion.setOpaque(true);
@@ -539,7 +554,7 @@ public class Main extends JFrame {
                 btnModInstitucionMouseExited(evt);
             }
         });
-        panelAcciones.add(btnModInstitucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 630, 180, 40));
+        panelAcciones.add(btnModInstitucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 180, 30));
 
         btnRankActDeportiva.setBackground(new java.awt.Color(25, 104, 157));
         btnRankActDeportiva.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -547,7 +562,7 @@ public class Main extends JFrame {
         btnRankActDeportiva.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRankActDeportiva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-strength-16.png"))); // NOI18N
         btnRankActDeportiva.setText("Actividad Deportiva");
-        btnRankActDeportiva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRankActDeportiva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRankActDeportiva.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnRankActDeportiva.setIconTextGap(20);
         btnRankActDeportiva.setOpaque(true);
@@ -562,7 +577,7 @@ public class Main extends JFrame {
                 btnRankActDeportivaMouseExited(evt);
             }
         });
-        panelAcciones.add(btnRankActDeportiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 730, 180, 40));
+        panelAcciones.add(btnRankActDeportiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 680, 180, 30));
 
         btnRegDictadoClase.setBackground(new java.awt.Color(25, 104, 157));
         btnRegDictadoClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -570,7 +585,7 @@ public class Main extends JFrame {
         btnRegDictadoClase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRegDictadoClase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-aula-de-google-16.png"))); // NOI18N
         btnRegDictadoClase.setText("Dictado de Clase");
-        btnRegDictadoClase.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegDictadoClase.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegDictadoClase.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnRegDictadoClase.setIconTextGap(20);
         btnRegDictadoClase.setOpaque(true);
@@ -585,7 +600,7 @@ public class Main extends JFrame {
                 btnRegDictadoClaseMouseExited(evt);
             }
         });
-        panelAcciones.add(btnRegDictadoClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 180, 40));
+        panelAcciones.add(btnRegDictadoClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 180, 30));
 
         panelPrincipal.add(panelAcciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 770));
 
@@ -627,6 +642,10 @@ public class Main extends JFrame {
         regDictClase.mostrarRegistroSocioClase(false);
         conAct.mostrarConsulta(false);
         conUsr.mostrarConsultas(false);
+        modUsr.mostrarModificarUsuario(false);
+        modAct.mostrarModificarActividad(false);
+        modIns.mostrarModificarInst(false);
+        rankCl.setVisible(false);
     }
     
     private void panelHeaderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelHeaderMousePressed
@@ -741,7 +760,7 @@ public class Main extends JFrame {
     private void btnModActDeportivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModActDeportivaMouseClicked
         // TODO add your handling code here:
         this.ocultarVentanas();
-        actDeportiva.mostrarRegistroActividad(true);
+        modAct.mostrarModificarActividad(true);
     }//GEN-LAST:event_btnModActDeportivaMouseClicked
 
     private void btnModActDeportivaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModActDeportivaMouseEntered
@@ -778,7 +797,7 @@ public class Main extends JFrame {
     private void btnModInstitucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModInstitucionMouseClicked
         // TODO add your handling code here:
         this.ocultarVentanas();
-        inst.setVisible(true);
+        modIns.mostrarModificarInst(true);
     }//GEN-LAST:event_btnModInstitucionMouseClicked
 
     private void btnModInstitucionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModInstitucionMouseEntered
@@ -849,26 +868,38 @@ public class Main extends JFrame {
 
     private void btnRankActDeportivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankActDeportivaMouseClicked
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnRankActDeportivaMouseClicked
 
     private void btnRankActDeportivaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankActDeportivaMouseEntered
         // TODO add your handling code here:
+        Color c = new Color (16,69,104);
+        btnRankActDeportiva.setBackground(c);
     }//GEN-LAST:event_btnRankActDeportivaMouseEntered
 
     private void btnRankActDeportivaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankActDeportivaMouseExited
         // TODO add your handling code here:
+        Color c = new Color(25,104,157);
+        btnRankActDeportiva.setBackground(c);
     }//GEN-LAST:event_btnRankActDeportivaMouseExited
 
     private void btnRegInstitucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseClicked
         // TODO add your handling code here:
+        this.ocultarVentanas();
+        this.inst.setVisible(true);
+
     }//GEN-LAST:event_btnRegInstitucionMouseClicked
 
     private void btnRegInstitucionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseEntered
         // TODO add your handling code here:
+        Color c = new Color (16,69,104);
+        btnRegInstitucion.setBackground(c);
     }//GEN-LAST:event_btnRegInstitucionMouseEntered
 
     private void btnRegInstitucionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseExited
         // TODO add your handling code here:
+        Color c = new Color(25,104,157);
+        btnRegInstitucion.setBackground(c);
     }//GEN-LAST:event_btnRegInstitucionMouseExited
 
     private void btnRankDictadoClaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankDictadoClaseMouseClicked
@@ -878,22 +909,32 @@ public class Main extends JFrame {
 
     private void btnRankDictadoClaseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankDictadoClaseMouseEntered
         // TODO add your handling code here:
+        Color c = new Color (16,69,104);
+        btnRankDictadoClase.setBackground(c);
     }//GEN-LAST:event_btnRankDictadoClaseMouseEntered
 
     private void btnRankDictadoClaseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankDictadoClaseMouseExited
         // TODO add your handling code here:
+        Color c = new Color(25,104,157);
+        btnRankDictadoClase.setBackground(c);
     }//GEN-LAST:event_btnRankDictadoClaseMouseExited
 
     private void btnRegActDeportivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseClicked
         // TODO add your handling code here:
+        this.ocultarVentanas();
+        this.actDeportiva.mostrarRegistroActividad(true);
     }//GEN-LAST:event_btnRegActDeportivaMouseClicked
 
     private void btnRegActDeportivaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseEntered
         // TODO add your handling code here:
+        Color c = new Color (16,69,104);
+        btnRegActDeportiva.setBackground(c);
     }//GEN-LAST:event_btnRegActDeportivaMouseEntered
 
     private void btnRegActDeportivaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseExited
         // TODO add your handling code here:
+        Color c = new Color(25,104,157);
+        btnRegActDeportiva.setBackground(c);
     }//GEN-LAST:event_btnRegActDeportivaMouseExited
 
     /**
