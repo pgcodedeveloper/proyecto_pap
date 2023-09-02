@@ -29,6 +29,7 @@ public class Main extends JFrame {
     private ConsultarUsuarios conUsr;
     private ConsultaActividadD conAct;
     private ModificarUsuarios modUsr;
+    private RankingClases rankCl;
     /**
      * Creates new form Main
      */
@@ -89,6 +90,12 @@ public class Main extends JFrame {
         modUsr.setSize(panelContenido.getSize());
         panelContenido.add(modUsr);
         modUsr.setVisible(false);
+        
+        
+        rankCl = new RankingClases(con);
+        modUsr.setSize(panelContenido.getSize());
+        panelContenido.add(rankCl);
+        rankCl.setVisible(false);
     }
      
     /**
@@ -117,15 +124,20 @@ public class Main extends JFrame {
         lblRegistros = new javax.swing.JLabel();
         lblConsultas = new javax.swing.JLabel();
         lblModificaciones = new javax.swing.JLabel();
-        btnModificaUsr = new javax.swing.JLabel();
-        btnConsultaUsr = new javax.swing.JLabel();
+        lblRankings = new javax.swing.JLabel();
         btnCliente = new javax.swing.JLabel();
         btnProfesor = new javax.swing.JLabel();
         btnRegActDeportiva = new javax.swing.JLabel();
-        btnRegDictadoClase = new javax.swing.JLabel();
+        btnRankDictadoClase = new javax.swing.JLabel();
         btnRegInstitucion = new javax.swing.JLabel();
         btnRegClase = new javax.swing.JLabel();
+        btnConsultaUsr = new javax.swing.JLabel();
         btnConsultaActividad = new javax.swing.JLabel();
+        btnModificaUsr = new javax.swing.JLabel();
+        btnModActDeportiva = new javax.swing.JLabel();
+        btnModInstitucion = new javax.swing.JLabel();
+        btnRankActDeportiva = new javax.swing.JLabel();
+        btnRegDictadoClase = new javax.swing.JLabel();
         panelContenido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -264,58 +276,17 @@ public class Main extends JFrame {
         lblConsultas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblConsultas.setForeground(new java.awt.Color(255, 255, 255));
         lblConsultas.setText("CONSULTAS");
-        panelAcciones.add(lblConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 450, 160, 36));
+        panelAcciones.add(lblConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 160, 36));
 
         lblModificaciones.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblModificaciones.setForeground(new java.awt.Color(255, 255, 255));
         lblModificaciones.setText("MODIFICACIONES");
-        panelAcciones.add(lblModificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 160, 36));
+        panelAcciones.add(lblModificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 160, 36));
 
-        btnModificaUsr.setBackground(new java.awt.Color(25, 104, 157));
-        btnModificaUsr.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnModificaUsr.setForeground(new java.awt.Color(255, 255, 255));
-        btnModificaUsr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnModificaUsr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-clientes-16.png"))); // NOI18N
-        btnModificaUsr.setText("Usuarios");
-        btnModificaUsr.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnModificaUsr.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnModificaUsr.setIconTextGap(20);
-        btnModificaUsr.setOpaque(true);
-        btnModificaUsr.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnModificaUsrMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnModificaUsrMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnModificaUsrMouseExited(evt);
-            }
-        });
-        panelAcciones.add(btnModificaUsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 180, 40));
-
-        btnConsultaUsr.setBackground(new java.awt.Color(25, 104, 157));
-        btnConsultaUsr.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnConsultaUsr.setForeground(new java.awt.Color(255, 255, 255));
-        btnConsultaUsr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnConsultaUsr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-clientes-16.png"))); // NOI18N
-        btnConsultaUsr.setText("Usuarios");
-        btnConsultaUsr.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnConsultaUsr.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnConsultaUsr.setIconTextGap(20);
-        btnConsultaUsr.setOpaque(true);
-        btnConsultaUsr.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnConsultaUsrMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnConsultaUsrMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnConsultaUsrMouseExited(evt);
-            }
-        });
-        panelAcciones.add(btnConsultaUsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 180, 40));
+        lblRankings.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblRankings.setForeground(new java.awt.Color(255, 255, 255));
+        lblRankings.setText("RANKINGS");
+        panelAcciones.add(lblRankings, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 660, 160, 36));
 
         btnCliente.setBackground(new java.awt.Color(25, 104, 157));
         btnCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -386,28 +357,28 @@ public class Main extends JFrame {
         });
         panelAcciones.add(btnRegActDeportiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 180, 40));
 
-        btnRegDictadoClase.setBackground(new java.awt.Color(25, 104, 157));
-        btnRegDictadoClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnRegDictadoClase.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegDictadoClase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnRegDictadoClase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-aula-de-google-16.png"))); // NOI18N
-        btnRegDictadoClase.setText("Dictado de Clase");
-        btnRegDictadoClase.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRegDictadoClase.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnRegDictadoClase.setIconTextGap(20);
-        btnRegDictadoClase.setOpaque(true);
-        btnRegDictadoClase.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRankDictadoClase.setBackground(new java.awt.Color(25, 104, 157));
+        btnRankDictadoClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRankDictadoClase.setForeground(new java.awt.Color(255, 255, 255));
+        btnRankDictadoClase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRankDictadoClase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-aula-de-google-16.png"))); // NOI18N
+        btnRankDictadoClase.setText("Dictado de Clase");
+        btnRankDictadoClase.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRankDictadoClase.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnRankDictadoClase.setIconTextGap(20);
+        btnRankDictadoClase.setOpaque(true);
+        btnRankDictadoClase.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegDictadoClaseMouseClicked(evt);
+                btnRankDictadoClaseMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegDictadoClaseMouseEntered(evt);
+                btnRankDictadoClaseMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegDictadoClaseMouseExited(evt);
+                btnRankDictadoClaseMouseExited(evt);
             }
         });
-        panelAcciones.add(btnRegDictadoClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 180, 40));
+        panelAcciones.add(btnRankDictadoClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 690, 180, 40));
 
         btnRegInstitucion.setBackground(new java.awt.Color(25, 104, 157));
         btnRegInstitucion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -455,6 +426,29 @@ public class Main extends JFrame {
         });
         panelAcciones.add(btnRegClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 180, 40));
 
+        btnConsultaUsr.setBackground(new java.awt.Color(25, 104, 157));
+        btnConsultaUsr.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnConsultaUsr.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultaUsr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnConsultaUsr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-clientes-16.png"))); // NOI18N
+        btnConsultaUsr.setText("Usuarios");
+        btnConsultaUsr.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnConsultaUsr.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnConsultaUsr.setIconTextGap(20);
+        btnConsultaUsr.setOpaque(true);
+        btnConsultaUsr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnConsultaUsrMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnConsultaUsrMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnConsultaUsrMouseExited(evt);
+            }
+        });
+        panelAcciones.add(btnConsultaUsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 180, 40));
+
         btnConsultaActividad.setBackground(new java.awt.Color(25, 104, 157));
         btnConsultaActividad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnConsultaActividad.setForeground(new java.awt.Color(255, 255, 255));
@@ -476,7 +470,122 @@ public class Main extends JFrame {
                 btnConsultaActividadMouseExited(evt);
             }
         });
-        panelAcciones.add(btnConsultaActividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 180, 40));
+        panelAcciones.add(btnConsultaActividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 180, 40));
+
+        btnModificaUsr.setBackground(new java.awt.Color(25, 104, 157));
+        btnModificaUsr.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnModificaUsr.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificaUsr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnModificaUsr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-clientes-16.png"))); // NOI18N
+        btnModificaUsr.setText("Usuarios");
+        btnModificaUsr.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnModificaUsr.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnModificaUsr.setIconTextGap(20);
+        btnModificaUsr.setOpaque(true);
+        btnModificaUsr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModificaUsrMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnModificaUsrMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnModificaUsrMouseExited(evt);
+            }
+        });
+        panelAcciones.add(btnModificaUsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 180, 40));
+
+        btnModActDeportiva.setBackground(new java.awt.Color(25, 104, 157));
+        btnModActDeportiva.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnModActDeportiva.setForeground(new java.awt.Color(255, 255, 255));
+        btnModActDeportiva.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnModActDeportiva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-strength-16.png"))); // NOI18N
+        btnModActDeportiva.setText("Actividad Deportiva");
+        btnModActDeportiva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnModActDeportiva.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnModActDeportiva.setIconTextGap(20);
+        btnModActDeportiva.setOpaque(true);
+        btnModActDeportiva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModActDeportivaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnModActDeportivaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnModActDeportivaMouseExited(evt);
+            }
+        });
+        panelAcciones.add(btnModActDeportiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 180, 40));
+
+        btnModInstitucion.setBackground(new java.awt.Color(25, 104, 157));
+        btnModInstitucion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnModInstitucion.setForeground(new java.awt.Color(255, 255, 255));
+        btnModInstitucion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnModInstitucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-colegio-16.png"))); // NOI18N
+        btnModInstitucion.setText("Institución Deportiva");
+        btnModInstitucion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnModInstitucion.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnModInstitucion.setIconTextGap(20);
+        btnModInstitucion.setOpaque(true);
+        btnModInstitucion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModInstitucionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnModInstitucionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnModInstitucionMouseExited(evt);
+            }
+        });
+        panelAcciones.add(btnModInstitucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 630, 180, 40));
+
+        btnRankActDeportiva.setBackground(new java.awt.Color(25, 104, 157));
+        btnRankActDeportiva.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRankActDeportiva.setForeground(new java.awt.Color(255, 255, 255));
+        btnRankActDeportiva.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRankActDeportiva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-strength-16.png"))); // NOI18N
+        btnRankActDeportiva.setText("Actividad Deportiva");
+        btnRankActDeportiva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRankActDeportiva.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnRankActDeportiva.setIconTextGap(20);
+        btnRankActDeportiva.setOpaque(true);
+        btnRankActDeportiva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRankActDeportivaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRankActDeportivaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRankActDeportivaMouseExited(evt);
+            }
+        });
+        panelAcciones.add(btnRankActDeportiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 730, 180, 40));
+
+        btnRegDictadoClase.setBackground(new java.awt.Color(25, 104, 157));
+        btnRegDictadoClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRegDictadoClase.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegDictadoClase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRegDictadoClase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-aula-de-google-16.png"))); // NOI18N
+        btnRegDictadoClase.setText("Dictado de Clase");
+        btnRegDictadoClase.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegDictadoClase.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnRegDictadoClase.setIconTextGap(20);
+        btnRegDictadoClase.setOpaque(true);
+        btnRegDictadoClase.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegDictadoClaseMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegDictadoClaseMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegDictadoClaseMouseExited(evt);
+            }
+        });
+        panelAcciones.add(btnRegDictadoClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 180, 40));
 
         panelPrincipal.add(panelAcciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 770));
 
@@ -629,23 +738,23 @@ public class Main extends JFrame {
         btnMinimizar.setBackground(new Color(46,124,209));
     }//GEN-LAST:event_btnMinimizarMouseExited
 
-    private void btnRegActDeportivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseClicked
+    private void btnModActDeportivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModActDeportivaMouseClicked
         // TODO add your handling code here:
         this.ocultarVentanas();
         actDeportiva.mostrarRegistroActividad(true);
-    }//GEN-LAST:event_btnRegActDeportivaMouseClicked
+    }//GEN-LAST:event_btnModActDeportivaMouseClicked
 
-    private void btnRegActDeportivaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseEntered
+    private void btnModActDeportivaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModActDeportivaMouseEntered
         // TODO add your handling code here:
         Color c = new Color (16,69,104);
-        btnRegActDeportiva. setBackground(c);
-    }//GEN-LAST:event_btnRegActDeportivaMouseEntered
+        btnModActDeportiva. setBackground(c);
+    }//GEN-LAST:event_btnModActDeportivaMouseEntered
 
-    private void btnRegActDeportivaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseExited
+    private void btnModActDeportivaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModActDeportivaMouseExited
         // TODO add your handling code here:
         Color c = new Color(25,104,157);
-        btnRegActDeportiva. setBackground(c);
-    }//GEN-LAST:event_btnRegActDeportivaMouseExited
+        btnModActDeportiva. setBackground(c);
+    }//GEN-LAST:event_btnModActDeportivaMouseExited
 
     private void btnRegDictadoClaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegDictadoClaseMouseClicked
         // TODO add your handling code here:
@@ -666,23 +775,23 @@ public class Main extends JFrame {
         btnRegDictadoClase. setBackground(c);
     }//GEN-LAST:event_btnRegDictadoClaseMouseExited
 
-    private void btnRegInstitucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseClicked
+    private void btnModInstitucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModInstitucionMouseClicked
         // TODO add your handling code here:
         this.ocultarVentanas();
         inst.setVisible(true);
-    }//GEN-LAST:event_btnRegInstitucionMouseClicked
+    }//GEN-LAST:event_btnModInstitucionMouseClicked
 
-    private void btnRegInstitucionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseEntered
+    private void btnModInstitucionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModInstitucionMouseEntered
         // TODO add your handling code here:
         Color c = new Color (16,69,104);
-        btnRegInstitucion.setBackground(c);
-    }//GEN-LAST:event_btnRegInstitucionMouseEntered
+        btnModInstitucion.setBackground(c);
+    }//GEN-LAST:event_btnModInstitucionMouseEntered
 
-    private void btnRegInstitucionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseExited
+    private void btnModInstitucionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModInstitucionMouseExited
         // TODO add your handling code here:
         Color c = new Color(25,104,157);
-        btnRegInstitucion. setBackground(c);
-    }//GEN-LAST:event_btnRegInstitucionMouseExited
+        btnModInstitucion. setBackground(c);
+    }//GEN-LAST:event_btnModInstitucionMouseExited
 
     private void btnRegClaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegClaseMouseClicked
         // TODO add your handling code here:
@@ -738,6 +847,55 @@ public class Main extends JFrame {
         btnModificaUsr.setBackground(c);
     }//GEN-LAST:event_btnModificaUsrMouseExited
 
+    private void btnRankActDeportivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankActDeportivaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRankActDeportivaMouseClicked
+
+    private void btnRankActDeportivaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankActDeportivaMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRankActDeportivaMouseEntered
+
+    private void btnRankActDeportivaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankActDeportivaMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRankActDeportivaMouseExited
+
+    private void btnRegInstitucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegInstitucionMouseClicked
+
+    private void btnRegInstitucionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegInstitucionMouseEntered
+
+    private void btnRegInstitucionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegInstitucionMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegInstitucionMouseExited
+
+    private void btnRankDictadoClaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankDictadoClaseMouseClicked
+        // TODO add your handling code here:
+        this.rankCl.setVisible(true);
+    }//GEN-LAST:event_btnRankDictadoClaseMouseClicked
+
+    private void btnRankDictadoClaseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankDictadoClaseMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRankDictadoClaseMouseEntered
+
+    private void btnRankDictadoClaseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankDictadoClaseMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRankDictadoClaseMouseExited
+
+    private void btnRegActDeportivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegActDeportivaMouseClicked
+
+    private void btnRegActDeportivaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegActDeportivaMouseEntered
+
+    private void btnRegActDeportivaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegActDeportivaMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegActDeportivaMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -779,8 +937,12 @@ public class Main extends JFrame {
     private javax.swing.JLabel btnConsultaActividad;
     private javax.swing.JLabel btnConsultaUsr;
     private javax.swing.JLabel btnMinimizar;
+    private javax.swing.JLabel btnModActDeportiva;
+    private javax.swing.JLabel btnModInstitucion;
     private javax.swing.JLabel btnModificaUsr;
     private javax.swing.JLabel btnProfesor;
+    private javax.swing.JLabel btnRankActDeportiva;
+    private javax.swing.JLabel btnRankDictadoClase;
     private javax.swing.JLabel btnRegActDeportiva;
     private javax.swing.JLabel btnRegClase;
     private javax.swing.JLabel btnRegDictadoClase;
@@ -791,6 +953,7 @@ public class Main extends JFrame {
     private javax.swing.JLabel lblIcono;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblModificaciones;
+    private javax.swing.JLabel lblRankings;
     private javax.swing.JLabel lblRegistros;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelAcciones;

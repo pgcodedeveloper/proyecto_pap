@@ -12,6 +12,7 @@ import exceptions.InstitucionRepetidaException;
 import exceptions.SocioYaInscriptoException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import logica.ActividadDeportiva;
 import logica.Clase;
 import logica.InstitucionDeportiva;
@@ -85,5 +86,7 @@ public interface IControlador {
     public void actualizarUsuario (String email,String nick, String nombre, String apellido, Date fNac);
     
     public void actualizarProfe (String email,String nick, String nombre, String apellido, Date fNac, String bio, String desc, String web);
+    
+    public ArrayList<List> rankingClases();
 
 }

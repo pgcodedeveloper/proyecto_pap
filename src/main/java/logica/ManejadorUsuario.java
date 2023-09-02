@@ -53,16 +53,6 @@ public class ManejadorUsuario {
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
         try {
-            /*em.getTransaction().begin();
-            Usuario user = em.find(Usuario.class, u.getId());
-            em.getTransaction().commit();
-            
-            em.getTransaction().begin();
-            user.setNombre(u.getNombre());
-            user.setApellido(u.getApellido());
-            user.setFechaNac(u.getFechaNac());
-            em.getTransaction().commit();*/
-            
             em.getTransaction().begin();
             em.merge(u);
             em.getTransaction().commit();
@@ -76,21 +66,6 @@ public class ManejadorUsuario {
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
         try {
-            
-            /*em.getTransaction().begin();
-            Profesor user = em.find(Profesor.class, p.getId());
-            em.getTransaction().commit();
-            
-            em.getTransaction().begin();
-            user.setNombre(p.getNombre());
-            user.setApellido(p.getApellido());
-            user.setFechaNac(p.getFechaNac());
-            user.setBiografia(p.getBiografia());
-            user.setDescripcion(p.getDescripcion());
-            user.setSitioWeb(p.getSitioWeb());
-                    
-            em.getTransaction().commit();*/
-            
             em.getTransaction().begin();
             em.merge(u);
             em.getTransaction().commit();

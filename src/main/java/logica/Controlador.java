@@ -441,18 +441,24 @@ public class Controlador implements IControlador {
         ((Profesor)u).setDescripcion(desc);
         ((Profesor)u).setSitioWeb(web);
         mju.actualizaProfe(u);
-        /*for (DtProfesor p:list){
-            if (p.getNickname().equals(nick)){
-                p.setNombre(nombre);
-                p.setApellido(apellido);
-                p.setFechaNac(fNac);
-                p.setBiografia(bio);
-                p.setDescripcion(desc);
-                p.setSitioWeb(web);
-                mju.actualizaProfe(p);
-            }
-        }*/
     }
+    
+    @Override
+    public ArrayList<List> rankingClases(){
+        ManejadorClase mjc = ManejadorClase.getInstancia();
+        ArrayList<List> aRet = mjc.rankClases();
+        ArrayList<Clase> clase= new ArrayList();
+        
+        int i=0;
+        List<String> nomC= aRet.get(1);
+            for(String s:nomC){
+            clase.add(i, mjc.obtenerInfoClase(s));
+            i++;
+        }
+        aRet.add(2, clase);
+        return aRet;
+    }
+    
 
 }
 

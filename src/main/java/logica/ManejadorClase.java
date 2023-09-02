@@ -39,4 +39,33 @@ public class ManejadorClase {
         
         return c;
     }
+    
+    public ArrayList<List> rankClases(){
+                
+            ArrayList<List> aRet = new ArrayList<>();
+            ArrayList<String> nomC = new ArrayList(); 
+            ArrayList<String> cantS = new ArrayList(); 
+            
+            Conexion con = Conexion.getInstancia();
+            EntityManager em = con.getEntityManager();
+     
+            String jpql = "SELECT COUNT(r), r.clase.id FROM Registro r GROUP BY r.clase.id ORDER BY COUNT(r) DESC";
+
+            Query q = em.createQuery(jpql, Object[].class);
+
+            // Ejecuta la consulta
+            List<Object[]> resultados = q.getResultList();
+                
+            // Itera a través de los resultados y los agrega a la lista correspondiente
+            int i=0;
+            for (Object[] resultado : resultados) {
+                cantS.add(i, resultado[0].toString());
+                nomC.add(i, resultado[1].toString());
+            }
+            
+            aRet.add(0, cantS);
+            aRet.add(1, nomC);
+            return aRet;    
+    }
+            
 }
