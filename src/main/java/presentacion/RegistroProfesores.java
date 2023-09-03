@@ -453,7 +453,7 @@ public class RegistroProfesores extends javax.swing.JInternalFrame {
         if(!txtNickN.getText().isEmpty() && !txtNombre.getText().isEmpty() && !txtEmail.getText().isEmpty() && !txtApellido.getText().isEmpty()){
             if(dateNacimiento.getDate().before(hoy) && fechaValida >= 18){
                 try {
-                    DtUsuario u = new DtProfesor(txtDescripcion.getText(), txtDescripcion.getText(), txtWeb.getText(), txtNickN.getText(), txtNombre.getText(), txtApellido.getText(), txtEmail.getText(), dateNacimiento.getDate(),this.icon.obtenerInstitucion(comboIntituto.getSelectedItem().toString()));
+                    DtUsuario u = new DtProfesor(txtDescripcion.getText(), txtBiografia.getText(), txtWeb.getText(), txtNickN.getText(), txtNombre.getText(), txtApellido.getText(), txtEmail.getText(), dateNacimiento.getDate(),this.icon.obtenerInstitucion(comboIntituto.getSelectedItem().toString()));
                     this.icon.altaUsuario(u);
                     JOptionPane.showMessageDialog(null, "Profesor creado correctamente","Exito",JOptionPane.INFORMATION_MESSAGE);
                     limpiar();

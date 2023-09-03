@@ -875,8 +875,8 @@ public class Main extends JFrame {
 
     private void btnRankActDeportivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankActDeportivaMouseClicked
         // TODO add your handling code here:
-      this.ocultarVentanas();
-        rankAd.setVisible(true);
+        this.ocultarVentanas();
+        rankAd.mostarRankinA(true);
     }//GEN-LAST:event_btnRankActDeportivaMouseClicked
 
     private void btnRankActDeportivaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankActDeportivaMouseEntered
@@ -913,7 +913,7 @@ public class Main extends JFrame {
     private void btnRankDictadoClaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankDictadoClaseMouseClicked
         // TODO add your handling code here:
         this.ocultarVentanas();
-        rankCl.setVisible(true);
+        rankCl.mostarRanckinC(true);
     }//GEN-LAST:event_btnRankDictadoClaseMouseClicked
 
     private void btnRankDictadoClaseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankDictadoClaseMouseEntered

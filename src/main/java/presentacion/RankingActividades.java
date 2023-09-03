@@ -42,13 +42,18 @@ public class RankingActividades extends javax.swing.JPanel {
         modelo.addColumn("Descripcion");
         modelo.addColumn("Cantidad de Clases");
                 
-            for (Object[] l : list) {
+        for (Object[] l : list) {
             ActividadDeportiva aD = (ActividadDeportiva) l[0];
             int valor = (int) l[1];
             
             modelo.addRow(new Object[]{aD.getNombre(), aD.getCosto(), aD.getDescripcion(),valor});
         }
         tableRankActividades.setModel(modelo);
+    }
+    
+    public void mostarRankinA(boolean flag){
+        this.setVisible(flag);
+        tablaActividades();
     }
     
     /**
@@ -123,15 +128,13 @@ public class RankingActividades extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 1074, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane7)
-                        .addGap(22, 22, 22))))
+                .addComponent(jScrollPane7)
+                .addGap(22, 22, 22))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 1086, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +144,7 @@ public class RankingActividades extends javax.swing.JPanel {
                     .addComponent(lblInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(358, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
