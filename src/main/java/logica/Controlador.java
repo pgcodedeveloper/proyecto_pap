@@ -17,6 +17,8 @@ import java.time.Instant;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -480,18 +482,27 @@ public class Controlador implements IControlador {
     }
     
     @Override
-    public ArrayList<List> rankingClases(){
+    public ArrayList<Object[]> rankingClases(){
         ManejadorClase mjc = ManejadorClase.getInstancia();
-        ArrayList<List> aRet = mjc.rankClases();
-        ArrayList<Clase> clase= new ArrayList();
+        ArrayList<Clase> clases = mjc.listadoClases();
+        ArrayList<Object[]> aRet = new ArrayList();
         
-        int i=0;
-        List<String> nomC= aRet.get(1);
-        for(String s:nomC){
-            clase.add(i, mjc.obtenerInfoClase(s));
-            i++;
+        for(Clase c:clases){
+            aRet.add(new Object []{c, c.getRegistros().size()});
         }
-        aRet.add(2, clase);
+        
+        Collections.sort(aRet, new Comparator<Object[]>() {
+            @Override
+            public int compare(Object[] pareja1, Object[] pareja2) {
+                // Compara las parejas por el valor de int
+                int valor1 = (int) pareja1[1];
+                int valor2 = (int) pareja2[1];
+                return Integer.compare(valor1, valor2);
+               }
+        });
+        
+        Collections.reverse(aRet);
+
         return aRet;
     }
 
@@ -517,7 +528,31 @@ public class Controlador implements IControlador {
         
     }
     
-    
+    @Override
+    public ArrayList<Object[]> rankingActividades(){
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        ArrayList <Object[]> aRet = new ArrayList();
+        ActividadDeportiva actDeportiva;
+        
+        for(String s : mji.obtenerActividades()){
+            actDeportiva = mji.obtenerActividad(s);
+            aRet.add(new Object []{actDeportiva, actDeportiva.getClases().size()});
+        }
+
+        Collections.sort(aRet, new Comparator<Object[]>() {
+            @Override
+            public int compare(Object[] pareja1, Object[] pareja2) {
+                // Compara las parejas por el valor de int
+                int valor1 = (int) pareja1[1];
+                int valor2 = (int) pareja2[1];
+                return Integer.compare(valor1, valor2);
+               }
+        });
+        
+        Collections.reverse(aRet);
+        return aRet;
+    }
+
 }
 
 

@@ -32,6 +32,7 @@ public class Main extends JFrame {
     private ModificarActividadDeportiva modAct;
     private ModificarInstitucion modIns;
     private RankingClases rankCl;
+    private RankingActividades rankAd;
     /**
      * Creates new form Main
      */
@@ -107,10 +108,15 @@ public class Main extends JFrame {
         modIns.setVisible(false);
         
         rankCl  = new RankingClases(con);
-        jInternalFrameSize = rankCl.getSize();
-        rankCl.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
+        rankCl.setSize(panelContenido.getSize());
         panelContenido.add(rankCl);
         rankCl.setVisible(false);
+        
+        rankAd  = new RankingActividades(con);
+        rankAd.setSize(panelContenido.getSize());
+        panelContenido.add(rankAd);
+        rankAd.setVisible(false);
+
     }
      
     /**
@@ -646,6 +652,7 @@ public class Main extends JFrame {
         modAct.mostrarModificarActividad(false);
         modIns.mostrarModificarInst(false);
         rankCl.setVisible(false);
+        rankAd.setVisible(false);
     }
     
     private void panelHeaderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelHeaderMousePressed
@@ -868,7 +875,8 @@ public class Main extends JFrame {
 
     private void btnRankActDeportivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankActDeportivaMouseClicked
         // TODO add your handling code here:
-        
+      this.ocultarVentanas();
+        rankAd.setVisible(true);
     }//GEN-LAST:event_btnRankActDeportivaMouseClicked
 
     private void btnRankActDeportivaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankActDeportivaMouseEntered
@@ -904,7 +912,8 @@ public class Main extends JFrame {
 
     private void btnRankDictadoClaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankDictadoClaseMouseClicked
         // TODO add your handling code here:
-        this.rankCl.setVisible(true);
+        this.ocultarVentanas();
+        rankCl.setVisible(true);
     }//GEN-LAST:event_btnRankDictadoClaseMouseClicked
 
     private void btnRankDictadoClaseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRankDictadoClaseMouseEntered

@@ -20,35 +20,35 @@ import logica.Registro;
  *
  * @author PC
  */
-public class RankingClases extends javax.swing.JPanel {
+public class RankingActividades extends javax.swing.JPanel {
 
     /**
      * Creates new form ConsultarUsuarios
      */
     private IControlador icon;
     
-    public RankingClases(IControlador con) {
+    public RankingActividades(IControlador con) {
         initComponents();
         this.icon = con;
-        tablaClases();
+        tablaActividades();
     }
     
-    private void tablaClases(){
+    private void tablaActividades(){
         DefaultTableModel modelo = new DefaultTableModel();
         ArrayList<Object[]> list;
-        list = icon.rankingClases();
+        list = icon.rankingActividades();
         modelo.addColumn("Nombre");
-        modelo.addColumn("Fecha");
-        modelo.addColumn("URL");
-        modelo.addColumn("Cantidad de Socios");
-        
-        for(Object[] l:list){
+        modelo.addColumn("Costo");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("Cantidad de Clases");
+                
+            for (Object[] l : list) {
+            ActividadDeportiva aD = (ActividadDeportiva) l[0];
+            int valor = (int) l[1];
             
-            Clase c=(Clase) l[0];
-            
-            modelo.addRow(new Object[]{c.getNombre(),c.getFecha(),c.getUrl(),l[1]});
+            modelo.addRow(new Object[]{aD.getNombre(), aD.getCosto(), aD.getDescripcion(),valor});
         }
-        tableRankClases.setModel(modelo);
+        tableRankActividades.setModel(modelo);
     }
     
     /**
@@ -63,7 +63,7 @@ public class RankingClases extends javax.swing.JPanel {
         lblInicio = new javax.swing.JLabel();
         btnSalir = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        tableRankClases = new javax.swing.JTable();
+        tableRankActividades = new javax.swing.JTable();
 
         setPreferredSize(new java.awt.Dimension(1120, 830));
 
@@ -71,7 +71,7 @@ public class RankingClases extends javax.swing.JPanel {
         lblInicio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblInicio.setForeground(new java.awt.Color(255, 255, 255));
         lblInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblInicio.setText("Ranking de Clases");
+        lblInicio.setText("Ranking de Actividades");
         lblInicio.setToolTipText("");
         lblInicio.setOpaque(true);
 
@@ -92,7 +92,30 @@ public class RankingClases extends javax.swing.JPanel {
             }
         });
 
-        jScrollPane7.setViewportView(tableRankClases);
+        tableRankActividades.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Costo", "Descripcion", "Cantidad de Clases"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(tableRankActividades);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -142,6 +165,6 @@ public class RankingClases extends javax.swing.JPanel {
     private javax.swing.JLabel btnSalir;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JLabel lblInicio;
-    private javax.swing.JTable tableRankClases;
+    private javax.swing.JTable tableRankActividades;
     // End of variables declaration//GEN-END:variables
 }

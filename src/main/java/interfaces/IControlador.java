@@ -95,6 +95,8 @@ public interface IControlador {
     
     public void modificarInstitucion(String nombre,String descripcion, String url);
     
-    public ArrayList<List> rankingClases();
+    public ArrayList<Object[]> rankingClases();
+    
+    public ArrayList<Object[]> rankingActividades();
 
 }
