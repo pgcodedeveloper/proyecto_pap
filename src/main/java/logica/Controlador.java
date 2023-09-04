@@ -248,8 +248,10 @@ public class Controlador implements IControlador {
             Instant instant = fechaI.toInstant();
             ZoneId zona = ZoneId.systemDefault();
             LocalTime hora = instant.atZone(zona).toLocalTime();
+            //System.out.println("La hora es" + hora.);
             Clase c = new Clase(nomC, fechaI, hora, url, fechaA);
-
+             
+            
             for(ActividadDeportiva a: i.getActividadesDeportiva()) {
                 if(a.getNombre().equals(act)){
                     a.altaClase(c);

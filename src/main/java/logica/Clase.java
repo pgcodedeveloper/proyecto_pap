@@ -44,7 +44,7 @@ public class Clase{
     private Date fechaReg;
     
     @OneToMany(mappedBy = "clase",cascade = CascadeType.ALL,fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Registro> registros = new ArrayList<>();;
+    private List<Registro> registros = new ArrayList<>();
 
     public Clase(){
         super();

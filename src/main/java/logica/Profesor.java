@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package logica;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -34,7 +35,7 @@ public class Profesor extends Usuario {
     private InstitucionDeportiva institucionDeportiva;
     
     @OneToMany
-    private List<Clase> clases;
+    private List<Clase> clases = new ArrayList <>();
 
     public Profesor(){
         super();
