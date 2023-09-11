@@ -555,6 +555,16 @@ public class Controlador implements IControlador {
         return aRet;
     }
 
+    @Override
+    public void setPassword(String nickname, String mail, String password, String imagen) {
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        Usuario u = mju.buscarUsuario(mail, nickname);
+        u.setPassword(password);
+        u.setImagen(imagen);
+        mju.actualizaUser(u);
+    }
+
+    
 }
 
 

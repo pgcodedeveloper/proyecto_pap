@@ -98,5 +98,7 @@ public interface IControlador {
     public ArrayList<Object[]> rankingClases();
     
     public ArrayList<Object[]> rankingActividades();
+    
+    public void setPassword (String nickname, String mail, String password, String imagen);
 
 }

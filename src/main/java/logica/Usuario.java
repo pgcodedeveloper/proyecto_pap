@@ -41,6 +41,10 @@ public class Usuario{
     @Column(name = "fecha_nacimiento")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaNac;
+    @Column (name = "password")
+    private String password;
+    @Column (name = "imagen")
+    private String imagen;  
 
     public Usuario() {
         super();
@@ -102,6 +106,22 @@ public class Usuario{
         this.fechaNac = fechaNac;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+    
     @Override
     public String toString() {
         return "Usuario{" + "nickname=" + nickname + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", fechaNac=" + fechaNac + '}';
