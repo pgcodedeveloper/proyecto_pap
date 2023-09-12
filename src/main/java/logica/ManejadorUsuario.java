@@ -106,6 +106,22 @@ public class ManejadorUsuario {
         return usr;
     }
     
+    public Usuario buscarUsuarioEmail(String email){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        
+        Query q = em.createQuery("select u from Usuario u where u.email = :email", Usuario.class);
+        q.setParameter("email", email);
+        Usuario usr = null;
+        
+        try {
+            usr = (Usuario) q.getSingleResult();
+        } catch (NoResultException e) {
+            usr = null;
+        }
+        return usr;
+    }
+    
     public ArrayList<DtSocio> obtenerUsuariosSocio(){
         Conexion con = Conexion.getInstancia();
         EntityManager em = con.getEntityManager();
