@@ -13,8 +13,8 @@ import java.util.Date;
 public class DtSocio extends DtUsuario {
 
     
-    public DtSocio(String nickname, String nombre, String apellido, String email, Date fechaNac) {
-        super(nickname, nombre, apellido, email, fechaNac);
+    public DtSocio(String nickname, String nombre, String apellido, String email, Date fechaNac, String pass, String img) {
+        super(nickname, nombre, apellido, email, fechaNac, pass, img);
     }
     
 }

@@ -50,12 +50,14 @@ public class Usuario{
         super();
     }
     
-    public Usuario(String nc, String n, String a, String e, Date df){
+    public Usuario(String nc, String n, String a, String e, Date df, String password, String imagen){
         this.nickname = nc;
         this.nombre = n;
         this.apellido = a;
         this.email = e;
         this.fechaNac = df;
+        this.imagen = imagen;
+        this.password = password;
     }
     
     public int getId() {

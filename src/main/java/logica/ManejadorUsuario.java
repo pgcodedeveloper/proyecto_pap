@@ -132,7 +132,7 @@ public class ManejadorUsuario {
         try {
             List<Socio> listU = (List<Socio>) q.getResultList();
             for(Socio u: listU) {
-                DtSocio socio = new DtSocio(u.getNickName(), u.getNombre(), u.getApellido(), u.getEmail(), u.getFecha());
+                DtSocio socio = new DtSocio(u.getNickName(), u.getNombre(), u.getApellido(), u.getEmail(), u.getFecha(), u.getPassword(), u.getImagen());
                 socio.setId(u.getId());
                 aRetornar.add(socio);
             }
@@ -153,7 +153,7 @@ public class ManejadorUsuario {
             List<Profesor> listU = (List<Profesor>) q.getResultList();
             for(Profesor u: listU) {
                 DtProfesor prof = new DtProfesor(u.getDescripcion(), u.getBiografia(), u.getSitioWeb(), u.getNickName(), u.getNombre()
-                    , u.getApellido(), u.getEmail(), u.getFecha(), u.getInstitucionDeportiva());
+                    , u.getApellido(), u.getEmail(), u.getFecha(), u.getInstitucionDeportiva(), u.getPassword(), u.getImagen());
                 prof.setId(u.getId());
                 aRetornar.add(prof);
             }
@@ -245,7 +245,7 @@ public class ManejadorUsuario {
         try {
             List<Usuario> listU = (List<Usuario>)q.getResultList();
             for(Usuario u: listU) {
-                DtUsuario usuario = new DtUsuario (u.getNickName(), u.getNombre() , u.getApellido(),u.getEmail(), u.getFecha());
+                DtUsuario usuario = new DtUsuario (u.getNickName(), u.getNombre() , u.getApellido(),u.getEmail(), u.getFecha(), u.getPassword(), u.getImagen() );
                 aRetornar.add(usuario);
             }
         } catch (NoResultException e) {

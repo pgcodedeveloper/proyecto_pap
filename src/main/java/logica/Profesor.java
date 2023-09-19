@@ -41,8 +41,8 @@ public class Profesor extends Usuario {
         super();
     }
     // Constructor
-    public Profesor(String nc, String n, String a, String e, Date df, String desc, String bio, String sitioWeb) {
-        super(nc, n, a, e, df);
+    public Profesor(String nc, String n, String a, String e, Date df, String desc, String bio, String sitioWeb, String p, String img) {
+        super(nc, n, a, e, df, p, img);
         this.descripcion = desc;
         this.biografia = bio;
         this.sitioWeb = sitioWeb;

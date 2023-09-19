@@ -5,6 +5,7 @@
 package datatypes;
 
 import java.util.Date;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -17,13 +18,18 @@ public class DtUsuario {
     private String apellido;
     private String email;
     private Date fechaNac;
+    private String password;
+    private String imagen;
 
-    public DtUsuario(String nickname, String nombre, String apellido, String email, Date fechaNac) {
+    public DtUsuario(String nickname, String nombre, String apellido, String email, Date fechaNac, String password, String imagen) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.fechaNac = fechaNac;
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        this.password = hashedPassword; 
+        this.imagen = imagen;
     }
 
     public int getId() {
@@ -75,6 +81,23 @@ public class DtUsuario {
     public void setFechaNac(Date fechaNac) {
         this.fechaNac = fechaNac;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+    
     
     
 }

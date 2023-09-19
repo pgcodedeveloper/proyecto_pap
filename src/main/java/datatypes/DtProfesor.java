@@ -21,8 +21,8 @@ public class DtProfesor extends DtUsuario {
     private InstitucionDeportiva institucionDeportiva;
     private List<Clase> clases;
 
-    public DtProfesor(String descripcion, String biografia, String sitioWeb, String nickname, String nombre, String apellido, String email, Date fechaNac, InstitucionDeportiva i) {
-        super(nickname, nombre, apellido, email, fechaNac);
+    public DtProfesor(String descripcion, String biografia, String sitioWeb, String nickname, String nombre, String apellido, String email, Date fechaNac, InstitucionDeportiva i, String password, String imagen) {
+        super(nickname, nombre, apellido, email, fechaNac, password , imagen);
         this.descripcion = descripcion;
         this.biografia = biografia;
         this.sitioWeb = sitioWeb;

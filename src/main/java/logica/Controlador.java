@@ -43,12 +43,12 @@ public class Controlador implements IControlador {
         }
         
         if(usr instanceof DtSocio){
-            u = new Socio(usr.getNickname(),  usr.getNombre(),  usr.getApellido(),  usr.getEmail(),  usr.getFechaNac());
+            u = new Socio(usr.getNickname(),  usr.getNombre(),  usr.getApellido(),  usr.getEmail(),  usr.getFechaNac(), usr.getPassword(), usr.getImagen());
             mju.agregarUsuario(u);
         }
         
         if(usr instanceof DtProfesor dtProfesor){
-            u = new Profesor(usr.getNickname(),  usr.getNombre(),  usr.getApellido(),  usr.getEmail(),  usr.getFechaNac(),dtProfesor.getDescripcion(),dtProfesor.getBiografia(),dtProfesor.getSitioWeb());
+            u = new Profesor(usr.getNickname(),  usr.getNombre(),  usr.getApellido(),  usr.getEmail(),  usr.getFechaNac(),dtProfesor.getDescripcion(),dtProfesor.getBiografia(),dtProfesor.getSitioWeb(), null, null);
             ((Profesor) u).setInstitucionDeportiva(dtProfesor.getInstitucionDeportiva());
             mju.agregarProfesor(u);
         }
