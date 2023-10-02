@@ -50,5 +50,44 @@ public class ManejadorClase {
             
             return aRet;    
     }
+    
+    public List<Registro> buscarRegistroClase(String nomb){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        List<Registro> list = null;
+        
+        try {
+            Clase c = em.find(Clase.class, nomb);
+            
+            if(c != null){
+                list = c.getRegistros();
+            }
+            
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    public void eliminarSocio(Clase clase, Socio idS){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+        try {
+            em.getTransaction().begin();
+
+            Query q = em.createQuery("delete from Registro r where r.clase = :clase and r.socio = :idS");
+            q.setParameter("clase", clase);
+            q.setParameter("idS", idS);
+            
+            int deletedCount = q.executeUpdate();
+
+            em.getTransaction().commit();
+
+            System.out.println("Registros eliminados: " + deletedCount);
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+        }
+    }
             
 }

@@ -100,5 +100,7 @@ public interface IControlador {
     public ArrayList<Object[]> rankingActividades();
     
     public void setPassword (String nickname, String mail, String password, String imagen);
+    
+    public void eliminarSocioRegistro(String clase, Socio s);
 
 }

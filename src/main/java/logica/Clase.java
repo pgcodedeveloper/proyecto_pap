@@ -117,6 +117,13 @@ public class Clase{
         this.registros.add(r);
         s.altaRegistro(r);
     }
+    
+    public void eliminarRegistro(Registro r){
+        System.out.println("Desde clase " + r.getSocioId().getId());
+        this.registros.remove(r);
+        r.getSocioId().eliminarRegistro(r);
+        System.out.println("O estoy aca?");
+    }
 
     @Override
     public String toString() {

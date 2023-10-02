@@ -32,7 +32,7 @@ public class ActividadDeportiva{
     private Date fechaReg;
     
     @OneToMany
-    private List<Clase> clases = new ArrayList<>();;
+    private List<Clase> clases = new ArrayList<>();
     
     @ManyToOne
     private InstitucionDeportiva inst;

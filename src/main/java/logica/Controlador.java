@@ -22,6 +22,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
+import org.mindrot.jbcrypt.BCrypt;
 import persistencia.Conexion;
 
 /**
@@ -48,7 +49,7 @@ public class Controlador implements IControlador {
         }
         
         if(usr instanceof DtProfesor dtProfesor){
-            u = new Profesor(usr.getNickname(),  usr.getNombre(),  usr.getApellido(),  usr.getEmail(),  usr.getFechaNac(),dtProfesor.getDescripcion(),dtProfesor.getBiografia(),dtProfesor.getSitioWeb(), null, null);
+            u = new Profesor(usr.getNickname(),  usr.getNombre(),  usr.getApellido(),  usr.getEmail(),  usr.getFechaNac(),dtProfesor.getDescripcion(),dtProfesor.getBiografia(),dtProfesor.getSitioWeb(), dtProfesor.getPassword(), dtProfesor.getImagen());
             ((Profesor) u).setInstitucionDeportiva(dtProfesor.getInstitucionDeportiva());
             mju.agregarProfesor(u);
         }
@@ -564,7 +565,27 @@ public class Controlador implements IControlador {
         mju.actualizaUser(u);
     }
 
-    
+    @Override
+    public void eliminarSocioRegistro(String clase, Socio s) {
+        ManejadorClase mjc = ManejadorClase.getInstancia();
+        Clase c = mjc.obtenerInfoClase(clase);
+        System.out.println("Clase " + c.getNombre());
+        System.out.println("Socio " + s.getId());
+        
+        
+        for(Registro r: c.getRegistros()){
+            System.out.println("Aca");
+            if(r.getClaseId().getNombre().equals(clase) && r.getSocioId().getId() == s.getId()){
+                System.out.println("Registro " + r.getSocioId().getId());
+                c.eliminarRegistro(r);
+                s.eliminarRegistro(r);
+                mjc.eliminarSocio(c, s);
+                break;
+            }
+        }
+        System.out.println("O termine aca?");
+    }
+
 }
 
 

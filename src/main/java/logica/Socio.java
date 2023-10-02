@@ -44,5 +44,8 @@ public class Socio extends Usuario{
         this.registros.add(r);
     }
     
-    
+    public void eliminarRegistro(Registro r){
+        System.out.println("Estoy aca?");
+        this.registros.remove(r);
+    }
 }
