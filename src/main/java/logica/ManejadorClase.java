@@ -89,5 +89,15 @@ public class ManejadorClase {
             e.printStackTrace();
         }
     }
-            
+
+    public ArrayList <ActividadDeportiva> obtenerActividadClase(){
+        Conexion con = Conexion.getInstancia();
+        EntityManager em = con.getEntityManager();
+
+
+            Query q = em.createQuery("select a from ActividadDeportiva a",ActividadDeportiva.class);     
+            ArrayList<ActividadDeportiva> aRet = new ArrayList<>(q.getResultList());
+            return aRet;
+    }
 }
+

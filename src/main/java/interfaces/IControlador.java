@@ -102,5 +102,7 @@ public interface IControlador {
     public void setPassword (String nickname, String mail, String password, String imagen);
     
     public void eliminarSocioRegistro(String clase, Socio s);
+    
+    public List<String[]> obtenerActividadClase(String clase);
 
 }

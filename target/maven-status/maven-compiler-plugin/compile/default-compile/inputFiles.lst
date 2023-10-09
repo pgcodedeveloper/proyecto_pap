@@ -1,37 +1,39 @@
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\logica\Controlador.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\logica\Profesor.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\persistencia\ProfesorJpaController.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\logica\Clase.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\interfaces\IControlador.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\persistencia\ClaseJpaController.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\datatypes\DtProfesor.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\persistencia\exceptions\NonexistentEntityException.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\exceptions\InstitucionRepetidaException.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\persistencia\InstitucionDeportivaJpaController.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\persistencia\RegistroJpaController.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\datatypes\DtHora.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\datatypes\DtUsuario.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\persistencia\ActividadDeportivaJpaController.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\presentacion\RegistroProfesores.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\datatypes\DtFecha.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\presentacion\RegistroDictadoClase.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\persistencia\RegistroID.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\logica\Socio.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\datatypes\DtSocio.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\persistencia\UsuarioJpaController.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\logica\Usuario.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\presentacion\RegistroInstitucion.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\presentacion\RegistroClientes.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\presentacion\Main.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\presentacion\RegistroActividadDeportiva.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\logica\ManejadorInstitucion.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\persistencia\SocioJpaController.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\exceptions\UsuarioRepetidoException.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\logica\Registro.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\logica\ActividadDeportiva.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\logica\InstitucionDeportiva.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\persistencia\exceptions\IllegalOrphanException.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\persistencia\exceptions\PreexistingEntityException.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\persistencia\Conexion.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\interfaces\Fabrica.java
-C:\Users\PC\Desktop\PAp\entrenamosuy\src\main\java\logica\ManejadorUsuario.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\logica\Profesor.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\presentacion\RegistroDictadoClase.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\exceptions\InstitucionRepetidaException.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\presentacion\ModificarActividadDeportiva.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\persistencia\RegistroID.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\logica\ManejadorInstitucion.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\presentacion\ModificarInstitucion.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\logica\ManejadorClase.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\datatypes\DtSocio.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\exceptions\UsuarioRepetidoException.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\presentacion\Main.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\datatypes\DtHora.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\logica\Controlador.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\persistencia\Conexion.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\logica\Clase.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\logica\Usuario.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\presentacion\RegistroInstitucion.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\presentacion\RegistroClientes.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\logica\ManejadorUsuario.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\logica\Registro.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\presentacion\RegistroProfesores.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\presentacion\ConsultaActividadD.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\exceptions\ActividadDException.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\presentacion\RankingActividades.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\datatypes\DtProfesor.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\presentacion\ConsultarUsuarios.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\datatypes\DtUsuario.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\datatypes\DtFecha.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\presentacion\RegistroActividadDeportiva.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\exceptions\ClaseException.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\exceptions\SocioYaInscriptoException.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\presentacion\ModificarUsuarios.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\interfaces\Fabrica.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\logica\ActividadDeportiva.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\logica\Socio.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\interfaces\IControlador.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\logica\InstitucionDeportiva.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\presentacion\RankingClases.java
+C:\Users\marti\OneDrive\Escritorio\Principal\Tecnologo\Segundo año\4to Semestre\Programacion_de_Aplicaciones\Laboratorio\proyecto_pap\src\main\java\presentacion\RegistroSocioDictadoClase.java

@@ -586,6 +586,25 @@ public class Controlador implements IControlador {
         System.out.println("O termine aca?");
     }
 
+    @Override
+    public List<String[]> obtenerActividadClase(String clase) {
+         ManejadorClase mjc = ManejadorClase.getInstancia();
+         Clase c = mjc.obtenerInfoClase(clase);
+         List <String[]> aRet = new ArrayList<>();
+         ArrayList <ActividadDeportiva> list = mjc.obtenerActividadClase();
+         for (ActividadDeportiva a:list){
+             if (a.getClases().contains(c)){
+                String[] datos = new String[3];
+                datos[0] = a.getNombre();
+                datos[1] = "" + a.getCosto();
+                datos[2] = "" + a.getDuracion();
+                aRet.add(datos);
+             }
+         }
+        return aRet;
+    }
+    
+
 }
 
 
