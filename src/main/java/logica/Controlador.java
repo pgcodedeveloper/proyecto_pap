@@ -145,14 +145,14 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void altaActividadDeportiva(String nombre, String descripcion, int duracion, float costo, Date fechaR, String nomInst) throws ActividadDException{
+    public void altaActividadDeportiva(String nombre, String descripcion, int duracion, float costo, Date fechaR, String nomInst, String img) throws ActividadDException{
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         InstitucionDeportiva i = mji.buscarInst(nomInst);
         if(this.existeActividadDepo(nombre, nomInst)){
             throw new ActividadDException("Ya existe una actividad con ese nombre");
         }
         else{
-            ActividadDeportiva a = new ActividadDeportiva(nombre, descripcion, duracion, costo, fechaR, i);
+            ActividadDeportiva a = new ActividadDeportiva(nombre, descripcion, duracion, costo, fechaR, i, img);
             i.agregarActividad(a);
             mji.agregarActividadDeportiva(a);
         }
@@ -238,7 +238,7 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void altaClaseActividad(String inst, String act, String nomC, String prof, String url, Date fechaI, Date fechaA) throws ClaseException{
+    public void altaClaseActividad(String inst, String act, String nomC, String prof, String url, Date fechaI, Date fechaA, String img) throws ClaseException{
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         InstitucionDeportiva i = mji.buscarInst(inst);
         
@@ -250,7 +250,7 @@ public class Controlador implements IControlador {
             ZoneId zona = ZoneId.systemDefault();
             LocalTime hora = instant.atZone(zona).toLocalTime();
             //System.out.println("La hora es" + hora.);
-            Clase c = new Clase(nomC, fechaI, hora, url, fechaA);
+            Clase c = new Clase(nomC, fechaI, hora, url, fechaA, img);
              
             
             for(ActividadDeportiva a: i.getActividadesDeportiva()) {
@@ -450,7 +450,7 @@ public class Controlador implements IControlador {
     }
     
     @Override
-    public void actualizarUsuario (String email,String nick, String nombre, String apellido, Date fNac){
+    public void actualizarUsuario (String email,String nick, String nombre, String apellido, Date fNac, String img){
         
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
         //ArrayList<DtUsuario> list = mju.obtenerUsuarios();
@@ -458,6 +458,7 @@ public class Controlador implements IControlador {
         u.setNombre(nombre);
         u.setApellido(apellido);
         u.setFechaNac(fNac);
+        u.setImagen(img);
         mju.actualizaUser(u);
         
         /*for (DtUsuario u:list){
@@ -471,13 +472,14 @@ public class Controlador implements IControlador {
     }
     
     @Override
-    public void actualizarProfe (String email,String nick, String nombre, String apellido, Date fNac, String bio, String desc, String web){
+    public void actualizarProfe (String email,String nick, String nombre, String apellido, Date fNac, String img, String bio, String desc, String web){
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
         //ArrayList<DtProfesor> list = mju.obtenerUsuariosProfe();
         Usuario u = mju.buscarUsuario(email, nick);
         u.setNombre(nombre);
         u.setApellido(apellido);
         u.setFechaNac(fNac);
+        u.setImagen(img);
         ((Profesor)u).setBiografia(bio);
         ((Profesor)u).setDescripcion(desc);
         ((Profesor)u).setSitioWeb(web);
@@ -510,13 +512,14 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void modificarActividadDeportiva(String nombre, String descripcion, int duracion, float costo) {
+    public void modificarActividadDeportiva(String nombre, String descripcion, int duracion, float costo, String img) {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         ActividadDeportiva a = mji.obtenerActividad(nombre);
         
         a.setDescripcion(descripcion);
         a.setDuracion(duracion);
         a.setCosto(costo);
+        a.setImagen(img);
         mji.modificarActividadDeportiva(a);
     }
 

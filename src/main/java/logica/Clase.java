@@ -42,6 +42,8 @@ public class Clase{
     @Column(name = "fecha_registro")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaReg;
+     @Column (name = "imagen")
+    private String imagen;  
     
     @OneToMany(mappedBy = "clase",cascade = CascadeType.ALL,fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Registro> registros = new ArrayList<>();
@@ -50,12 +52,13 @@ public class Clase{
         super();
     }
     // Constructor
-    public Clase(String nombre, Date fecha, LocalTime horaInicio, String url, Date fechaReg) {
+    public Clase(String nombre, Date fecha, LocalTime horaInicio, String url, Date fechaReg, String img) {
         this.nombre = nombre;
         this.fecha = fecha;
         this.horaInicio = horaInicio;
         this.url = url;
         this.fechaReg = fechaReg;
+        this.imagen = img;
     }
 
     // Getter y Setter para 'nombre'
@@ -129,6 +132,15 @@ public class Clase{
     public String toString() {
         return "Clase{" + "nombre=" + nombre + ", fecha=" + fecha + ", horaInicio=" + horaInicio + ", url=" + url + ", fechaReg=" + fechaReg + ", registros=" + registros + '}';
     }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+    
     
     
 }

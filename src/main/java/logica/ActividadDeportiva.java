@@ -13,6 +13,7 @@ import java.util.Date;
  * @author PC
  */
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -30,6 +31,8 @@ public class ActividadDeportiva{
     private float costo;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaReg;
+    @Column (name = "imagen")
+    private String imagen;  
     
     @OneToMany
     private List<Clase> clases = new ArrayList<>();
@@ -41,13 +44,14 @@ public class ActividadDeportiva{
         super();
     }
     // Constructor
-    public ActividadDeportiva(String nombre, String descripcion, Integer duracion, float costo, Date fechaReg, InstitucionDeportiva ins) {
+    public ActividadDeportiva(String nombre, String descripcion, Integer duracion, float costo, Date fechaReg, InstitucionDeportiva ins, String img) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
         this.costo = costo;
         this.fechaReg = fechaReg;
         this.inst = ins;
+        this.imagen = img;
     }
 
     // Getter y Setter para 'nombre'
@@ -115,5 +119,15 @@ public class ActividadDeportiva{
     public void setInst(InstitucionDeportiva inst) {
         this.inst = inst;
     }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+    
+    
 
 }

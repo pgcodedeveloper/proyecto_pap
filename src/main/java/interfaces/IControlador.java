@@ -33,7 +33,7 @@ public interface IControlador {
     
     public void altaInstitucion(String nombre,String descripcion, String url) throws InstitucionRepetidaException;
     
-    public void altaActividadDeportiva(String nombre, String descripcion,int duracion,float costo, Date fechaR, String nomInst) throws ActividadDException;
+    public void altaActividadDeportiva(String nombre, String descripcion,int duracion,float costo, Date fechaR, String nomInst, String img) throws ActividadDException;
     
     public void altaSocioClase (String socio, String clase, Date fecha) throws SocioYaInscriptoException;
     
@@ -69,7 +69,7 @@ public interface IControlador {
     
     public ArrayList<Registro> obtenerRegistrosSocio(int idS);
     
-    public void altaClaseActividad(String inst, String act, String nomC, String prof, String url, Date fechaI, Date fechaA) throws ClaseException;
+    public void altaClaseActividad(String inst, String act, String nomC, String prof, String url, Date fechaI, Date fechaA, String img) throws ClaseException;
     
     public boolean existeClaseActividad(String clase);
     
@@ -87,11 +87,11 @@ public interface IControlador {
     
     public DtProfesor obtenerProfesor (String nickname); 
     
-    public void actualizarUsuario (String email,String nick, String nombre, String apellido, Date fNac);
+    public void actualizarUsuario (String email,String nick, String nombre, String apellido, Date fNac, String img);
     
-    public void actualizarProfe (String email,String nick, String nombre, String apellido, Date fNac, String bio, String desc, String web);
+    public void actualizarProfe (String email,String nick, String nombre, String apellido, Date fNac, String img, String bio, String desc, String web);
     
-    public void modificarActividadDeportiva(String nombre, String descripcion,int duracion,float costo);
+    public void modificarActividadDeportiva(String nombre, String descripcion,int duracion,float costo, String img);
     
     public void modificarInstitucion(String nombre,String descripcion, String url);
     

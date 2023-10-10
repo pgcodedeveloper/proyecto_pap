@@ -8,6 +8,8 @@ import exceptions.ClaseException;
 import interfaces.IControlador;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -19,6 +21,8 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
      * Creates new form RegistroClientes
      */
     private IControlador icon;
+    String ruta = null;
+    
     public RegistroDictadoClase(IControlador con) {
         initComponents();
         this.icon = con;
@@ -75,6 +79,7 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
         comboBoxActDeportiva = new javax.swing.JComboBox<>();
         dateFechaInicio = new com.toedter.calendar.JDateChooser();
         dateFechaAlta = new com.toedter.calendar.JDateChooser();
+        btnImagen = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
@@ -165,6 +170,14 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
 
         dateFechaAlta.setDateFormatString("dd/MM/yyyy");
 
+        btnImagen.setText("Seleccionar Imagen");
+        btnImagen.setIconTextGap(10);
+        btnImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImagenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRegistroLayout = new javax.swing.GroupLayout(panelRegistro);
         panelRegistro.setLayout(panelRegistroLayout);
         panelRegistroLayout.setHorizontalGroup(
@@ -172,6 +185,9 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
             .addGroup(panelRegistroLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRegistroLayout.createSequentialGroup()
+                        .addComponent(btnImagen)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelRegistroLayout.createSequentialGroup()
                         .addComponent(lblNombreClase)
                         .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +215,7 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
                                 .addGap(51, 51, 51)
                                 .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(dateFechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+                            .addComponent(dateFechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                             .addComponent(dateFechaAlta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelRegistroLayout.createSequentialGroup()
                         .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,11 +269,12 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
                         .addComponent(dateFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRegistroLayout.createSequentialGroup()
-                        .addComponent(lblFechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblFechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateFechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addComponent(btnImagen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
 
@@ -307,12 +324,12 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(panelRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnGuardar});
@@ -338,7 +355,7 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
         if(!txtNombreClase.getText().isEmpty() && !txtURL.getText().isEmpty()) {
             try {
                 icon.altaClaseActividad(comboBoxInstitucion.getSelectedItem().toString(), comboBoxActDeportiva.getSelectedItem().toString(), txtNombreClase.getText(),
-                        comboBoxProfesor.getSelectedItem().toString(), txtURL.getText(), dateFechaInicio.getDate(), dateFechaAlta.getDate());
+                        comboBoxProfesor.getSelectedItem().toString(), txtURL.getText(), dateFechaInicio.getDate(), dateFechaAlta.getDate(), ruta);
                 JOptionPane.showMessageDialog(null, "Clase creada correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 this.setVisible(false);
             } catch (ClaseException e) {
@@ -373,10 +390,23 @@ public class RegistroDictadoClase extends javax.swing.JInternalFrame {
         txtURL.setEnabled(true);
     }//GEN-LAST:event_comboBoxInstitucionActionPerformed
 
+    private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter ("Archivos de imagen", "jpg","jpeg","png","gif","bmp");
+        fileChooser.setFileFilter(filter);
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION){
+            ruta = fileChooser.getSelectedFile().getAbsolutePath();
+            System.out.print(ruta);
+        }
+    }//GEN-LAST:event_btnImagenActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnImagen;
     private javax.swing.JComboBox<String> comboBoxActDeportiva;
     private javax.swing.JComboBox<String> comboBoxInstitucion;
     private javax.swing.JComboBox<String> comboBoxProfesor;
