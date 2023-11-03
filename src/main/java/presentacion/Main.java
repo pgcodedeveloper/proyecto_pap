@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package presentacion;
 
 import interfaces.Fabrica;
@@ -13,11 +10,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.w3c.dom.css.RGBColor;
+import publicadores.ControladorPublish;
 
-/**
- *
- * @author PC
- */
 public class Main extends JFrame {
     int xMouse, yMouse;
     private RegistroClientes clientes;
@@ -38,6 +32,10 @@ public class Main extends JFrame {
      */
     public Main() {
         initComponents();
+        
+        ControladorPublish cp = new ControladorPublish();
+        cp.publicar();
+        
         Fabrica fab = Fabrica.getInstancia();
         IControlador con = fab.getIControlador();
         clientes = new RegistroClientes(con);
@@ -47,8 +45,7 @@ public class Main extends JFrame {
         clientes.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);
         panelContenido.add(clientes);
         clientes.setVisible(false);
-        
-        
+
         profesores = new RegistroProfesores(con);
         jInternalFrameSize = profesores.getSize();
         profesores.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height- jInternalFrameSize.height)/2);

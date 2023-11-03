@@ -42,7 +42,7 @@ public class Clase{
     @Column(name = "fecha_registro")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaReg;
-     @Column (name = "imagen")
+    @Column (name = "imagen")
     private String imagen;  
     
     @OneToMany(mappedBy = "clase",cascade = CascadeType.ALL,fetch = FetchType.LAZY, orphanRemoval = true)

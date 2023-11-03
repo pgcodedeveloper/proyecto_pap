@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package logica;
+package publicadores;
 
+import configuracion.WebServiceConfiguracion;
 import datatypes.DtProfesor;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
@@ -12,7 +9,12 @@ import exceptions.ClaseException;
 import exceptions.InstitucionRepetidaException;
 import exceptions.SocioYaInscriptoException;
 import exceptions.UsuarioRepetidoException;
+import interfaces.Fabrica;
 import interfaces.IControlador;
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebService;
+import jakarta.jws.soap.SOAPBinding;
+import jakarta.xml.ws.Endpoint;
 import java.time.Instant;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -22,20 +24,51 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
-import org.mindrot.jbcrypt.BCrypt;
+import logica.ActividadDeportiva;
+import logica.Clase;
+import logica.InstitucionDeportiva;
+import logica.ManejadorClase;
+import logica.ManejadorInstitucion;
+import logica.ManejadorUsuario;
+import logica.Profesor;
+import logica.Registro;
+import logica.Socio;
+import logica.Usuario;
 import persistencia.Conexion;
 
-/**
- *
- * @author PC
- */
-public class Controlador implements IControlador {
 
-    public Controlador() {
-        super();
+@WebService(name = "Controlador")
+@SOAPBinding(style = SOAPBinding.Style.RPC, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
+public class ControladorPublish{
+    private Fabrica fabrica = Fabrica.getInstancia();
+    private IControlador icon = fabrica.getIControlador();
+    private WebServiceConfiguracion configuracion = new WebServiceConfiguracion();
+    private Endpoint endpoint;
+    
+    public ControladorPublish() {
+        fabrica = Fabrica.getInstancia();
+        icon = fabrica.getIControlador();
+        configuracion = new WebServiceConfiguracion();
+    }
+
+    @WebMethod(exclude = true)
+    public void publicar() {
+        endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controlador", this);
+        System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controlador");
+    }
+	
+    @WebMethod(exclude = true)
+    public Endpoint getEndpoint() {
+        return endpoint;
     }
     
-    @Override
+    @WebMethod(operationName = "operation")
+    public String operation() {
+        //TODO write your implementation code here:
+        return null;
+    }
+    
+    @WebMethod(operationName = "altaUsuario")
     public void altaUsuario(DtUsuario usr) throws UsuarioRepetidoException{
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
         Usuario u = mju.buscarUsuario(usr.getEmail(), usr.getNickname());
@@ -54,8 +87,8 @@ public class Controlador implements IControlador {
             mju.agregarProfesor(u);
         }
     }
-
-    @Override
+    
+    @WebMethod(operationName = "altaInstitucion")
     public void altaInstitucion(String nombre, String descripcion, String url) throws InstitucionRepetidaException {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         InstitucionDeportiva ins = mji.buscarInst(nombre);
@@ -68,8 +101,7 @@ public class Controlador implements IControlador {
             mji.agregarInstitucion(ins);
         }
     }
-
-    @Override
+    @WebMethod(operationName = "obtenerInstituciones")
     public String[] obtenerInstituciones() {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         ArrayList<String> list;
@@ -89,62 +121,88 @@ public class Controlador implements IControlador {
         }
         return inst_ret;
     }
-    
-    @Override
+    @WebMethod(operationName = "obtenerInstitucion")
     public InstitucionDeportiva obtenerInstitucion(String nom){
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         InstitucionDeportiva i = mji.buscarInst(nom);
         return i;
     }
-
-    @Override
-    public ArrayList<DtSocio> obtenerSocios() {
+    @WebMethod(operationName = "obtenerSocios")
+    public DtSocio[] obtenerSocios() {
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
         ArrayList<DtSocio> list;
         list = mju.obtenerUsuariosSocio();
-        return list;
+        DtSocio[] ret = new DtSocio[list.size()];
+        int i = 0;
+        for(DtSocio s : list) {
+            ret[i]=s;
+            i++;
+        }
+        return ret;
     }
-
-    @Override
-    public ArrayList<DtProfesor> obtenerProfes() {
+    @WebMethod(operationName = "obtenerProfes")
+    public DtProfesor[] obtenerProfes() {
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
         ArrayList<DtProfesor> list;
         list = mju.obtenerUsuariosProfe();
-        return list;
+        DtProfesor[] ret = new DtProfesor[list.size()];
+        int i = 0;
+        for(DtProfesor s : list) {
+            ret[i]=s;
+            i++;
+        }
+        return ret;
     }
-
-    @Override
-    public ArrayList<String> obtenerClasesProfe(int idP) {
+    @WebMethod(operationName = "obtenerClasesProfe")
+    public String[] obtenerClasesProfe(int idP) {
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
         ArrayList<String> li;
         li = mju.obtenerClases(idP);
-        return li;
+        int i = 0;
+        String[] ret = new String[li.size()];
+        for(String s: li){
+            ret[i] = s;
+            i++;
+        }
+        return ret;
     }
-
-    @Override
-    public ArrayList<String> obtenerActivDeporProfe(int idP) {
+    
+    @WebMethod
+    public String[] obtenerActivDeporProfe(int idP) {
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
         ArrayList<String> li;
         li = mju.obtenerActividadesD(idP);
-        return li;
+        int i = 0;
+        String[] ret = new String[li.size()];
+        for(String s: li){
+            ret[i] = s;
+            i++;
+        }
+        return ret;
     }
 
-    @Override
+    @WebMethod
     public Clase obtenerInfoClase(String nombre) {
         ManejadorClase mjc = ManejadorClase.getInstancia();
         Clase c = mjc.obtenerInfoClase(nombre);
         return c;
     }
 
-    @Override
-    public ArrayList<Registro> obtenerRegistrosSocio(int idS) {
+    @WebMethod
+    public Registro[] obtenerRegistrosSocio(int idS) {
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
         ArrayList<Registro> list;
         list = mju.obtenerRegistrosSocio(idS);
-        return list;
+        int i = 0;
+        Registro[] ret = new Registro[list.size()];
+        for(Registro r : list){
+            ret[i] = r;
+            i++;
+        }
+        return ret;
     }
-
-    @Override
+    
+    @WebMethod
     public void altaActividadDeportiva(String nombre, String descripcion, int duracion, float costo, Date fechaR, String nomInst, String img) throws ActividadDException{
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         InstitucionDeportiva i = mji.buscarInst(nomInst);
@@ -159,7 +217,7 @@ public class Controlador implements IControlador {
         
     }
 
-    @Override
+    @WebMethod
     public boolean existeActividadDepo(String nomAct, String nomInst) {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         InstitucionDeportiva i = mji.buscarInst(nomInst);
@@ -174,7 +232,7 @@ public class Controlador implements IControlador {
         return aRetornar;
     }
 
-    @Override
+    @WebMethod
     public String[] obtenerActividades(String nom) {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         ArrayList<String> list;
@@ -194,29 +252,8 @@ public class Controlador implements IControlador {
         }
         return inst_ret;
     }
-    
-    @Override
-    public String[] obtenerActividades() {
-        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
-        ArrayList<String> list;
-        list = mji.obtenerActividades();
-        String[] inst_ret = new String[list.size()];
-        if(!list.isEmpty()){
-            int i=0;
-            //inst_ret[0] = "Seleccione"; //Para que en el combo box aparezca seleccionada esta opción
-            for(String name:list) {
-                    inst_ret[i]=name;
-                    i++;
-            }
-        }
-        else{
-            inst_ret = new String[1];
-            inst_ret[0] = "No hay actividades";
-        }
-        return inst_ret;
-    }
 
-    @Override
+    @WebMethod
     public String[] obtenerProfesInst(String nom) {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         ArrayList<String> list;
@@ -237,7 +274,18 @@ public class Controlador implements IControlador {
         return inst_ret;
     }
 
-    @Override
+    @WebMethod
+    public boolean existeClaseActividad(String clase) {
+        ManejadorClase mjc = ManejadorClase.getInstancia();
+        Clase c = mjc.obtenerInfoClase(clase);
+        boolean aRetornar = false;
+        if(c != null){
+            aRetornar = true;
+        }
+        return aRetornar;
+    }
+   
+    @WebMethod
     public void altaClaseActividad(String inst, String act, String nomC, String prof, String url, Date fechaI, Date fechaA, String img) throws ClaseException{
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         InstitucionDeportiva i = mji.buscarInst(inst);
@@ -268,50 +316,58 @@ public class Controlador implements IControlador {
         
     }
     
-    @Override
-    public boolean existeClaseActividad(String clase) {
-        ManejadorClase mjc = ManejadorClase.getInstancia();
-        Clase c = mjc.obtenerInfoClase(clase);
-        boolean aRetornar = false;
-        if(c != null){
-            aRetornar = true;
-        }
-        return aRetornar;
-    }
-
-    @Override
+    @WebMethod
     public ActividadDeportiva obtenerActividad(String nom) {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         ActividadDeportiva a = mji.obtenerActividad(nom);
         return a;
     }
 
-    @Override
-    public ArrayList<ActividadDeportiva> obtenerActividadesInstitucion(String institucion) {
+    @WebMethod
+    public ActividadDeportiva[] obtenerActividadesInstitucion(String institucion) {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         ArrayList<ActividadDeportiva> aRetornar = mji.obtenerActividadesInst(institucion);
-        return aRetornar;
+        int i = 0;
+        ActividadDeportiva[] ret = new ActividadDeportiva[aRetornar.size()];
+        for(ActividadDeportiva a: aRetornar){
+            ret[i] = a;
+            i++;
+        }
+        return ret;
     }
 
-    @Override
-    public ArrayList<String> obtenerClasesAct(String act) {
+    @WebMethod
+    public String[] obtenerClasesAct(String act) {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         ArrayList<String> aRetornar = mji.obtenerClasesAct(act);
-        return aRetornar;
+        int i = 0;
+        String[] ret = new String[aRetornar.size()];
+        for(String s: aRetornar){
+            ret[i] = s;
+            i++;
+        }
+        return ret;
     }
 
-    @Override
-    public ArrayList<Clase> obtenerClasesDeActividad(String act) {
+    @WebMethod
+    public Clase[] obtenerClasesDeActividad(String act) {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         ArrayList<Clase> aRetornar = mji.obtenerClaseDeActividad(act);
-        return aRetornar;
+        int i = 0;
+        Clase[] ret = new Clase[aRetornar.size()];
+        for(Clase c: aRetornar){
+            ret[i] = c;
+            i++;
+        }
+        return ret;
     }
 
     
-    @Override
+    @WebMethod
     public String [] obtenerListaSocios(){
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
         ArrayList<DtSocio> list;
-        list = this.obtenerSocios();
+        list = mju.obtenerUsuariosSocio();
         String[] usr_ret = new String[list.size()];
         if(!list.isEmpty()){
             int i=0;
@@ -327,28 +383,26 @@ public class Controlador implements IControlador {
         return usr_ret;
     }
     
-    @Override
-        public String [] obtenerClases(String nomAct){
-         
-            ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
-            
-            List<Clase> cs= (mji.obtenerActividad(nomAct).getClases());
-            String[] ret= new String [cs.size()];
-            if (!cs.isEmpty()){
-                int i = 0;
-                for (Clase c:cs){
-                    ret[i]= c.getNombre();
-                    i++;
-                }
+    @WebMethod
+    public String [] obtenerClases(String nomAct){
+        ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
+        List<Clase> cs= (mji.obtenerActividad(nomAct).getClases());
+        String[] ret= new String [cs.size()];
+        if (!cs.isEmpty()){
+            int i = 0;
+            for (Clase c:cs){
+                ret[i]= c.getNombre();
+                i++;
             }
-            else{
-                ret = new String [1];
-                ret[0] = "No hay clases";
-            }
-            return ret;
         }
-
-    @Override
+        else{
+            ret = new String [1];
+            ret[0] = "No hay clases";
+        }
+        return ret;
+    }
+    
+    @WebMethod
     public void altaSocioClase (String nomSocio, String nomClase, Date fecha) throws SocioYaInscriptoException{
         ManejadorClase mjc = ManejadorClase.getInstancia();
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
@@ -376,7 +430,7 @@ public class Controlador implements IControlador {
         em.getTransaction().commit();
     }   
     
-    @Override
+    @WebMethod
     public boolean existeSocioClase (Clase c, Socio s){
         
         Boolean aRetornar=false;
@@ -387,7 +441,7 @@ public class Controlador implements IControlador {
         return aRetornar;
     }
     
-    @Override
+    @WebMethod
     public String obtenerProfesorClase(String nomClase, String nomInst){
         
         String aRet = null;
@@ -402,7 +456,7 @@ public class Controlador implements IControlador {
         return aRet;
     }   
     
-    @Override
+    @WebMethod
     public String[] obtenerUsuarios(){
         
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
@@ -418,7 +472,7 @@ public class Controlador implements IControlador {
     }
     
     
-    @Override
+    @WebMethod
     public DtUsuario obtenerUsuario(String nickname){
         
         DtUsuario ret = null;
@@ -434,7 +488,7 @@ public class Controlador implements IControlador {
         return ret;
     }
     
-    @Override
+    @WebMethod
     public DtProfesor obtenerProfesor (String nickname){
         
         DtProfesor ret = null;
@@ -449,32 +503,22 @@ public class Controlador implements IControlador {
         return ret;
     }
     
-    @Override
+    @WebMethod
     public void actualizarUsuario (String email,String nick, String nombre, String apellido, Date fNac, String img){
         
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
-        //ArrayList<DtUsuario> list = mju.obtenerUsuarios();
         Usuario u = mju.buscarUsuario(email, nick);
         u.setNombre(nombre);
         u.setApellido(apellido);
         u.setFechaNac(fNac);
         u.setImagen(img);
         mju.actualizaUser(u);
-        
-        /*for (DtUsuario u:list){
-            if (u.getNickname().equals(nick)){
-                u.setNombre(nombre);
-                u.setApellido(apellido);
-                u.setFechaNac(fNac);
-                mju.actualizaUser(u);
-            }
-        }*/
+
     }
     
-    @Override
+    @WebMethod
     public void actualizarProfe (String email,String nick, String nombre, String apellido, Date fNac, String img, String bio, String desc, String web){
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
-        //ArrayList<DtProfesor> list = mju.obtenerUsuariosProfe();
         Usuario u = mju.buscarUsuario(email, nick);
         u.setNombre(nombre);
         u.setApellido(apellido);
@@ -486,14 +530,15 @@ public class Controlador implements IControlador {
         mju.actualizaProfe(u);
     }
     
-    @Override
-    public ArrayList<Object[]> rankingClases(){
+    /*
+    @WebMethod
+    public Object[] rankingClases(){
         ManejadorClase mjc = ManejadorClase.getInstancia();
         ArrayList<Clase> clases = mjc.listadoClases();
-        ArrayList<Object[]> aRet = new ArrayList();
-        
+        Object[] aRet = new Object[clases.size()];
+        int i = 0;
         for(Clase c:clases){
-            aRet.add(new Object []{c, c.getRegistros().size()});
+            aRet[i] = (new Object []{c, c.getRegistros().size()});
         }
         
         Collections.sort(aRet, new Comparator<Object[]>() {
@@ -510,8 +555,9 @@ public class Controlador implements IControlador {
 
         return aRet;
     }
+    */
 
-    @Override
+    @WebMethod
     public void modificarActividadDeportiva(String nombre, String descripcion, int duracion, float costo, String img) {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         ActividadDeportiva a = mji.obtenerActividad(nombre);
@@ -523,7 +569,7 @@ public class Controlador implements IControlador {
         mji.modificarActividadDeportiva(a);
     }
 
-    @Override
+    @WebMethod
     public void modificarInstitucion(String nombre, String descripcion, String url) {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         InstitucionDeportiva ins = mji.buscarInst(nombre);
@@ -534,7 +580,8 @@ public class Controlador implements IControlador {
         
     }
     
-    @Override
+    /*
+    @WebMethod
     public ArrayList<Object[]> rankingActividades(){
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         ArrayList <Object[]> aRet = new ArrayList();
@@ -557,9 +604,9 @@ public class Controlador implements IControlador {
         
         Collections.reverse(aRet);
         return aRet;
-    }
+    }*/
 
-    @Override
+    @WebMethod
     public void setPassword(String nickname, String mail, String password, String imagen) {
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
         Usuario u = mju.buscarUsuario(mail, nickname);
@@ -568,48 +615,39 @@ public class Controlador implements IControlador {
         mju.actualizaUser(u);
     }
 
-    @Override
+    @WebMethod
     public void eliminarSocioRegistro(String clase, Socio s) {
         ManejadorClase mjc = ManejadorClase.getInstancia();
         Clase c = mjc.obtenerInfoClase(clase);
-        System.out.println("Clase " + c.getNombre());
-        System.out.println("Socio " + s.getId());
-        
-        
+  
         for(Registro r: c.getRegistros()){
-            System.out.println("Aca");
             if(r.getClaseId().getNombre().equals(clase) && r.getSocioId().getId() == s.getId()){
-                System.out.println("Registro " + r.getSocioId().getId());
                 c.eliminarRegistro(r);
                 s.eliminarRegistro(r);
                 mjc.eliminarSocio(c, s);
                 break;
             }
         }
-        System.out.println("O termine aca?");
     }
 
-    @Override
-    public List<String[]> obtenerActividadClase(String clase) {
-         ManejadorClase mjc = ManejadorClase.getInstancia();
-         Clase c = mjc.obtenerInfoClase(clase);
-         List <String[]> aRet = new ArrayList<>();
-         ArrayList <ActividadDeportiva> list = mjc.obtenerActividadClase();
-         for (ActividadDeportiva a:list){
-             if (a.getClases().contains(c)){
-                String[] datos = new String[3];
-                datos[0] = a.getNombre();
-                datos[1] = "" + a.getCosto();
-                datos[2] = "" + a.getDuracion();
-                aRet.add(datos);
-             }
-         }
+    @WebMethod
+    public String[] obtenerActividadClase(String clase) {
+        ManejadorClase mjc = ManejadorClase.getInstancia();
+        Clase c = mjc.obtenerInfoClase(clase);
+        ArrayList <ActividadDeportiva> list = mjc.obtenerActividadClase();
+        String[] aRet = new String[list.size()];
+        int i = 0;
+        for (ActividadDeportiva a: list){
+            if (a.getClases().contains(c)){
+               String[] datos = new String[3];
+               datos[0] = a.getNombre();
+               datos[1] = "" + a.getCosto();
+               datos[2] = "" + a.getDuracion();
+               aRet[i] = datos.toString();
+               i++;
+            }
+        }
         return aRet;
     }
     
-
 }
-
-
-
- 
