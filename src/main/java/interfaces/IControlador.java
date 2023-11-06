@@ -21,6 +21,7 @@ import logica.InstitucionDeportiva;
 import logica.Profesor;
 import logica.Registro;
 import logica.Socio;
+import logica.Usuario;
 
 /**
  *
@@ -104,5 +105,7 @@ public interface IControlador {
     public void eliminarSocioRegistro(String clase, Socio s);
     
     public List<String[]> obtenerActividadClase(String clase);
+    
+    public Usuario loginUsuario(String email);
 
 }

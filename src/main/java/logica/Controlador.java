@@ -606,8 +606,15 @@ public class Controlador implements IControlador {
          }
         return aRet;
     }
-    
 
+    @Override
+    public Usuario loginUsuario(String email) {
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        Usuario u = mju.buscarUsuarioEmail(email);
+        return u;
+    }
+    
+    
 }
 
 
