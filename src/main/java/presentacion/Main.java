@@ -33,6 +33,7 @@ public class Main extends JFrame {
     public Main() {
         initComponents();
         
+        System.setProperty("org.apache.cxf.stax.allowInsecureParser", "true");
         ControladorPublish cp = new ControladorPublish();
         cp.publicar();
         

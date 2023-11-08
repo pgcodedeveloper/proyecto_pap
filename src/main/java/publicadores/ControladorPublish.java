@@ -11,14 +11,16 @@ import exceptions.SocioYaInscriptoException;
 import exceptions.UsuarioRepetidoException;
 import interfaces.Fabrica;
 import interfaces.IControlador;
-import jakarta.jws.WebMethod;
-import jakarta.jws.WebService;
-import jakarta.jws.soap.SOAPBinding;
-import jakarta.xml.ws.Endpoint;
+import javax.xml.ws.Endpoint;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
+import javax.jws.soap.SOAPBinding.Style;
+import javax.jws.soap.SOAPBinding.ParameterStyle;
 import logica.ActividadDeportiva;
 import logica.Clase;
 import logica.InstitucionDeportiva;
@@ -31,7 +33,7 @@ import logica.Usuario;
 
 
 @WebService
-@SOAPBinding(style = SOAPBinding.Style.RPC, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
+@SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public class ControladorPublish{
     private Fabrica fabrica = Fabrica.getInstancia();
     private IControlador icon = fabrica.getIControlador();

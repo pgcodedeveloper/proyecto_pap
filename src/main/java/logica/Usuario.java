@@ -72,6 +72,10 @@ public class Usuario{
         return this.nickname;
     }
     
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+    
     public String getNombre(){
         return this.nombre;
     }
@@ -86,10 +90,6 @@ public class Usuario{
     
     public Date getFecha(){
         return this.fechaNac;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public void setNombre(String nombre) {
