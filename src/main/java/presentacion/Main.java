@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.xml.ws.Endpoint;
 import org.w3c.dom.css.RGBColor;
+import publicadores.Controlador;
 import publicadores.ControladorPublish;
 
 public class Main extends JFrame {
@@ -33,9 +35,7 @@ public class Main extends JFrame {
     public Main() {
         initComponents();
         
-        System.setProperty("org.apache.cxf.stax.allowInsecureParser", "true");
-        ControladorPublish cp = new ControladorPublish();
-        cp.publicar();
+        Endpoint.publish("http://localhost:3001/controlador", new ControladorPublish());
         
         Fabrica fab = Fabrica.getInstancia();
         IControlador con = fab.getIControlador();
