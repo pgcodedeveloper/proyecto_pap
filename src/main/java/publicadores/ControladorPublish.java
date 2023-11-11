@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 import logica.ActividadDeportiva;
 import logica.Clase;
 import logica.InstitucionDeportiva;
@@ -27,13 +29,18 @@ import logica.Registro;
 import logica.Socio;
 import logica.Usuario;
 
-@WebService(endpointInterface = "publicadores.Controlador")
-public class ControladorPublish implements Controlador{
+@WebService(name = "ControladorPublish")
+@SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.WRAPPED,style = SOAPBinding.Style.RPC)
+public class ControladorPublish{
     private final Fabrica fabrica = Fabrica.getInstancia();
     private final IControlador icon = fabrica.getIControlador();
     private final WebServiceConfiguracion configuracion = new WebServiceConfiguracion();
        
-    @Override
+    public ControladorPublish(){
+        
+    }
+    
+    @WebMethod
     public void altaUsuario(DtUsuario usr) throws UsuarioRepetidoException{
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
         Usuario u = mju.buscarUsuario(usr.getEmail(), usr.getNickname());
@@ -44,7 +51,7 @@ public class ControladorPublish implements Controlador{
     }
     
     
-    @Override
+    @WebMethod
     public void altaInstitucion(String nombre, String descripcion, String url) throws InstitucionRepetidaException {
         ManejadorInstitucion mji = ManejadorInstitucion.getInstancia();
         InstitucionDeportiva ins = mji.buscarInst(nombre);
@@ -57,19 +64,19 @@ public class ControladorPublish implements Controlador{
         }
     }
     
-    @Override
+    @WebMethod
     public String[] obtenerInstituciones() {
         String[] inst_ret = icon.obtenerInstituciones();
         return inst_ret;
     }
     
-    @Override
+   @WebMethod
     public InstitucionDeportiva obtenerInstitucion(String nom){
         InstitucionDeportiva i = icon.obtenerInstitucion(nom);
         return i;
     }
     
-    @Override
+    @WebMethod
     public DtSocio[] obtenerSocios() {
         ArrayList<DtSocio> list;
         list = icon.obtenerSocios();
@@ -82,7 +89,7 @@ public class ControladorPublish implements Controlador{
         return ret;
     }
     
-    @Override
+    @WebMethod
     public DtProfesor[] obtenerProfes() {
         ArrayList<DtProfesor> list;
         list = icon.obtenerProfes();
@@ -95,7 +102,7 @@ public class ControladorPublish implements Controlador{
         return ret;
     }
 
-    @Override
+    @WebMethod
     public String[] obtenerClasesProfe(int idP) {
         ArrayList<String> li;
         li = icon.obtenerClasesProfe(idP);
@@ -109,7 +116,7 @@ public class ControladorPublish implements Controlador{
     }
     
 
-    @Override
+    @WebMethod
     public Usuario loginUsuario(String email) {
         Usuario u = icon.loginUsuario(email);
         if(u != null){         
@@ -127,7 +134,7 @@ public class ControladorPublish implements Controlador{
     }
     
  
-    @Override
+    @WebMethod
     public String[] obtenerActivDeporProfe(int idP) {
         ArrayList<String> li;
         li = icon.obtenerActivDeporProfe(idP);
@@ -141,14 +148,14 @@ public class ControladorPublish implements Controlador{
     }
 
 
-    @Override
+    @WebMethod
     public Clase obtenerInfoClase(String nombre) {
         Clase c = icon.obtenerInfoClase(nombre);
         return c;
     }
 
 
-    @Override
+    @WebMethod
     public Registro[] obtenerRegistrosSocio(int idS) {
         ArrayList<Registro> list;
         list = icon.obtenerRegistrosSocio(idS);
@@ -162,46 +169,46 @@ public class ControladorPublish implements Controlador{
     }
     
 
-    @Override
+    @WebMethod
     public void altaActividadDeportiva(String nombre, String descripcion, int duracion, float costo, Date fechaR, String nomInst, String img) throws ActividadDException{
         icon.altaActividadDeportiva(nombre, descripcion, duracion, costo, fechaR, nomInst, img);
     }
 
 
-    @Override
+    @WebMethod
     public boolean existeActividadDepo(String nomAct, String nomInst) {
         boolean aRetornar = icon.existeActividadDepo(nomAct, nomInst);
         return aRetornar;
     }
 
 
-    @Override
+    @WebMethod
     public String[] obtenerActividades(String nom) {
         String[] inst_ret = icon.obtenerActividades(nom);
         return inst_ret;
     }
 
 
-    @Override
+    @WebMethod
     public String[] obtenerProfesInst(String nom) {
         String[] inst_ret = icon.obtenerProfesInst(nom);
         return inst_ret;
     }
 
 
-    @Override
+    @WebMethod
     public boolean existeClaseActividad(String clase) {
         boolean aRetornar = icon.existeClaseActividad(clase);
         return aRetornar;
     }
    
 
-    @Override
+    @WebMethod
     public void altaClaseActividad(String inst, String act, String nomC, String prof, String url, Date fechaI, Date fechaA, String img) throws ClaseException{
         icon.altaClaseActividad(inst, act, nomC, prof, url, fechaI, fechaA, img);
     }
     
-    @Override
+    @WebMethod
     public ActividadDeportiva obtenerActividad(String nom) {
         ActividadDeportiva a = new ActividadDeportiva();
         a = icon.obtenerActividad(nom);
@@ -209,7 +216,7 @@ public class ControladorPublish implements Controlador{
         return a;
     }
 
-    @Override
+    @WebMethod
     public ActividadDeportiva[] obtenerActividadesInstitucion(String institucion) {
         ArrayList<ActividadDeportiva> aRetornar = icon.obtenerActividadesInstitucion(institucion);
         int i = 0;
@@ -221,7 +228,7 @@ public class ControladorPublish implements Controlador{
         return ret;
     }
 
-    @Override
+    @WebMethod
     public String[] obtenerClasesAct(String act) {
         ArrayList<String> aRetornar = icon.obtenerClasesAct(act);
         int i = 0;
@@ -233,7 +240,7 @@ public class ControladorPublish implements Controlador{
         return ret;
     }
 
-    @Override
+    @WebMethod
     public Clase[] obtenerClasesDeActividad(String act) {
         ArrayList<Clase> aRetornar = icon.obtenerClasesDeActividad(act);
         int i = 0;
@@ -246,67 +253,67 @@ public class ControladorPublish implements Controlador{
     }
 
     
-    @Override
+   @WebMethod
     public String [] obtenerListaSocios(){
         String[] usr_ret = icon.obtenerListaSocios();
         return usr_ret;
     }
     
-    @Override
+    @WebMethod
     public String [] obtenerClases(String nomAct){
         String[] ret = icon.obtenerClases(nomAct);
         return ret;
     }
     
-    @Override
+    @WebMethod
     public void altaSocioClase (String nomSocio, String nomClase, Date fecha) throws SocioYaInscriptoException{
         icon.altaSocioClase(nomSocio, nomClase, fecha);
     }   
     
-    @Override
+   @WebMethod
     public boolean existeSocioClase (Clase c, Socio s){
         boolean aRetornar = icon.existeSocioClase(c, s);
         return aRetornar;
     }
     
-    @Override
+    @WebMethod
     public String obtenerProfesorClase(String nomClase, String nomInst){
         String aRet = icon.obtenerProfesorClase(nomClase, nomInst);
         return aRet;
     }   
     
-    @Override
+    @WebMethod
     public String[] obtenerUsuarios(){
         String[] aRet = icon.obtenerUsuarios();
         return aRet;
     }
     
     
-    @Override
+    @WebMethod
     public DtUsuario obtenerUsuario(String nickname){
         DtUsuario ret = icon.obtenerUsuario(nickname);
         return ret;
     }
     
-    @Override
+    @WebMethod
     public DtProfesor obtenerProfesor (String nickname){
         DtProfesor ret = icon.obtenerProfesor(nickname);
         return ret;
     }
     
-    @Override
+    @WebMethod
     public void actualizarUsuario (String email,String nick, String nombre, String apellido, Date fNac, String img){
         icon.actualizarUsuario(email, nick, nombre, apellido, fNac, img);
 
     }
     
-    @Override
+   @WebMethod
     public void actualizarProfe (String email,String nick, String nombre, String apellido, Date fNac, String img, String bio, String desc, String web){
         icon.actualizarProfe(email, nick, nombre, apellido, fNac, img, bio, desc, web);
     }
     
     
-    @Override
+    @WebMethod
     public Object[] rankingClases(){
         ArrayList<Object[]> act = icon.rankingClases();
         
@@ -320,18 +327,18 @@ public class ControladorPublish implements Controlador{
     }
     
 
-    @Override
+    @WebMethod
     public void modificarActividadDeportiva(String nombre, String descripcion, int duracion, float costo, String img) {
         icon.modificarActividadDeportiva(nombre, descripcion, duracion, costo, img);
     }
 
-    @Override
+   @WebMethod
     public void modificarInstitucion(String nombre, String descripcion, String url) {
         icon.modificarInstitucion(nombre, descripcion, url); 
     }
     
     
-    @Override
+    @WebMethod
     public Object[] rankingActividades(){
         ArrayList<Object[]> act = icon.rankingActividades();
         
@@ -344,17 +351,17 @@ public class ControladorPublish implements Controlador{
         return obj;
     }
 
-    @Override
+    @WebMethod
     public void setPassword(String nickname, String mail, String password, String imagen) {
         icon.setPassword(nickname, mail, password, imagen);
     }
 
-    @Override
+    @WebMethod
     public void eliminarSocioRegistro(String clase, Socio s) {
         icon.eliminarSocioRegistro(clase, s);
     }
 
-    @Override
+    @WebMethod
     public String[] obtenerActividadClase(String clase) {
         List <String[]> list = icon.obtenerActividadClase(clase);
         String[] aRet = new String[list.size()];

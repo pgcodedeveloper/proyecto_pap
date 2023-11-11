@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.xml.ws.Endpoint;
 import org.w3c.dom.css.RGBColor;
-import publicadores.Controlador;
 import publicadores.ControladorPublish;
 
 public class Main extends JFrame {
