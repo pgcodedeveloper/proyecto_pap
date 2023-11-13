@@ -1,6 +1,7 @@
 package publicadores;
 
 import configuracion.WebServiceConfiguracion;
+import datatypes.DtActividadDeportiva;
 import datatypes.DtProfesor;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
@@ -11,14 +12,14 @@ import exceptions.SocioYaInscriptoException;
 import exceptions.UsuarioRepetidoException;
 import interfaces.Fabrica;
 import interfaces.IControlador;
-import javax.xml.ws.Endpoint;
+import jakarta.xml.ws.Endpoint;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import javax.jws.WebMethod;
-import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebService;
+import jakarta.jws.soap.SOAPBinding;
 import logica.ActividadDeportiva;
 import logica.Clase;
 import logica.InstitucionDeportiva;
@@ -35,9 +36,14 @@ public class ControladorPublish{
     private final Fabrica fabrica = Fabrica.getInstancia();
     private final IControlador icon = fabrica.getIControlador();
     private final WebServiceConfiguracion configuracion = new WebServiceConfiguracion();
-       
+    private Endpoint endpoint;
+    
     public ControladorPublish(){
         
+    }
+    @WebMethod(exclude = true)
+    public void publicar(){
+        endpoint = Endpoint.publish("http://localhost:3001/controlador", this);
     }
     
     @WebMethod
@@ -117,19 +123,8 @@ public class ControladorPublish{
     
 
     @WebMethod
-    public Usuario loginUsuario(String email) {
-        Usuario u = icon.loginUsuario(email);
-        if(u != null){         
-            if(u instanceof Socio){
-                u = new Socio(u.getNickName(),u.getNombre(),u.getApellido(),u.getEmail(),u.getFecha(),u.getPassword(),u.getImagen());
-            }
-            else if(u instanceof Profesor){
-                u = new Profesor(u.getNickName(),u.getNombre(),u.getApellido(),u.getEmail(),u.getFecha(),((Profesor)u).getDescripcion(),((Profesor)u).getBiografia(),((Profesor)u).getSitioWeb(),u.getPassword(),u.getImagen());
-            }
-        }
-        else{
-            u = null;
-        }
+    public DtUsuario loginUsuario(String email) {
+        DtUsuario u = icon.loginUsuario(email);
         return u;
     }
     
@@ -149,22 +144,45 @@ public class ControladorPublish{
 
 
     @WebMethod
-    public Clase obtenerInfoClase(String nombre) {
+    public String[] obtenerInfoClase(String nombre) {
         Clase c = icon.obtenerInfoClase(nombre);
-        return c;
+        String [] clase = new String[7];
+        clase[0] = c.getNombre();
+        clase[1] = c.getFecha().toString();
+        clase[2] = c.getHoraInicio().toString();
+        clase[3] = c.getUrl();
+        clase[4] = c.getFechaReg().toString();
+        clase[5] = c.getImagen();
+        List <Registro> list = c.getRegistros();
+        String[] reg = new String[list.size()];
+        int i = 0;
+        for(Registro r: list){
+            reg[i] = r.getSocioId().getNickName();
+            i++;
+        }
+        clase[6] = reg.toString();
+        return clase;
     }
 
 
     @WebMethod
-    public Registro[] obtenerRegistrosSocio(int idS) {
+    public String[] obtenerRegistrosSocio(String idS) {
         ArrayList<Registro> list;
-        list = icon.obtenerRegistrosSocio(idS);
+        DtUsuario u = icon.obtenerUsuario(idS);
+        System.out.println(u.getId());
+        list = icon.obtenerRegistrosSocio(u.getId());
         int i = 0;
-        Registro[] ret = new Registro[list.size()];
+        String[] ret = new String[list.size()];
         for(Registro r : list){
-            ret[i] = r;
+            String [] d = new String[3];
+            d[0] = r.getClaseId().getNombre();
+            d[1] = r.getFechaReg().toString();
+            d[2] = r.getSocioId().getNombre() + " " + r.getSocioId().getApellido();
+            //System.out.println(d);
+            ret[i] = Arrays.deepToString(d);
             i++;
         }
+        System.out.println(ret[0]);
         return ret;
     }
     
@@ -209,11 +227,18 @@ public class ControladorPublish{
     }
     
     @WebMethod
-    public ActividadDeportiva obtenerActividad(String nom) {
-        ActividadDeportiva a = new ActividadDeportiva();
-        a = icon.obtenerActividad(nom);
+    public String[] obtenerActividad(String nom) {
+        DtActividadDeportiva a = new DtActividadDeportiva(icon.obtenerActividad(nom));
         System.out.println(a.getNombre());
-        return a;
+        String[] act = new String[7];
+        act[0] = a.getNombre();
+        act[1] = a.getDescripcion();
+        act[2] = "" + a.getDuracion();
+        act[3] = "" + a.getCosto();
+        act[4] = a.getFechaReg().toString();
+        act[5] = a.getImagen();
+        act[6] = a.getInst().getNombre();
+        return act;
     }
 
     @WebMethod
@@ -357,7 +382,8 @@ public class ControladorPublish{
     }
 
     @WebMethod
-    public void eliminarSocioRegistro(String clase, Socio s) {
+    public void eliminarSocioRegistro(String clase, DtUsuario socio) {
+        Socio s = icon.obtenerSocio(socio.getNickname(), socio.getEmail());
         icon.eliminarSocioRegistro(clase, s);
     }
 

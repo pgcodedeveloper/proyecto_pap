@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.xml.ws.Endpoint;
 import org.w3c.dom.css.RGBColor;
 import publicadores.ControladorPublish;
 
@@ -34,7 +33,8 @@ public class Main extends JFrame {
     public Main() {
         initComponents();
         
-        Endpoint.publish("http://localhost:3001/controlador", new ControladorPublish());
+        ControladorPublish cp = new ControladorPublish();
+        cp.publicar();
         
         Fabrica fab = Fabrica.getInstancia();
         IControlador con = fab.getIControlador();

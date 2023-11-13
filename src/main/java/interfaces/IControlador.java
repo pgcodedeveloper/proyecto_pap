@@ -106,6 +106,7 @@ public interface IControlador {
     
     public List<String[]> obtenerActividadClase(String clase);
     
-    public Usuario loginUsuario(String email);
+    public DtUsuario loginUsuario(String email);
 
+    public Socio obtenerSocio(String nick,String email);
 }

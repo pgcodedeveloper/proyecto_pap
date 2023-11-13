@@ -361,8 +361,9 @@ public class Controlador implements IControlador {
         
         Socio socio = (Socio) mju.buscarUsuario(email,nomSocio);
         Clase clase = mjc.obtenerInfoClase(nomClase);
+        System.out.println(clase.getNombre());
+        System.out.println(socio.getNickName());
         
-                  
         if(this.existeSocioClase(clase, socio)){
            throw new SocioYaInscriptoException ("El socio ya esta inscripto en esta clase");
         }
@@ -608,11 +609,31 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public Usuario loginUsuario(String email) {
+    public DtUsuario loginUsuario(String email) {
+        DtUsuario ret = null;
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
-        Usuario u = mju.buscarUsuarioEmail(email);
-        return u;
+        ArrayList<DtUsuario> list;
+        list = mju.obtenerUsuarios();
+        Usuario usr = mju.buscarUsuarioEmail(email);
+        if(usr instanceof Socio){
+            ret = new DtSocio(usr.getId(),usr.getNickName(), usr.getNombre(), usr.getApellido(), email, usr.getFecha(), usr.getPassword(), usr.getImagen());
+        }
+        else if(usr instanceof Profesor prof){
+            ret = new DtProfesor(usr.getId(),prof.getDescripcion(), prof.getBiografia(), prof.getSitioWeb(), usr.getNickName(), usr.getNombre(), usr.getApellido(), email, usr.getFecha(), prof.getInstitucionDeportiva(), usr.getPassword(), usr.getImagen());
+        }
+        else{
+            System.out.println("Soy otra cosa");
+        }
+        return ret;
     }
+
+    @Override
+    public Socio obtenerSocio(String nick,String email) {
+        ManejadorUsuario mju = ManejadorUsuario.getInstancia();
+        Usuario s = mju.buscarUsuario(email, nick);
+        return ((Socio)s);
+    }
+    
     
     
 }

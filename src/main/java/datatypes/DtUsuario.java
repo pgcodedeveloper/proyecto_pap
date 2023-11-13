@@ -21,14 +21,36 @@ public class DtUsuario {
     private String password;
     private String imagen;
 
+    public DtUsuario(int id,String nickname, String nombre, String apellido, String email, Date fechaNac, String password, String imagen) {
+        this.id = id;
+        this.nickname = nickname;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.fechaNac = fechaNac;
+        if(password == null){
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+            this.password = hashedPassword; 
+        }
+        else{
+            this.password = password;
+        }
+        this.imagen = imagen;
+    }
+    
     public DtUsuario(String nickname, String nombre, String apellido, String email, Date fechaNac, String password, String imagen) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.fechaNac = fechaNac;
-        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-        this.password = hashedPassword; 
+        if(password == null){
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+            this.password = hashedPassword; 
+        }
+        else{
+            this.password = password;
+        }
         this.imagen = imagen;
     }
 

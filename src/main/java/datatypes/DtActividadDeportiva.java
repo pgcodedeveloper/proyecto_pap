@@ -2,12 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package logica;
-import java.util.List;
-import datatypes.DtFecha;
+package datatypes;
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
 /**
@@ -15,40 +13,38 @@ import java.util.Date;
  * @author PC
  */
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
+import logica.ActividadDeportiva;
+import logica.Clase;
+import logica.InstitucionDeportiva;
 
-@Entity
-@Table(name = "ActividadDeportiva")
-@XmlRootElement(name = "actividadDeportiva")
-public class ActividadDeportiva{
-    @Id
+public class DtActividadDeportiva{
+
     private String nombre;
     private String descripcion;
     private Integer duracion;
     private float costo;
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaReg;
-    @Column (name = "imagen")
-    private String imagen;  
-    
-    @OneToMany(fetch = FetchType.EAGER)
+    private String imagen;
+
     private List<Clase> clases = new ArrayList<>();
-    
-    @ManyToOne
+
     private InstitucionDeportiva inst;
 
-    public ActividadDeportiva(){
+    public DtActividadDeportiva(){
         super();
     }
+    
+    public DtActividadDeportiva(ActividadDeportiva a){
+        this.nombre = a.getNombre();
+        this.descripcion = a.getDescripcion();
+        this.duracion = a.getDuracion();
+        this.costo = a.getCosto();
+        this.fechaReg = a.getFechaReg();
+        this.inst = a.getInst();
+        this.imagen = a.getImagen();
+    }
     // Constructor
-    public ActividadDeportiva(String nombre, String descripcion, Integer duracion, float costo, Date fechaReg, InstitucionDeportiva ins, String img) {
+    public DtActividadDeportiva(String nombre, String descripcion, Integer duracion, float costo, Date fechaReg, InstitucionDeportiva ins, String img) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
