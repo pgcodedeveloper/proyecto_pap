@@ -130,7 +130,7 @@ public class Clase{
 
     @Override
     public String toString() {
-        return "Clase{" + "nombre=" + nombre + ", fecha=" + fecha + ", horaInicio=" + horaInicio + ", url=" + url + ", fechaReg=" + fechaReg + ", registros=" + registros + '}';
+        return nombre + "," + fecha + "," + horaInicio + "," + url + "," + fechaReg;
     }
 
     public String getImagen() {

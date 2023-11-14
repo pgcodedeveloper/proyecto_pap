@@ -19,15 +19,19 @@ public class DtProfesor extends DtUsuario {
     private String biografia;
     private String sitioWeb;
     private InstitucionDeportiva institucionDeportiva;
-    private List<Clase> clases;
+    private String inst;
+    private String[] clases;
 
-    public DtProfesor(int id,String descripcion, String biografia, String sitioWeb, String nickname, String nombre, String apellido, String email, Date fechaNac, InstitucionDeportiva i, String password, String imagen) {
+    public DtProfesor(){
+        super();
+    }
+    public DtProfesor(int id,String descripcion, String biografia, String sitioWeb, String nickname, String nombre, String apellido, String email, Date fechaNac,String i, String password, String imagen, String[] c) {
         super(id,nickname, nombre, apellido, email, fechaNac, password , imagen);
         this.descripcion = descripcion;
         this.biografia = biografia;
         this.sitioWeb = sitioWeb;
-        this.institucionDeportiva = i;
-        this.clases = new ArrayList<>();
+        this.inst = i;
+        this.clases = c;
     }
     
     public DtProfesor(String descripcion, String biografia, String sitioWeb, String nickname, String nombre, String apellido, String email, Date fechaNac, InstitucionDeportiva i, String password, String imagen) {
@@ -36,7 +40,7 @@ public class DtProfesor extends DtUsuario {
         this.biografia = biografia;
         this.sitioWeb = sitioWeb;
         this.institucionDeportiva = i;
-        this.clases = new ArrayList<>();
+        this.clases = null;
     }
 
     public String getDescripcion() {
@@ -55,7 +59,7 @@ public class DtProfesor extends DtUsuario {
         return institucionDeportiva;
     }
 
-    public List<Clase> getClases() {
+    public String[] getClases() {
         return clases;
     }
 
@@ -75,8 +79,16 @@ public class DtProfesor extends DtUsuario {
         this.institucionDeportiva = institucionDeportiva;
     }
 
-    public void setClases(List<Clase> clases) {
+    public void setClases(String[] clases) {
         this.clases = clases;
+    }
+
+    public String getInst() {
+        return inst;
+    }
+
+    public void setInst(String inst) {
+        this.inst = inst;
     }
     
     

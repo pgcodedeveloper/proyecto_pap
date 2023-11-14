@@ -125,6 +125,18 @@ public class ControladorPublish{
     @WebMethod
     public DtUsuario loginUsuario(String email) {
         DtUsuario u = icon.loginUsuario(email);
+        
+        //System.out.println();
+        if(u instanceof DtProfesor dtProfesor){
+            System.out.println(dtProfesor.getClases().length);
+            System.out.println(dtProfesor.getBiografia());
+            System.out.println(dtProfesor.getDescripcion());
+            System.out.println(dtProfesor.getInst());
+            System.out.println(dtProfesor.getSitioWeb());
+            for(String s: dtProfesor.getClases()){
+                System.out.println(s);
+            }
+        }
         return u;
     }
     
@@ -141,7 +153,6 @@ public class ControladorPublish{
         }
         return ret;
     }
-
 
     @WebMethod
     public String[] obtenerInfoClase(String nombre) {

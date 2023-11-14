@@ -94,4 +94,11 @@ public class InstitucionDeportiva{
         this.profesores.add(p);
         //p.setInstitucionDeportiva(this);
     }
+
+    @Override
+    public String toString() {
+        return  nombre + ",," + descripcion + ",," + url;
+    }
+    
+    
 }

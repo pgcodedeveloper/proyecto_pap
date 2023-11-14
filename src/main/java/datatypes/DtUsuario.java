@@ -21,6 +21,9 @@ public class DtUsuario {
     private String password;
     private String imagen;
 
+    public DtUsuario(){
+        
+    }
     public DtUsuario(int id,String nickname, String nombre, String apellido, String email, Date fechaNac, String password, String imagen) {
         this.id = id;
         this.nickname = nickname;

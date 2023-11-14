@@ -5,6 +5,8 @@
 package datatypes;
 
 import java.util.Date;
+import java.util.List;
+import logica.Registro;
 
 /**
  *
@@ -12,13 +14,28 @@ import java.util.Date;
  */
 public class DtSocio extends DtUsuario {
 
+    private String[] registros;
     
+    public DtSocio(){
+        super();
+    }
     
-    public DtSocio(int id,String nickname, String nombre, String apellido, String email, Date fechaNac, String pass, String img) {
+    public DtSocio(int id,String nickname, String nombre, String apellido, String email, Date fechaNac, String pass, String img,String[] reg) {
         super(id,nickname, nombre, apellido, email, fechaNac, pass, img);
+        this.registros = reg;
     }
     
     public DtSocio(String nickname, String nombre, String apellido, String email, Date fechaNac, String pass, String img) {
         super(nickname, nombre, apellido, email, fechaNac, pass, img);
     }
+
+    public String[] getRegistros() {
+        return registros;
+    }
+
+    public void setRegistros(String[] registros) {
+        this.registros = registros;
+    }
+    
+    
 }

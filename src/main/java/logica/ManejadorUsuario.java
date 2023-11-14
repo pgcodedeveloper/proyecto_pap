@@ -132,7 +132,14 @@ public class ManejadorUsuario {
         try {
             List<Socio> listU = (List<Socio>) q.getResultList();
             for(Socio u: listU) {
-                DtSocio socio = new DtSocio(u.getId(),u.getNickName(), u.getNombre(), u.getApellido(), u.getEmail(), u.getFecha(), u.getPassword(), u.getImagen());
+                int size = u.getRegistros().size();
+                String[] reg = new String[size];
+                int i = 0;
+                for(Registro r:u.getRegistros() ){
+                    reg[i] = r.toString();
+                    i++;
+                }
+                DtSocio socio = new DtSocio(u.getId(),u.getNickName(), u.getNombre(), u.getApellido(), u.getEmail(), u.getFecha(), u.getPassword(), u.getImagen(),reg);
                 socio.setId(u.getId());
                 aRetornar.add(socio);
             }
@@ -152,8 +159,15 @@ public class ManejadorUsuario {
         try {
             List<Profesor> listU = (List<Profesor>) q.getResultList();
             for(Profesor u: listU) {
+                int size = u.getClases().size();
+                String[] clas = new String[size];
+                int i = 0;
+                for(Clase r: u.getClases()){
+                    clas[i] = r.toString();
+                    i++;
+                }
                 DtProfesor prof = new DtProfesor(u.getId(),u.getDescripcion(), u.getBiografia(), u.getSitioWeb(), u.getNickName(), u.getNombre()
-                    , u.getApellido(), u.getEmail(), u.getFecha(), u.getInstitucionDeportiva(), u.getPassword(), u.getImagen());
+                    , u.getApellido(), u.getEmail(), u.getFecha(),u.getInstitucionDeportiva().toString(), u.getPassword(), u.getImagen(),clas);
                 prof.setId(u.getId());
                 aRetornar.add(prof);
             }

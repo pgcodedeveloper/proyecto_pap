@@ -610,19 +610,35 @@ public class Controlador implements IControlador {
 
     @Override
     public DtUsuario loginUsuario(String email) {
-        DtUsuario ret = null;
+        DtUsuario ret;
         ManejadorUsuario mju = ManejadorUsuario.getInstancia();
         ArrayList<DtUsuario> list;
         list = mju.obtenerUsuarios();
         Usuario usr = mju.buscarUsuarioEmail(email);
+        
         if(usr instanceof Socio){
-            ret = new DtSocio(usr.getId(),usr.getNickName(), usr.getNombre(), usr.getApellido(), email, usr.getFecha(), usr.getPassword(), usr.getImagen());
-        }
-        else if(usr instanceof Profesor prof){
-            ret = new DtProfesor(usr.getId(),prof.getDescripcion(), prof.getBiografia(), prof.getSitioWeb(), usr.getNickName(), usr.getNombre(), usr.getApellido(), email, usr.getFecha(), prof.getInstitucionDeportiva(), usr.getPassword(), usr.getImagen());
+            int size = ((Socio) usr).getRegistros().size();
+            String[] reg = new String[size];
+            int i = 0;
+            for(Registro r:((Socio) usr).getRegistros() ){
+                reg[i] = r.toString();
+                i++;
+            }
+            ret = new DtSocio(usr.getId(),usr.getNickName(), usr.getNombre(), usr.getApellido(), email, usr.getFecha(), usr.getPassword(), usr.getImagen(),reg);
         }
         else{
-            System.out.println("Soy otra cosa");
+            Profesor prof = (Profesor) usr;
+            //System.out.println(prof.getClases().size());
+            
+            int size = prof.getClases().size();
+            String[] clas = new String[size];
+            int i = 0;
+            for(Clase r: prof.getClases()){
+                clas[i] = r.toString();
+                i++;
+            }
+            ret = new DtProfesor(usr.getId(),prof.getDescripcion(), prof.getBiografia(), prof.getSitioWeb(), usr.getNickName(), usr.getNombre(), usr.getApellido(), email, usr.getFecha(),prof.getInstitucionDeportiva().toString(), usr.getPassword(), usr.getImagen(),clas);
+            //System.out.println(((DtProfesor)ret).getBiografia());
         }
         return ret;
     }

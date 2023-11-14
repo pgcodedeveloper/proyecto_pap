@@ -84,5 +84,12 @@ public class Registro{
     public void setClaseId(Clase clase) {
         this.clase = clase;
     }
+
+    @Override
+    public String toString() {
+        return socio.getNombre() + " " + socio.getApellido() + "," + clase.getNombre() + "," + fechaReg + "," + clase.getHoraInicio();
+    }
+    
+    
     
 }
