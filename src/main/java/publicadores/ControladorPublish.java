@@ -351,15 +351,16 @@ public class ControladorPublish{
     
     @WebMethod
     public Object[] rankingClases(){
-        ArrayList<Object[]> act = icon.rankingClases();
-        
+        ArrayList<Object[]> clases = icon.rankingClases();
         int i = 0;
-        Object[] obj = new Object[act.size()];
-        for(Object[] a: act){
-            obj[i] = new Object[]{a[0],a[1]};
+        String [] aRet = new String [clases.size()];
+         
+        for(Object[] cs: clases){
+            Clase c = (Clase)cs[0];
+            aRet[i] = c.getNombre() + ",," + c.getFecha().toString() + ",," + c.getUrl() + ",," + cs[1];
             i++;
         }
-        return obj;
+        return aRet;
     }
     
 
@@ -377,14 +378,15 @@ public class ControladorPublish{
     @WebMethod
     public Object[] rankingActividades(){
         ArrayList<Object[]> act = icon.rankingActividades();
-        
+        //nombre, costo, descripcion, clases
         int i = 0;
-        Object[] obj = new Object[act.size()];
+        String [] aRet = new String [act.size()];
         for(Object[] a: act){
-            obj[i] = new Object[]{a[0],a[1]};
+            ActividadDeportiva ad = (ActividadDeportiva) a[0];
+            aRet[i] = ad.getNombre() + ",," + ad.getCosto() + ",," + ad.getDescripcion() + ",," + a[1];
             i++;
         }
-        return obj;
+        return aRet;
     }
 
     @WebMethod
