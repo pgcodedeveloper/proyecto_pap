@@ -64,6 +64,8 @@ public interface IControlador {
        
     public ArrayList<String> obtenerClasesProfe(int idP);
     
+    public Usuario obtenerClaseProfe(String idP);
+    
     public ArrayList<String> obtenerActivDeporProfe(int idP);
     
     public Clase obtenerInfoClase(String nombre);

@@ -121,6 +121,19 @@ public class ControladorPublish{
         return ret;
     }
     
+    
+    @WebMethod
+    public String[] obtenerClasesProfesor(String idP) {
+        Usuario u = icon.obtenerClaseProfe(idP);
+        int i = 0;
+        String[] ret = new String[((Profesor)u).getClases().size()];
+        for(Clase s: ((Profesor)u).getClases()){
+            ret[i] = s.toString();
+            i++;
+        }
+        return ret;
+    }
+    
 
     @WebMethod
     public DtUsuario loginUsuario(String email) {
@@ -171,7 +184,7 @@ public class ControladorPublish{
             reg[i] = r.getSocioId().getNickName();
             i++;
         }
-        clase[6] = reg.toString();
+        clase[6] = Arrays.toString(reg);
         return clase;
     }
 
@@ -250,6 +263,38 @@ public class ControladorPublish{
         act[5] = a.getImagen();
         act[6] = a.getInst().getNombre();
         return act;
+    }
+    
+    @WebMethod
+    public String[] obtenerActividadDatos(String nom) {
+        ActividadDeportiva a = icon.obtenerActividad(nom);
+        System.out.println(a.getNombre());
+        String[] act = new String[7];
+        act[0] = a.getDescripcion();
+        act[1] = a.getFechaReg().toString();
+        act[2] = a.getInst().getNombre();
+        act[3] = "" + a.getCosto();
+        act[4] = "" + a.getDuracion();
+        String[] clases = new String[a.getClases().size()];
+        int i = 0;
+        for(Clase c: a.getClases()){
+            clases[i] = c.getNombre();
+            i++;
+        }
+        act[5] = clases.toString();
+        return act;
+    }
+    
+    @WebMethod
+    public String[] obtenerActividadClases(String nom) {
+        ActividadDeportiva a = icon.obtenerActividad(nom);
+        String[] clases = new String[a.getClases().size()];
+        int i = 0;
+        for(Clase c: a.getClases()){
+            clases[i] = c.getNombre();
+            i++;
+        }
+        return clases;
     }
 
     @WebMethod
