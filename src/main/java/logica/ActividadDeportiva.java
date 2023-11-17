@@ -38,7 +38,7 @@ public class ActividadDeportiva{
     @Column (name = "imagen")
     private String imagen;  
     
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     private List<Clase> clases = new ArrayList<>();
     
     @ManyToOne
@@ -113,7 +113,9 @@ public class ActividadDeportiva{
     }
     
     public void altaClase(Clase c){
+        //System.out.println("Clases antes: " + this.clases.size());
         this.clases.add(c);
+        //System.out.println("Clases despues: " + this.clases.size());
     }
 
     public InstitucionDeportiva getInst() {

@@ -604,13 +604,17 @@ public class Controlador implements IControlador {
          List <String[]> aRet = new ArrayList<>();
          ArrayList <ActividadDeportiva> list = mjc.obtenerActividadClase();
          for (ActividadDeportiva a:list){
-             if (a.getClases().contains(c)){
-                String[] datos = new String[3];
-                datos[0] = a.getNombre();
-                datos[1] = "" + a.getCosto();
-                datos[2] = "" + a.getDuracion();
-                aRet.add(datos);
-             }
+            //System.out.println(a.getNombre());
+            for(Clase cl: a.getClases()){
+                //System.out.println(cl.getNombre() + "==" + c.getNombre());
+                if(cl.getNombre().equals(c.getNombre())){
+                    String[] datos = new String[3];
+                    datos[0] = a.getNombre();
+                    datos[1] = "" + a.getCosto();
+                    datos[2] = "" + a.getDuracion();
+                    aRet.add(datos);
+                }
+            }
          }
         return aRet;
     }

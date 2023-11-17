@@ -450,12 +450,14 @@ public class ControladorPublish{
         List <String[]> list = icon.obtenerActividadClase(clase);
         String[] aRet = new String[list.size()];
         int i = 0;
+        //System.out.println(list.size());
         for (String[] a: list){
             String[] datos = new String[3];         
             datos[0] = a[0];
             datos[1] = a[1];
             datos[2] = a[2];
             aRet[i] = Arrays.toString(datos);
+            //System.out.println(Arrays.toString(datos));
             i++; 
         }
         return aRet;
